@@ -1,3 +1,15 @@
+# Project: Microlearning for Programming Languages
+
+This repository contains the source code for Group 3 implementation
+of the Microlearning App project in the Technical Interaction Design course.
+
+## Authors
+
+* **Anne Schjødt-Pedersen**
+* **Beatrice Y Ambrosi De M Verzier**
+* **Cecilia Andersen**
+* **Monica Souza**
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

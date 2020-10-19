@@ -13,11 +13,11 @@ of the Microlearning App project in the Technical Interaction Design course.
 ## How to set up the project as an extension
 
 1. Run `npm run build` in your command line. 
-2. Open [chrome://extensions/](chrome://extensions/) in Google Chrome. 
+2. Open **chrome://extensions/** in Google Chrome. 
 3. On that page, make sure 'Developer mode' (in the top right corner) is enabled.
-4. Click 'Load unpacked'.
-5. Browse to the **build** folder and press the **OK** button.
-6. If you cannot see the app's logo in your extensions bar, click on the "Extensions" logo (puzzle piece) and make sure to pin the extension called "**Microlearning**".
+4. Click "**Load unpacked**".
+5. Browse to the `build` folder and press the **OK** button.
+6. If you cannot see the app's logo in your extensions bar, click the "Extensions" logo (puzzle piece) and make sure to pin the extension called "**Microlearning**".
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

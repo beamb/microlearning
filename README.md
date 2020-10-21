@@ -1,4 +1,4 @@
-# Project: Microlearning for Programming Languages
+# Project: Microlearning for Programming Languages (Group 3)
 
 This repository contains the source code for Group 3 implementation
 of the Microlearning App project in the Technical Interaction Design course.
@@ -6,7 +6,7 @@ of the Microlearning App project in the Technical Interaction Design course.
 ## Authors
 
 * **Anne Schjødt-Pedersen**
-* **Beatrice Y Ambrosi De M Verzier**
+* **Beatrice Ambrosi de Magistris Verzier**
 * **Cecilia Andersen**
 * **Monica Souza**
 

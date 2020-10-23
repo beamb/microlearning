@@ -11,7 +11,9 @@ const App = (props) => {
   // If it's still loading the user-state, we're showing nothing here. We could show a spinner,
   // but it will change very fast and it might be more confusing than a blank screen for half a sec
   if (loading) {
-    return null;
+    return (
+    <p>Loading...</p>
+    );
   }
 
   // We will show a component based on whether we have a "user" or not

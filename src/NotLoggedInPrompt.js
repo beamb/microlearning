@@ -3,10 +3,10 @@ import { firebaseAppAuth, provider } from "./firebase";
 
 export const NotLoggedInPrompt = () => {
   const handleSignIn = () => firebaseAppAuth.signInWithPopup(provider);
-
+  
+  handleSignIn()
+    
   return (
-    <div>
-      <button onClick={handleSignIn}>Sign in</button>
-    </div>
-  );
+        <p>Please log in.</p>
+    );
 };

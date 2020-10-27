@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import MainScreen from '../MainScreen';
+import MainScreen from '../../pages/MainScreen';
 
 function LanguageButton() {
     const [counter, setCounter] = useState(0)
@@ -12,9 +12,17 @@ function LanguageButton() {
 
     return (
         <div>
-      <a href="/" onClick={handleClick}>
+      <p>Which language do you prefer?</p>
+    
+      <button onClick={handleClick}>
         Java
-      </a>
+      </button>
+      <button onClick={handleClick}>
+        JavaScript
+      </button>
+      <button onClick={handleClick}>
+        Python
+      </button>
       <div>{counter === 1? <MainScreen></MainScreen> : <p></p>}</div>
       </div>
     );

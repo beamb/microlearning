@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import MainScreen from '../MainScreen';
+import MainScreen from '../../pages/MainScreen';
 
 function ExitButton() {
     const [counter, setCounter] = useState(0)
@@ -11,10 +11,10 @@ function ExitButton() {
   
     return (
         <div>
-      <a href="/" onClick={handleClick}>
-        Exit Quiz
-      </a>
-      {counter === 1? <p>false</p>: <MainScreen/>}
+      <button onClick={handleClick}>
+        Exit
+      </button>
+      {counter === 1? <p>Should close the pop-up</p>: <p></p>}
       </div>
     );
   }

@@ -9,14 +9,12 @@ function StartQuizButton() {
       console.log('The link was clicked.');
       setCounter(1)
     }
-  
-console.log(counter);
 
     return (
         <div>
-      <a href="/" onClick={handleClick}>
+      <button onClick={handleClick}>
         Start Quiz
-      </a>
+      </button>
       {counter === 1? <LanguageButton></LanguageButton> : <p></p>}
       </div>
     );

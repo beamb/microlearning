@@ -1,0 +1,38 @@
+import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { firebaseAppAuth, database } from "../firebase";
+
+import ExitButton from '../components/Buttons/ExitButton';
+import StartQuizButton from "../components/Buttons/StartQuizButton";
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  width: 500px;
+  background: lightgrey;
+  color: black;
+  `
+
+export const LoggedInPrompt = () => {
+
+  const [counter, setCounter] = useState(0)
+    function handleClick(e) {
+      e.preventDefault();
+      console.log('The link was clicked.');
+      setCounter(1)
+    }
+  
+  return (
+    <Container>
+      <p>Hi there!</p>
+      <p>Do you want to answer some questions?</p>
+    <ExitButton></ExitButton>
+    <StartQuizButton></StartQuizButton>
+    </Container>
+  );
+}
+
+export default LoggedInPrompt;

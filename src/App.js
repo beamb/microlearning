@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import './App.css';
-import styled from 'styled-components';
-import StartQuizButton from './components/Buttons/StartQuizButton';
-
-function App() {
-  return (
-    <div className="App">
-      <StartQuizButton></StartQuizButton>
-    </div>
-  );
-}
-=======
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth } from "./firebase";
@@ -33,6 +19,5 @@ const App = (props) => {
   // We will show a component based on whether we have a "user" or not
   return user ? <LoggedInPrompt /> : <NotLoggedInPrompt />;
 };
->>>>>>> 1eee1b53991ab13d062bb82a19050162970de36d
 
 export default App;

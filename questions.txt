@@ -1,0 +1,615 @@
+https://www.tutorialspoint.com/java/java_online_quiz.htm
+
+Java-Questions: [
+    question: "What is a class in java?",
+    answers: [
+        answer1: {
+            text: "A class is a blue print from which individual objects are created. A class can contain fields and methods to describe the behavior of an object.",
+            correct: "true",
+            explanation: "A class is a blue print from which individual objects are created. A class can contain fields and methods to describe the behavior of an object."
+        },
+        answer2: {
+            text: "A class is a special data type.",
+            correct: "false"
+        },
+        answer3: {
+            text: "A class is used to allocate memory to a data type.",
+            correct: "false"
+        },
+        answer4: {
+            text: "None of the above",
+            correct: "false"
+        }
+    ],
+    question: "What is Encapsulation?",
+    answers: [
+        answer1: {
+            text: "Encapsulation is a technique to define different methods of same type.",
+            correct: "false"
+        },
+        answer2: {
+            text: "Encapsulation is the ability of an object to take on many forms.",
+            correct: "false"
+        },
+        answer3: {
+            text: "Encapsulation is the technique of making the fields in a class private and providing access to the fields via public methods.",
+            correct: "true",
+            explanation: "It is the technique of making the fields in a class private and providing access to the fields via public methods. If a field is declared private, it cannot be accessed by anyone outside the class, thereby hiding the fields within the class. Therefore encapsulation is also referred to as data hiding."
+        },
+        answer4: {
+            text: "None of the above.",
+            correct: "false"
+        }
+    ],
+    question: "What is the size of boolean variable?",
+    answers: [
+        answer1: {
+            text: "8 bit",
+            correct: "false"
+        },
+        answer2: {
+            text: "16 bit",
+            correct: "true",
+            explanation: "The boolean data type can take either true or false, but its "size" isn't precisely defined."
+        },
+        answer3: {
+            text: "32 bit",
+            correct: "false"
+        },
+        answer4: {
+            text: "not precisely defined",
+            correct: "false"
+        }
+    ],
+    question: "What is polymorphism?",
+    answers: [
+        answer1: {
+            text: "Polymorphism is a technique to define different objects of same type.",
+            correct: "false"
+        },
+        answer2: {
+            text: "Polymorphism is the ability of an object to take on many forms.",
+            correct: "true",
+            explanation: "Polymorphism is the ability of an object to take on many forms. The most common use of polymorphism in OOP occurs when a parent class reference is used to refer to a child class object."
+        },
+        answer3: {
+            text: "Polymorphism is a technique to define different methods of same type.",
+            correct: "false"
+        },
+        answer4: {
+            text: "None of the above.",
+            correct: "false"
+        }
+    ],
+    question: "What is the default value of float variable?",
+    answers: [
+        answer1: {
+            text: "0.0d",
+            correct: "false"
+        },
+        answer2: {
+            text: "0.0f",
+            correct: "true",
+            explanation: "float variable has default value of 0.0f if defined as an instance/static variable."
+        },
+        answer3: {
+            text: "0",
+            correct: "false"
+        },
+        answer4: {
+            text: "not defined",
+            correct: "false"
+        }
+    ],
+    question: "What is an applet?",
+    answers: [
+        answer1: {
+            text: "An applet is a Java program that runs in a Web browser.",
+            correct: "true",
+            explanation: "An applet is a Java program that runs in a Web browser."
+        },
+        answer2: {
+            text: "Applet is a standalone java program.",
+            correct: "false"
+        },
+        answer3: {
+            text: "Applet is a tool.",
+            correct: "false"
+        },
+        answer4: {
+            text: "Applet is a run time environment.",
+            correct: "false"
+        }
+    ],
+    question: "Method Overriding is an example of",
+    answers: [
+        answer1: {
+            text: "Static Binding.",
+            correct: "false"
+        },
+        answer2: {
+            text: "Dynamic Binding.",
+            correct: "true",
+            explanation: "Method Overriding is an example of dynamic binding."
+        },
+        answer3: {
+            text: "Both of the above.",
+            correct: "false"
+        },
+        answer4: {
+            text: "None of the above.",
+            correct: "false"
+        }
+    ],
+    question: "What invokes a thread's run() method?",
+    answers: [
+        answer1: {
+            text: "JVM invokes the thread's run() method when the thread is initially executed.",
+            correct: "true",
+            explanation: "After a thread is started, via its start() method of the Thread class, the JVM invokes the thread's run() method when the thread is initially executed."
+        },
+        answer2: {
+            text: "Main application running the thread.",
+            correct: "false"
+        },
+        answer3: {
+            text: "start() method of the thread class.",
+            correct: "false"
+        },
+        answer4: {
+            text: "None of the above.",
+            correct: "false"
+        }
+    ],
+    question: "What will happen if static modifier is removed from the signature of the main method?",
+    answers: [
+        answer1: {
+            text: "Compilation Error.",
+            correct: "false"
+        },
+        answer2: {
+            text: "RunTime Error: NoSuchMethodError.",
+            correct: "true",
+            explanation: "Program throws "NoSuchMethodError" error at runtime."
+        },
+        answer3: {
+            text: "Program will compile and run without any output.",
+            correct: "false"
+        },
+        answer4: {
+            text: "Program will compile and run to show the required output.",
+            correct: "false"
+        }
+    ],
+    question: "Which of the following is Faster, StringBuilder or StringBuffer?",
+    answers: [
+        answer1: {
+            text: "StringBuilder",
+            correct: "true",
+            explanation: "StringBuilder is faster than StringBuffer."
+        },
+        answer2: {
+            text: "StringBuffer",
+            correct: "false"
+        },
+        answer3: {
+            text: "Both of the above.",
+            correct: "false"
+        },
+        answer4: {
+            text: "none of the above.",
+            correct: "false"
+        }
+    ]
+]
+
+https://www.tutorialspoint.com/python/python_online_quiz.htm
+https://www.geeksforgeeks.org/miscellaneous-gq/
+
+Python-Questions: [
+    question: "What is output for − a = ['hat', 'mat', 'rat'] 'rhyme'.join(a)",
+    answers: [
+        answer1: {
+            text: "[‘hat’,’mat’,’rat’,’rhyme’]",
+            correct: "false"
+        },
+        answer2: {
+            text: "‘hatmatratrhyme’",
+            correct: "false"
+        },
+        answer3: {
+            text: "[‘hat mat rat rhyme’]",
+            correct: "false"
+        },
+        answer4: {
+            text: "‘hatrhymematrhyme rat’",
+            correct: "true",
+            explanation: "The method join() takes list of string as input and returns string as output. It removes ‘,’ and add the given string with join to the list."
+        }
+    ],
+    question: "Which is invalid in python for z = 5 ?",
+    answers: [
+        answer1: {
+            text: "z = z++",
+            correct: "true",
+            explanation: "z = z++ is not valid in python, it is not a legal expression. It results in syntax error."
+        },
+        answer2: {
+            text: "z = ++z",
+            correct: "false"
+        },
+        answer3: {
+            text: "z += 1",
+            correct: "false",
+        },
+        answer4: {
+            text: "z -= 1",
+            correct: "false"
+        }
+    ],
+    question: "Which operator is right-associative",
+    answers: [
+        answer1: {
+            text: "*",
+            correct: "false"
+        },
+        answer2: {
+            text: "=",
+            correct: "true",
+            explanation: "‘=‘ operator is right associative as assignment operators are right associative."
+        },
+        answer3: {
+            text: "+",
+            correct: "false"
+        },
+        answer4: {
+            text: "%",
+            correct: "false"
+        }
+    ],
+    question: "Suppose we have two sets A & B, then A<B is:",
+    answers: [
+        answer1: {
+            text: "True if len(A) is less than len(B).",
+            correct: "false"
+        },
+        answer2: {
+            text: "True if A is a proper subset of B.",
+            correct: "true",
+            explanation: "If A is proper subset of B then hen all elements of A are in B but B contains at least one element that is not in B."
+        },
+        answer3: {
+            text: "True if the elements in A when compared are less than the elements in B.",
+            correct: "false"
+        },
+        answer4: {
+            text: "True if A is a proper superset of B.",
+            correct: "false"
+        }
+    ],
+    question: "Which options are correct to create an empty set in Python?",
+    answers: [
+        answer1: {
+            text: "{}",
+            correct: "false"
+        },
+        answer2: {
+            text: "()",
+            correct: "false"
+        },
+        answer3: {
+            text: "[]",
+            correct: "false"
+        },
+        answer4: {
+            text: "set()",
+            correct: "true",
+            explanation: "we need to define the set by including the keyword ‘set’."
+        }
+    ],
+    question: "Select the correct function among them which can be used to write the data to perform for a binary output?",
+    answers: [
+        answer1: {
+            text: "Write",
+            correct: "false"
+        },
+        answer2: {
+            text: "Output.binary",
+            correct: "false"
+        },
+        answer3: {
+            text: "Dump",
+            correct: "true",
+            explanation: ""
+        },
+        answer4: {
+            text: "Binary.output",
+            correct: "false"
+        }
+    ],
+    question: "What is the output of the following program : print "Hello World"[::-1]",
+    answers: [
+        answer1: {
+            text: "dlroW olleH",
+            correct: "true",
+            explanation: "[::] depicts extended slicing in Python and [::-1] returns the reverse of the string."
+        },
+        answer2: {
+            text: "Hello Worl",
+            correct: "false"
+        },
+        answer3: {
+            text: "d",
+            correct: "false"
+        },
+        answer4: {
+            text: "Error",
+            correct: "false"
+        }
+    ],
+    question: "Given a function that does not return any value, what value is shown when executed at the shell?",
+    answers: [
+        answer1: {
+            text: "int",
+            correct: "false"
+        },
+        answer2: {
+            text: "bool",
+            correct: "false"
+        },
+        answer3: {
+            text: "void",
+            correct: "false"
+        },
+        answer4: {
+            text: "None",
+            correct: "true",
+            explanation: "Python explicitly defines the None object that is returned if no value is specified."
+        }
+    ],
+    question: "Which module in Python supports regular expressions?",
+    answers: [
+        answer1: {
+            text: "re",
+            correct: "true",
+            explanation: "re is a part of the standard library and can be imported using: import re."
+        },
+        answer2: {
+            text: "regex",
+            correct: "false"
+        },
+        answer3: {
+            text: "pyregex",
+            correct: "false"
+        },
+        answer4: {
+            text: "None of the above",
+            correct: "false"
+        }
+    ],
+    question: "What is the output of the following program : print 0.1 + 0.2 == 0.3",
+    answers: [
+        answer1: {
+            text: "True",
+            correct: "false"
+        },
+        answer2: {
+            text: "False",
+            correct: "true",
+            explanation: "Neither of 0.1, 0.2 and 0.3 can be represented accurately in binary. The round off errors from 0.1 and 0.2 accumulate and hence there is a difference of 5.5511e-17 between (0.1 + 0.2) and 0.3."
+        },
+        answer3: {
+            text: "Machine dependent",
+            correct: "false"
+        },
+        answer4: {
+            text: "Error",
+            correct: "false"
+        }
+    ]
+]
+
+https://www.tutorialspoint.com/javascript/javascript_online_quiz.htm
+
+JavaScript-Questions: [
+    question: "Which of the following is correct about features of JavaScript?",
+    answers: [
+        answer1: {
+            text: "JavaScript is is complementary to and integrated with HTML.",
+            correct: "false"
+        },
+        answer2: {
+            text: "JavaScript is open and cross-platform.",
+            correct: "false"
+        },
+        answer3: {
+            text: "Both of the above.",
+            correct: "true",
+            explanation: "Both of the above options are correct."
+        },
+        answer4: {
+            text: "All of the above.",
+            correct: "false"
+        }
+    ],
+    question: "Which of the following is the correct syntax to print a page using JavaScript?",
+    answers: [
+        answer1: {
+            text: "window.print();",
+            correct: "true",
+            explanation: "window.print(); is the correct option."
+        },
+        answer2: {
+            text: "browser.print();",
+            correct: "false"
+        },
+        answer3: {
+            text: "navigator.print();",
+            correct: "false"
+        },
+        answer4: {
+            text: "document.print();",
+            correct: "false"
+        }
+    ],
+    question: "Which of the following type of variable is visible only within a function where it is defined?",
+    answers: [
+        answer1: {
+            text: "global variable",
+            correct: "false"
+        },
+        answer2: {
+            text: "local variable",
+            correct: "true",
+            explanation: "Local Variables: A local variable will be visible only within a function where it is defined. Function parameters are always local to that function."
+        },
+        answer3: {
+            text: "Both of the above.",
+            correct: "false"
+        },
+        answer4: {
+            text: "None of the above.",
+            correct: "false"
+        }
+    ],
+    question: "Which of the following function of Number object formats a number with a specific number of digits to the right of the decimal?",
+    answers: [
+        answer1: {
+            text: "toExponential()",
+            correct: "false"
+        },
+        answer2: {
+            text: "toFixed()",
+            correct: "true",
+            explanation: "toFixed() − Formats a number with a specific number of digits to the right of the decimal."
+        },
+        answer3: {
+            text: "toPrecision()",
+            correct: "false"
+        },
+        answer4: {
+            text: "toLocaleString()",
+            correct: "false"
+        }
+    ],
+    question: "Which of the following function of Number object returns a string value version of the current number in a format that may vary according to a browser's locale settings.?",
+    answers: [
+        answer1: {
+            text: "toExponential()",
+            correct: "false"
+        },
+        answer2: {
+            text: "toFixed()",
+            correct: "false"
+        },
+        answer3: {
+            text: "toLocaleString()",
+            correct: "true",
+            explanation: "toLocaleString() − Returns a string value version of the current number in a format that may vary according to a browser's locale settings."
+        },
+        answer4: {
+            text: "toString()",
+            correct: "false"
+        }
+    ],
+    question: "Which of the following function of String object is used to find a match between a regular expression and a string, and to replace the matched substring with a new substring?",
+    answers: [
+        answer1: {
+            text: "concat()",
+            correct: "false"
+        },
+        answer2: {
+            text: "match()",
+            correct: "false"
+        },
+        answer3: {
+            text: "replace()",
+            correct: "true",
+            explanation: "replace() − Used to find a match between a regular expression and a string, and to replace the matched substring with a new substring."
+        },
+        answer4: {
+            text: "search()",
+            correct: "false"
+        }
+    ],
+    question: "Which of the following function of String object returns the calling string value converted to lower case while respecting the current locale?",
+    answers: [
+        answer1: {
+            text: "toLocaleLowerCase()",
+            correct: "true",
+            explanation: "toLocaleLowerCase() − Returns the calling string value converted to lower case while respecting the current locale."
+        },
+        answer2: {
+            text: "toLowerCase()",
+            correct: "false"
+        },
+        answer3: {
+            text: "toString()",
+            correct: "false"
+        },
+        answer4: {
+            text: "substring()",
+            correct: "false"
+        }
+    ],
+    question: "Which of the following function of String object causes a string to be displayed in the specified size as if it were in a <font size = 'size'> tag?",
+    answers: [
+        answer1: {
+            text: "fixed()",
+            correct: "false"
+        },
+        answer2: {
+            text: "fontcolor()",
+            correct: "false"
+        },
+        answer3: {
+            text: "fontsize()",
+            correct: "true",
+            explanation: "fontsize() − Causes a string to be displayed in the specified size as if it were in a <font size = 'size'> tag."
+        },
+        answer4: {
+            text: "bold()",
+            correct: "false"
+        }
+    ],
+    question: "Which of the following function of Array object creates a new array with the results of calling a provided function on every element in this array?",
+    answers: [
+        answer1: {
+            text: "push()",
+            correct: "false"
+        },
+        answer2: {
+            text: "join()",
+            correct: "false"
+        },
+        answer3: {
+            text: "pop()",
+            correct: "false"
+        },
+        answer4: {
+            text: "map()",
+            correct: "true",
+            explanation: "map() − Creates a new array with the results of calling a provided function on every element in this array."
+        }
+    ],
+    question: "Which of the following function of Array object reverses the order of the elements of an array?",
+    answers: [
+        answer1: {
+            text: "reverse()",
+            correct: "true",
+            explanation: "reverse() − Reverses the order of the elements of an array."
+        },
+        answer2: {
+            text: "push()",
+            correct: "false"
+        },
+        answer3: {
+            text: "reduce()",
+            correct: "false"
+        },
+        answer4: {
+            text: "reduceRight()",
+            correct: "false"
+        }
+    ]
+]

@@ -1,0 +1,698 @@
+Java-Questions: [
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ]
+]
+
+Python-Questions: [
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ]
+]
+
+JavaScript-Questions: [
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ],
+    question: "",
+    answers: [
+        answer1: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer2: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer3: {
+            text: "",
+            correct: "",
+            explanation: ""
+        },
+        answer4: {
+            text: "",
+            correct: "",
+            explanation: ""
+        }
+    ]
+]

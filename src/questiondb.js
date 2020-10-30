@@ -47,7 +47,7 @@ import { useCollectionData } from "react-firebase-hooks/firestore";
   };
 
 
-export const LoggedInPrompt = () => {
+export const questiondb = () => {
   const [description, setDescription] = useState("");
   const [level, setLevel] = useState("");
   const [language, setLanguage] = useState("");

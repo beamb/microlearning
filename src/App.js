@@ -7,6 +7,9 @@ import { NotLoggedInPrompt } from "./pages/NotLoggedInPrompt";
 import NavBar from "react-bootstrap/NavBar";
 import Nav from "react-bootstrap/Nav";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Language from "./components/Language";
+import Quiz from "./components/Quiz";
+import Exit from "./components/Exit";
 
 const Container = styled.div`
   display: inline-block;
@@ -37,8 +40,12 @@ const App = (props) => {
               <button type="button">Settings</button>
             </Link>
 
-            <Link to="/close">
+            <Link to="/exit">
               <button type="button">x</button>
+            </Link>
+
+            <Link to="/index.html">
+              <button type="button">back</button>
             </Link>
           </Nav>
 
@@ -49,8 +56,14 @@ const App = (props) => {
             <Route path="/settings">
               <Settings />
             </Route>
-            <Route path="/close">
-              <Close />
+            <Route path="/exit">
+              <Exit />
+            </Route>
+            <Route path="/language">
+              <Language />
+            </Route>
+            <Route path="/quiz">
+              <Quiz />
             </Route>
           </Switch>
         </NavBar>
@@ -61,26 +74,10 @@ const App = (props) => {
   );
 };
 
-function MainScreen() {
-  return (
-    <div>
-      <h2>This is where the quiz is</h2>
-    </div>
-  );
-}
-
 function Settings() {
   return (
     <div>
       <h2>This is the settings page</h2>
-    </div>
-  );
-}
-
-function Close() {
-  return (
-    <div>
-      <h2>This should just close the extension</h2>
     </div>
   );
 }

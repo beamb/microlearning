@@ -1,11 +1,10 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth, database } from "../firebase";
 
-import ExitButton from "../components/Buttons/ExitButton";
-import StartQuizButton from "../components/Buttons/StartQuizButton";
+import { BrowserRouter as Link } from "react-router-dom";
 import styled from "styled-components";
-import Popup from "reactjs-popup";
 
 const Container = styled.div`
   display: inline-block;
@@ -25,14 +24,36 @@ export const LoggedInPrompt = () => {
     setCounter(1);
   }
 
+  const LanguageButton = withRouter(({ history }) => (
+    <button
+      type="button"
+      onClick={() => {
+        history.push("/language");
+      }}
+    >
+      Yes, let's quiz!
+    </button>
+  ));
+
+  const NoThanksButton = withRouter(({ history }) => (
+    <button
+      type="button"
+      onClick={() => {
+        history.push("/exit");
+      }}
+    >
+      No thanks
+    </button>
+  ));
+
   // First pop-up container
   return (
     <Container>
       <p>Hi there!</p>
       <p>Do you want to answer some questions?</p>
       <div>
-        <ExitButton />
-        <StartQuizButton />
+        <NoThanksButton />
+        <LanguageButton />
       </div>
     </Container>
   );

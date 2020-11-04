@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import { Settings } from "@styled-icons/feather/Settings";
 import { Close } from "@styled-icons/evaicons-solid/Close";
 import { useLocation, withRouter } from "react-router-dom";
+import { firebaseAppAuth } from "../firebase";
 
 // Style
 const NavContainer = styled.div`
@@ -36,6 +37,8 @@ export const Navigation = () => {
 
   const location = useLocation();
 
+  const handleSignOut = () => firebaseAppAuth.signOut();
+
   const SaveBackButton = withRouter(({ history }) => (
     <Button type="button" onClick={() => history.goBack()}>
       {buttonName}
@@ -66,6 +69,12 @@ export const Navigation = () => {
     </Button>
   ));
 
+  const SignOutButton = () => (
+    <Button type="button" onClick={handleSignOut}>
+      Sign out
+    </Button>
+  );
+
   if (location.pathname === "/settings") {
     return (
       <NavContainer>
@@ -73,6 +82,7 @@ export const Navigation = () => {
         <HelpButton />
         <ExitButton />
         <BackButton />
+        <SignOutButton />
       </NavContainer>
     );
   } else {
@@ -82,6 +92,7 @@ export const Navigation = () => {
         <HelpButton />
         <ExitButton />
         <BackButton />
+        <SignOutButton />
       </NavContainer>
     );
   }

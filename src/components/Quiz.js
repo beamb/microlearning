@@ -76,16 +76,11 @@ function Quiz(props) {
     </button>
   ));
 
-  const ExitButton = withRouter(({ history }) => (
-    <button
-      type="button"
-      onClick={() => {
-        history.push("/exit");
-      }}
-    >
+  const ExitButton = () => (
+    <button type="button" onClick={() => window.close()}>
       Procrastinate
     </button>
-  ));
+  );
 
   return (
     <div className="quiz">

@@ -4,7 +4,6 @@ import Language from "./Language";
 import { BrowserRouter as Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import styled, { css } from "styled-components";
-import "./Quiz.css";
 
 // Style
 

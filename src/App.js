@@ -7,12 +7,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
 import './App.css';
 
-const App = (props) => {
+
+const App = () => {
   // We're using a package where someone else created a "hook" for using Firebase functionality
   const [user, loading] = useAuthState(firebaseAppAuth);
 
-  // If it's still loading the user-state, we're showing nothing here. We could show a spinner,
-  // but it will change very fast and it might be more confusing than a blank screen for half a sec
+  // If it's still loading the user-state, we're showing "Loading...". We might show a spinner,
+  // but it will change very fast and it might be more confusing than a less attractive "Loading..." message
   if (loading) {
     return <p>Loading...</p>;
   }

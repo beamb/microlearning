@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 import { Slider } from "../components/Slider";
+import styled, { css } from "styled-components";
+
+const Button = styled.button`
+  background: transparent;
+  border-radius: 3px;
+  color: black;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+`;
 
 export const Settings = () => {
   const [interruption, setInterruption] = useState("5");
@@ -14,14 +23,13 @@ export const Settings = () => {
   };
 
   const NumberButton = (props) => (
-    <button
-      type="button"
+    <Button type="button"
       onClick={() => 
         handleNumberClick(props.number)
       }
     >
      {props.number} 
-    </button>
+    </Button>
   );
 
   

@@ -1,6 +1,35 @@
 import React from "react";
-import Nav from "react-bootstrap/Nav";
+import styled, { css } from "styled-components";
+import { Settings } from "@styled-icons/feather/Settings";
+import { Close } from "@styled-icons/evaicons-solid/Close";
 import { useLocation, withRouter } from "react-router-dom";
+
+// Style
+const NavContainer = styled.div`
+  display: inline-block;
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  background: white;
+  color: black;
+  text-align: center;
+`;
+
+const SettingsWeel = styled(Settings)`
+  color: grey;
+`;
+
+const CloseCross = styled(Close)`
+  color: grey;
+`;
+
+const Button = styled.button`
+  background: transparent;
+  border-radius: 3px;
+  color: black;
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+`;
 
 export const Navigation = () => {
   const buttonName = "Save & Back";
@@ -8,52 +37,52 @@ export const Navigation = () => {
   const location = useLocation();
 
   const SaveBackButton = withRouter(({ history }) => (
-    <button type="button" onClick={() => history.goBack()}>
+    <Button type="button" onClick={() => history.goBack()}>
       {buttonName}
-    </button>
+    </Button>
   ));
 
   const SettingsButton = withRouter(({ history }) => (
-    <button type="button" onClick={() => history.push("/settings")}>
+    <SettingsWeel size="30" type="button" onClick={() => history.push("/settings")}>
       Settings
-    </button>
+    </SettingsWeel>
   ));
 
   const ExitButton = () => (
-    <button type="button" onClick={() => window.close()}>
+    <CloseCross size="30" type="button" onClick={() => window.close()}>
       x
-    </button>
+    </CloseCross>
   );
 
   const HelpButton = withRouter(({ history }) => (
-    <button type="button" onClick={() => history.push("/help")}>
+    <Button type="button" onClick={() => history.push("/help")}>
       ?
-    </button>
+    </Button>
   ));
 
   const BackButton = withRouter(({ history }) => (
-    <button type="button" onClick={() => history.goBack()}>
+    <Button type="button" onClick={() => history.goBack()}>
       back
-    </button>
+    </Button>
   ));
 
   if (location.pathname === "/settings") {
     return (
-      <Nav className="flex-row">
+      <NavContainer>
         <SaveBackButton />
         <HelpButton />
         <ExitButton />
         <BackButton />
-      </Nav>
+      </NavContainer>
     );
   } else {
     return (
-      <Nav className="ml-auto">
+      <NavContainer>
         <SettingsButton />
         <HelpButton />
         <ExitButton />
         <BackButton />
-      </Nav>
+      </NavContainer>
     );
   }
 };

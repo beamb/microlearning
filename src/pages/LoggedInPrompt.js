@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { firebaseAppAuth, database } from "../firebase";
-
-import { BrowserRouter as Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const Container = styled.div`

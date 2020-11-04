@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { firebaseAppAuth, database } from "../firebase";
-
-import { BrowserRouter as Link } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { firebaseAppAuth } from "../firebase";
 
 const Container = styled.div`
   text-align: center;
@@ -40,6 +38,8 @@ export const LoggedInPrompt = () => {
     setCounter(1);
   }
 
+  const [user] = useAuthState(firebaseAppAuth);
+
   const LanguageButton = withRouter(({ history }) => (
     <Button
       primary
@@ -66,7 +66,7 @@ export const LoggedInPrompt = () => {
   // First pop-up container
   return (
     <Container>
-      <p>Hi there!</p>
+      <p>Hi {user.displayName}!</p>
       <p>Do you want to answer some questions?</p>
       <div>
         <NoThanksButton />

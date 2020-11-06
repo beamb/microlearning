@@ -5,33 +5,13 @@ import { BrowserRouter as Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-// Style
-
-const Container = styled.div`
-  text-align: center;
-  border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
-  width: 500px;
-  background: white;
-  color: black;
-`;
-
-const Button = styled.button`
-  background: rgba(226, 232, 240, 1);
-  border: none;
-  border-radius: 3px;
-  color: rgba(45, 55, 72, 1);
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
-
-  ${(props) =>
-    props.primary &&
-    css`
-      background: rgba(33, 182, 168, 1);
-      color: white;
-    `}
-`;
+//styling
+import { QuizContainer } from "../styling/Containers";
+import {
+  StartQuizButton,
+  ProcrastinateButton,
+  NextButton,
+} from "../styling/Buttons";
 
 // We need a way to access the langugage from the state in the Language component.
 
@@ -108,7 +88,22 @@ function Quiz(props) {
     }
   };
 
-  const handleNextClick = () => {
+  const StartQuizButton1 = withRouter(({ history }) => (
+    <StartQuizButton
+      type="button"
+      onClick={() => {
+        history.push("/language");
+      }}
+    >
+      Quiz
+    </StartQuizButton>
+  ));
+
+  function handleProcrastinateClick() {
+    window.close();
+  }
+
+  function handleNextButtonClick() {
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
@@ -116,28 +111,10 @@ function Quiz(props) {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
       setShowScore(true);
     }
-  };
-
-  const QuizAgainButton = withRouter(({ history }) => (
-    <Button
-      primary
-      type="button"
-      onClick={() => {
-        history.push("/language");
-      }}
-    >
-      Quiz
-    </Button>
-  ));
-
-  const ExitButton = () => (
-    <button type="button" onClick={() => window.close()}>
-      Procrastinate
-    </button>
-  );
+  }
 
   return (
-    <Container>
+    <QuizContainer>
       {showScore ? (
         <div className="finish-display">
           <p>Congratulations!</p>
@@ -146,8 +123,10 @@ function Quiz(props) {
             answers.
           </p>
           <div>
-            <ExitButton />
-            <QuizAgainButton />
+            <ProcrastinateButton onCLick={handleProcrastinateClick}>
+              Procrastinate
+            </ProcrastinateButton>
+            <StartQuizButton1>Quiz</StartQuizButton1>
           </div>
         </div>
       ) : (
@@ -168,18 +147,11 @@ function Quiz(props) {
             ))}
           </div>
           <div>
-            <Button
-              primary
-              className="NextStep"
-              disabled={false}
-              onClick={() => handleNextClick()}
-            >
-              Next
-            </Button>
+            <NextButton onClick={handleNextButtonClick}>Next</NextButton>
           </div>
         </>
       )}
-    </Container>
+    </QuizContainer>
   );
 }
 

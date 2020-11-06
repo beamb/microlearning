@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.5.3",
     "firebase": "^7.24.0",
+    "firesql": "^2.0.2",
     "jquery": "^3.5.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
@@ -17,6 +18,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.4",
     "reactjs-popup": "^2.0.4",
+    "rxfire": "^4.0.0",
+    "rxjs": "^6.6.3",
     "styled-components": "^5.2.1",
     "styled-icons": "^10.22.0"
   },

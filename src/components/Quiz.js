@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { database } from "../firebase";
+import { FireSQL } from 'firesql';
+import firebase from 'firebase/app';
+import 'firesql/rx'; 
 
 import Language from "./Language";
 import { BrowserRouter as Link } from "react-router-dom";
@@ -34,14 +37,21 @@ const Button = styled.button`
     `}
 `;
 
+const java = "java";
+const python = "python";
+
+const dbQuestions = database.collection('questions').doc('60IscHtSe4tSGbek18Ag');
+const fireSQL = new FireSQL(dbQuestions);
+
 // We need a way to access the langugage from the state in the Language component.
 
 // only temporary question array
 function Quiz(props) {
+  var qdescription = fireSQL.query('SELECT description FROM questions');
+  //var query = dbquestions.where("description", "==", "Which of the following function of Array object reverses the order of the elements of an array?");
   const questions = [
     {
-      Description:
-        "Java: How do you create a variable with the numeric value 13?",
+      Description: qdescription.toString(),
       Language: "java",
       Level: 1,
       QuestionId: 0,

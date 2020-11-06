@@ -3,7 +3,6 @@ import styled, { css } from "styled-components";
 import { Settings } from "@styled-icons/feather/Settings";
 import { Close } from "@styled-icons/evaicons-solid/Close";
 import { useLocation, withRouter } from "react-router-dom";
-import { firebaseAppAuth } from "../firebase";
 
 // Style
 const NavContainer = styled.div`
@@ -37,8 +36,6 @@ export const Navigation = () => {
 
   const location = useLocation();
 
-  const handleSignOut = () => firebaseAppAuth.signOut();
-
   const SaveBackButton = withRouter(({ history }) => (
     <Button type="button" onClick={() => history.goBack()}>
       {buttonName}
@@ -57,42 +54,26 @@ export const Navigation = () => {
     </CloseCross>
   );
 
-  const HelpButton = withRouter(({ history }) => (
-    <Button type="button" onClick={() => history.push("/help")}>
-      ?
-    </Button>
-  ));
-
   const BackButton = withRouter(({ history }) => (
     <Button type="button" onClick={() => history.goBack()}>
       back
     </Button>
   ));
 
-  const SignOutButton = () => (
-    <Button type="button" onClick={handleSignOut}>
-      Sign out
-    </Button>
-  );
-
   if (location.pathname === "/settings") {
     return (
       <NavContainer>
         <SaveBackButton />
-        <HelpButton />
-        <ExitButton />
         <BackButton />
-        <SignOutButton />
+        <ExitButton />
       </NavContainer>
     );
   } else {
     return (
       <NavContainer>
         <SettingsButton />
-        <HelpButton />
-        <ExitButton />
         <BackButton />
-        <SignOutButton />
+        <ExitButton />
       </NavContainer>
     );
   }

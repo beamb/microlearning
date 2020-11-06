@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { firebaseAppAuth } from "./firebase";
+import { firebaseAppAuth, database } from "./firebase";
 import { NotLoggedInPrompt } from "./pages/NotLoggedInPrompt";
 import MainRouter from "./components/MainRouter";
 import "bootstrap/dist/css/bootstrap.css";
@@ -11,6 +11,20 @@ import './App.css';
 const App = () => {
   // We're using a package where someone else created a "hook" for using Firebase functionality
   const [user, loading] = useAuthState(firebaseAppAuth);
+
+  const setUpUser = () => {
+    if(user) {
+      database.collection('users').doc(user.uid).set({
+        questions: [],
+      }, {merge: true});
+      
+    }
+  }
+
+  if(user) {
+    console.log("creating user data");
+    setUpUser();
+  }
 
   // If it's still loading the user-state, we're showing "Loading...". We might show a spinner,
   // but it will change very fast and it might be more confusing than a less attractive "Loading..." message

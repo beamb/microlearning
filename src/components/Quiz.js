@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { database } from "../firebase";
 
 import Language from "./Language";
 import { BrowserRouter as Link } from "react-router-dom";

@@ -15,17 +15,12 @@ export const Settings = () => {
 
   console.log("number of questions: " + interruption);
 
-  // sets the interruption in state to n questions
-  const handleNumberClick = (number) => {
-    // e.preventDefault();
-    console.log(number + " questions has been clicked.");
-    setInterruption(number);
-  };
-
   const NumberButton = (props) => (
     <Button type="button"
       onClick={() => 
-        handleNumberClick(props.number)
+         console.log(props.number + " questions has been clicked.");
+          // sets the interruption in state to n questions
+         setInterruption(props.number);
       }
     >
      {props.number} 

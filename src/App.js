@@ -29,11 +29,8 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
-  // We're using a package where someone else created a "hook" for using Firebase functionality
   const [user, loading] = useAuthState(firebaseAppAuth);
 
-  // If it's still loading the user-state, we're showing "Loading...". We might show a spinner,
-  // but it will change very fast and it might be more confusing than a less attractive "Loading..." message
   if (loading) {
     return (
       <Container>
@@ -44,7 +41,6 @@ const App = () => {
     );
   }
 
-  // We will show a component based on whether we have a "user" or not
   return user ? (
     <ThemeProvider theme={theme}>
       <MainRouter />

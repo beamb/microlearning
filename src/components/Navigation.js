@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Settings } from "@styled-icons/feather/Settings";
 import { Close } from "@styled-icons/evaicons-solid/Close";
-import { useLocation, withRouter } from "react-router-dom";
+import { useLocation, withRouter, Link } from "react-router-dom";
 
 // Style
 const NavContainer = styled.div`
@@ -42,11 +42,13 @@ export const Navigation = () => {
     </Button>
   ));
 
-  const SettingsButton = withRouter(({ history }) => (
-    <SettingsWeel size="30" type="button" onClick={() => history.push("/settings")}>
-      Settings
-    </SettingsWeel>
-  ));
+  const SettingsButton = () => (
+    <Link to="/settings">
+      <SettingsWeel size="30" type="button">
+        Settings
+      </SettingsWeel>
+    </Link>
+  );
 
   const ExitButton = () => (
     <CloseCross size="30" type="button" onClick={() => window.close()}>

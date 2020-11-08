@@ -28,18 +28,6 @@ export const WebsiteField = (props) => {
     props.changeCheckState(props.website);
   };
 
-  const Interval = () => {
-    return props.checkState ? (
-      <h4>
-        <span>{props.value} minutes</span>
-      </h4>
-    ) : (
-      <h4>
-        <span>fixed minutes</span>
-      </h4>
-    );
-  };
-
   return (
     <div>
       <FormControl component="fieldset">
@@ -60,7 +48,9 @@ export const WebsiteField = (props) => {
             {label}
           </Button>
           <Button type="button">Delete</Button>
-          <Interval />
+          <h4>
+            <span>{props.value} minutes</span>
+          </h4>
         </FormGroup>
       </FormControl>
       <br />

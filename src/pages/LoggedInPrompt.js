@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth } from "../firebase";
@@ -40,28 +40,24 @@ export const LoggedInPrompt = () => {
 
   const [user] = useAuthState(firebaseAppAuth);
 
-  const LanguageButton = withRouter(({ history }) => (
-    <Button
-      primary
-      type="button"
-      onClick={() => {
-        history.push("/language");
-      }}
-    >
-      Yes, let's quiz!
-    </Button>
-  ));
+  const LanguageButton = () => (
+    <Link to="/language">
+      <Button primary type="button">
+        Yes, let's quiz!
+      </Button>
+    </Link>
+  );
 
-  const NoThanksButton = withRouter(({ history }) => (
+  const NoThanksButton = () => (
     <Button
       type="button"
       onClick={() => {
-        history.push("/exit");
+        window.close();
       }}
     >
       No thanks
     </Button>
-  ));
+  );
 
   // First pop-up container
   return (

@@ -76,7 +76,7 @@ export const IntervalSlider = (props) => {
   return (
     <div className={classes.root}>
       <Slider
-        defaultValue={props.value}
+        value={props.value}
         getAriaValueText={valuetext}
         onChange={handleSliderChange}
         aria-labelledby="discrete-slider-always"

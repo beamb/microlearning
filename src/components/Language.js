@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { Java } from "@styled-icons/fa-brands/Java";
 import { Python } from "@styled-icons/simple-icons/Python";
@@ -54,43 +53,29 @@ function Language() {
     setLanguage("python");
   }
 
-  const JavaButton = withRouter(({ history }) => (
-    <JavaIcon
-      size="80"
-      type="button"
-      onClick={() => {
-        handleJavaClick();
-        history.push("/quiz");
-      }}
-    >
-      Java
-    </JavaIcon>
-  ));
+  const JavaButton = () => (
+    <Link to="/quiz">
+      <JavaIcon size="80" type="button" onClick={() => handleJavaClick()}>
+        Java
+      </JavaIcon>
+    </Link>
+  );
 
-  // const JSButton = withRouter(({ history }) => (
-  //   <button
-  //     type="button"
-  //     onClick={() => {
-  //       handleJSClick();
-  //       history.push("/quiz");
-  //     }}
-  //   >
-  //     JavaScript
-  //   </button>
-  // ));
+  /*const JSButton = () => (
+    <Link to="/quiz">
+      <button type="button" onClick={() => handleJSClick()}>
+        JavaScript
+      </button>
+    </Link>
+  );*/
 
-  const PythonButton = withRouter(({ history }) => (
-    <PythonIcon
-      size="80"
-      type="button"
-      onClick={() => {
-        handlePythonClick();
-        history.push("/quiz");
-      }}
-    >
-      Python
-    </PythonIcon>
-  ));
+  const PythonButton = () => (
+    <Link to="/quiz">
+      <PythonIcon size="80" type="button" onClick={() => handlePythonClick()}>
+        Python
+      </PythonIcon>
+    </Link>
+  );
 
   return (
     <Container>

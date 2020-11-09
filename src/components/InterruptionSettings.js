@@ -34,9 +34,6 @@ export const InterruptionSettings = () => {
 
   const changingInterval = () => {
     let intervals = [];
-    /*Array.min = function (array) {
-      return Math.min.apply(Math, array);
-    };*/
     sharedState.websites.forEach((ws) => {
       if (ws.state) {
         intervals.push(ws.interval);
@@ -49,18 +46,23 @@ export const InterruptionSettings = () => {
     setInterval(minimum);
   };
 
-  const handleAllIntervals = (event) => {
+  const handleInputInterval = (newInterval) => {
+    handleAllIntervals(newInterval);
+    changingInterval();
+  };
+
+  const handleAllIntervals = (newInterval) => {
     if (sharedState.websites.every((w) => w.state)) {
-      setInterval(event);
+      setInterval(newInterval);
       let websitesCopy = { ...sharedState };
-      websitesCopy.websites.forEach((wc) => (wc.interval = event));
+      websitesCopy.websites.forEach((wc) => (wc.interval = newInterval));
       setSharedState(websitesCopy);
     } else {
-      setInterval(event);
+      setInterval(newInterval);
       let websitesCopy = { ...sharedState };
       websitesCopy.websites.forEach((wc) => {
         if (wc.state) {
-          wc.interval = event;
+          wc.interval = newInterval;
         }
       });
       setSharedState(websitesCopy);
@@ -84,6 +86,32 @@ export const InterruptionSettings = () => {
     });
     setSharedState(websitesCopy);
     changingInterval();
+  };
+
+  const toggleCheckboxes = (name) => {
+    let websitesCopy = { ...sharedState };
+    websitesCopy.websites.forEach((wc) => {
+      if (wc.name !== name) {
+        wc.state = false;
+      } else {
+        wc.state = true;
+      }
+    });
+    setSharedState(websitesCopy);
+  };
+
+  const validateInput = (name) => {
+    let websitesCopy = { ...sharedState };
+    websitesCopy.websites.forEach((wc) => {
+      if (wc.name === name) {
+        if (wc.interval < 5) {
+          wc.interval = 5;
+        } else if (wc.interval > 60) {
+          wc.interval = 60;
+        }
+      }
+    });
+    setSharedState(websitesCopy);
   };
 
   return (
@@ -113,6 +141,9 @@ export const InterruptionSettings = () => {
           value={website.interval}
           checkState={website.state}
           changeCheckState={updateWebsite}
+          updateInterval={handleInputInterval}
+          disableCheckboxes={toggleCheckboxes}
+          validateInput={validateInput}
         />
       ))}
     </div>

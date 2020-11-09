@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import styled, { css } from "styled-components";
+import TextField from "@material-ui/core/TextField";
 
 const Button = styled.button`
   background: transparent;
@@ -13,7 +15,18 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: "75px",
+    },
+  },
+}));
+
 export const WebsiteField = (props) => {
+  const classes = useStyles();
+
   const [label, setLabel] = useState("Disable interruptions");
 
   const switchLabel = () => {
@@ -26,6 +39,19 @@ export const WebsiteField = (props) => {
 
   const handleCheckboxChange = () => {
     props.changeCheckState(props.website);
+  };
+
+  const handleInputChange = (event) => {
+    disableOtherCheckboxes();
+    props.updateInterval(event.target.value);
+  };
+
+  const disableOtherCheckboxes = () => {
+    props.disableCheckboxes(props.website);
+  };
+
+  const handleBlur = () => {
+    props.validateInput(props.website);
   };
 
   return (
@@ -48,9 +74,15 @@ export const WebsiteField = (props) => {
             {label}
           </Button>
           <Button type="button">Delete</Button>
-          <h4>
-            <span>{props.value} minutes</span>
-          </h4>
+          <TextField
+            id="standard-number"
+            type="number"
+            value={props.value}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
+            helperText="minutes"
+            InputProps={{ inputProps: { min: 5, max: 60 } }}
+          />
         </FormGroup>
       </FormControl>
       <br />

@@ -34,7 +34,7 @@ export const PromptContainer = styled.div`
 `;
 
 export const MainContainer = styled.div`
-  display: inline-block;
+  display: flex;
   border-radius: 3px;
   padding: 0.5rem 0;
   margin: 0.5rem 4rem;
@@ -43,4 +43,23 @@ export const MainContainer = styled.div`
   text-align: center;
   width: 500px;
   height: 400px;
+`;
+
+export const LanguageContainer = styled.div`
+  display: flex;
+  border-radius: 3px;
+  padding: 15% 0;
+  margin: 0.5rem 4rem;
+  background: white;
+  color: black;
+  text-align: center;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const IconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 `;

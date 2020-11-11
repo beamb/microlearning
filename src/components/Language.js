@@ -1,43 +1,30 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { BrowserRouter as Link } from "react-router-dom";
-import Quiz from "./Quiz";
+import LanguageDataContainer from "./LanguageDataContainer";
 
 // styling
 import { JavaIcon, PythonIcon, JSIcon } from "../styling/Icons";
-import { MainContainer } from "../styling/Containers";
+import {
+  MainContainer,
+  LanguageContainer,
+  IconContainer,
+} from "../styling/Containers";
 
-function Language() {
-  const [langugage, setLanguage] = useState("");
-  console.log(langugage);
+function Language(props) {
+  // const [language, setLanguage] = useState("");
+  // console.log(language);
 
-  // sets the language in state to java
-  function handleJavaClick(e) {
-    e.preventDefault();
-    console.log("The link was clicked.");
-    setLanguage("java");
-  }
-
-  // sets the language in state to javascript
-  function handleJSClick(e) {
-    e.preventDefault();
-    console.log("The link was clicked.");
-    setLanguage("javascript");
-  }
-
-  // sets the language in state to python
-  function handlePythonClick(e) {
-    e.preventDefault();
-    console.log("The link was clicked.");
-    setLanguage("python");
-  }
+  // function handleLanguageSelect(selected) {
+  //   console.log(`The link was clicked for "${selected}"`);
+  //   setLanguage(selected);
+  // }
 
   const JavaButton = withRouter(({ history }) => (
     <JavaIcon
       size="80"
       type="button"
       onClick={() => {
-        handleJavaClick();
+        props.handleLanguageSelect("java");
         history.push("/quiz");
       }}
     >
@@ -50,7 +37,7 @@ function Language() {
       size="80"
       type="button"
       onClick={() => {
-        handleJSClick();
+        props.handleLanguageSelect("javascript");
         history.push("/quiz");
       }}
     >
@@ -63,7 +50,7 @@ function Language() {
       size="80"
       type="button"
       onClick={() => {
-        handlePythonClick();
+        props.handleLanguageSelect("python");
         history.push("/quiz");
       }}
     >
@@ -73,12 +60,14 @@ function Language() {
 
   return (
     <MainContainer>
-      <h3>Which language do you prefer?</h3>
-      <div>
-        <JavaButton />
-        <JSButton />
-        <PythonButton />
-      </div>
+      <LanguageContainer>
+        <p>Which language do you want me to test you in?</p>
+        <IconContainer>
+          <JavaButton />
+          <JSButton />
+          <PythonButton />
+        </IconContainer>
+      </LanguageContainer>
     </MainContainer>
   );
 }

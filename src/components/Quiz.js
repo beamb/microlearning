@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-
-import Language from "./Language";
-import { BrowserRouter as Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import styled, { css } from "styled-components";
+import LanguageDataContainer from "./LanguageDataContainer";
 
 // Style
 
@@ -90,7 +87,7 @@ function Quiz(props) {
     },
   ];
 
-  const [langugage, setLanguage] = useState("");
+  const { selectedLanguage } = props;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -139,7 +136,8 @@ function Quiz(props) {
   return (
     <Container>
       {showScore ? (
-        <div className="finish-display">
+        // Finish section
+        <div>
           <p>Congratulations!</p>
           <p>
             You finished the quiz with {score}/{questions.length} correct
@@ -152,18 +150,20 @@ function Quiz(props) {
         </div>
       ) : (
         <>
-          <div className="question-section">
-            <div className="question-description">
-              {questions[currentQuestion].Description}
-            </div>
+          {/* Question section */}
+          <div>
+            {/* Question description */}
+            <div>{questions[currentQuestion].Description}</div>
           </div>
-          <div className="answer-section">
+          {/* Answer section */}
+          <div>
             {questions[currentQuestion].Options.map((answerOption) => (
               <button
                 style={{ backgroundColor: buttonColor }}
-                onClick={() => handleAnswerOptionClick(answerOption)}
+                onChange={() => handleAnswerOptionClick(answerOption)}
               >
                 {answerOption.Text}
+                <p>{selectedLanguage}</p>
               </button>
             ))}
           </div>

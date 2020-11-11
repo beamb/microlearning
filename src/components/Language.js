@@ -1,65 +1,30 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { BrowserRouter as Link } from "react-router-dom";
-import styled, { css } from "styled-components";
-import { Java } from "@styled-icons/fa-brands/Java";
-import { Python } from "@styled-icons/simple-icons/Python";
-import Quiz from "./Quiz";
+import LanguageDataContainer from "./LanguageDataContainer";
 
-//Style
-const Container = styled.div`
-  display: inline-block;
-  border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 4rem;
-  background: white;
-  color: black;
-  text-align: center;
-  width: 500px;
-  height: 400px;
-`;
+// styling
+import { JavaIcon, PythonIcon, JSIcon } from "../styling/Icons";
+import {
+  MainContainer,
+  LanguageContainer,
+  IconContainer,
+} from "../styling/Containers";
 
-const JavaIcon = styled(Java)`
-  margin: 0.5em 1em;
-  color: rgba(33, 182, 168, 1);
-`;
+function Language(props) {
+  // const [language, setLanguage] = useState("");
+  // console.log(language);
 
-const PythonIcon = styled(Python)`
-  margin: 0.5em 1em;
-  color: rgba(33, 182, 168, 1);
-`;
-
-function Language() {
-  const [langugage, setLanguage] = useState("");
-  console.log(langugage);
-
-  // sets the language in state to java
-  function handleJavaClick(e) {
-    // e.preventDefault();
-    console.log("The link was clicked.");
-    setLanguage("java");
-  }
-
-  // sets the language in state to javascript
-  function handleJSClick(e) {
-    // e.preventDefault();
-    console.log("The link was clicked.");
-    setLanguage("javascript");
-  }
-
-  // sets the language in state to python
-  function handlePythonClick(e) {
-    // e.preventDefault();
-    console.log("The link was clicked.");
-    setLanguage("python");
-  }
+  // function handleLanguageSelect(selected) {
+  //   console.log(`The link was clicked for "${selected}"`);
+  //   setLanguage(selected);
+  // }
 
   const JavaButton = withRouter(({ history }) => (
     <JavaIcon
       size="80"
       type="button"
       onClick={() => {
-        handleJavaClick();
+        props.handleLanguageSelect("java");
         history.push("/quiz");
       }}
     >
@@ -67,24 +32,25 @@ function Language() {
     </JavaIcon>
   ));
 
-  // const JSButton = withRouter(({ history }) => (
-  //   <button
-  //     type="button"
-  //     onClick={() => {
-  //       handleJSClick();
-  //       history.push("/quiz");
-  //     }}
-  //   >
-  //     JavaScript
-  //   </button>
-  // ));
+  const JSButton = withRouter(({ history }) => (
+    <JSIcon
+      size="80"
+      type="button"
+      onClick={() => {
+        props.handleLanguageSelect("javascript");
+        history.push("/quiz");
+      }}
+    >
+      JavaScript
+    </JSIcon>
+  ));
 
   const PythonButton = withRouter(({ history }) => (
     <PythonIcon
       size="80"
       type="button"
       onClick={() => {
-        handlePythonClick();
+        props.handleLanguageSelect("python");
         history.push("/quiz");
       }}
     >
@@ -93,14 +59,16 @@ function Language() {
   ));
 
   return (
-    <Container>
-      <h3>Which language do you prefer?</h3>
-      <div>
-        <JavaButton />
-        {/* <JSButton /> */}
-        <PythonButton />
-      </div>
-    </Container>
+    <MainContainer>
+      <LanguageContainer>
+        <p>Which language do you want me to test you in?</p>
+        <IconContainer>
+          <JavaButton />
+          <JSButton />
+          <PythonButton />
+        </IconContainer>
+      </LanguageContainer>
+    </MainContainer>
   );
 }
 

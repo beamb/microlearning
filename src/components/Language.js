@@ -18,8 +18,10 @@ function Language(props) {
     <JavaIcon
       size="80"
       type="button"
-      value="java"
-      onClick={this.props.handleOnChange}
+      onClick={() => {
+        props.handleLanguageSelect("java");
+        history.push("/quiz");
+      }}
     >
       Java
     </JavaIcon>
@@ -29,9 +31,10 @@ function Language(props) {
     <JSIcon
       size="80"
       type="button"
-      value="javascript"
-      onClick={this.props.handleOnChange}
-      // history.push("/quiz");
+      onClick={() => {
+        props.handleLanguageSelect("javascript");
+        history.push("/quiz");
+      }}
     >
       JavaScript
     </JSIcon>
@@ -41,9 +44,10 @@ function Language(props) {
     <PythonIcon
       size="80"
       type="button"
-      value="python"
-      onClick={this.props.handleOnChange}
-      // history.push("/quiz");
+      onClick={() => {
+        props.handleLanguageSelect("python");
+        history.push("/quiz");
+      }}
     >
       Python
     </PythonIcon>

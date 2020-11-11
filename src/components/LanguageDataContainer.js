@@ -2,21 +2,70 @@ import React, { useState } from "react";
 import Language from "./Language";
 import Quiz from "./Quiz";
 
-function LanguageDataContainer() {
-  const [selectedLanguage, setLanguage] = useState("blabla");
-  console.log(selectedLanguage);
+// styling
+import { MainContainer, LanguageContainer } from "../styling/Containers";
 
-  function handleLanguageSelect() {
-    console.log(`The link was clicked for "${selected}"`);
-    setLanguage();
+class LanguageDataContainer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      selectValue: "java",
+    };
   }
 
-  return (
-    <div>
-      <Language handleLanguagSelect={handleLanguageSelect()} />
-      <Quiz selectedLanguage={selectedLanguage} />
-    </div>
-  );
+  handleOnChange(e) {
+    this.setState({
+      selectValue: e.target.value,
+    });
+  }
+
+  render() {
+    const { selectValue } = this.state;
+
+    return (
+      <MainContainer>
+        <LanguageContainer>
+          <Language handleOnChange={this.handleOnChange.bind(this)} />
+          <Quiz selectValue={selectValue} />
+        </LanguageContainer>
+      </MainContainer>
+    );
+  }
+
+  // constructor() {
+  //   super();
+  //   this.state = {
+  //     selectLanguage: "", // use this as default
+  //   };
+  // }
+
+  // handleOnChange(e) {
+  //   this.setState({
+  //     selectLanguage: e.target.value,
+  //   });
+  // }
+
+  // render() {
+  //   const { selectValue } = this.state;
+
+  //   return (
+  //     <div>
+  //       <Language handleOnChange={this.handleOnChange.bind(this)} />
+  //       <Quiz selectLanguage={selectLanguage} />
+  //     </div>
+  //   );
+  // }
 }
+
+//   return (
+//     <MainContainer>
+//       <LanguageContainer>
+//         <p>Which language do you want me to test you in?</p>
+//         <Language handleLanguageSelect={this.handleLanguageSelect} />
+//         <Quiz selectedLanguage={this.selectedLanguage} />
+//       </LanguageContainer>
+//     </MainContainer>
+//   );
+// }
 
 export default LanguageDataContainer;

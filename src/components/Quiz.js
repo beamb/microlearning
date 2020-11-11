@@ -67,7 +67,7 @@ function Quiz(props) {
     },
   ];
 
-  const { selectedLanguage } = props;
+  const { selectValue } = this.props;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -142,7 +142,7 @@ function Quiz(props) {
                 onChange={() => handleAnswerOptionClick(answerOption)}
               >
                 {answerOption.Text}
-                <p>{selectedLanguage}</p>
+                <p>{selectValue}</p>
               </button>
             ))}
           </div>

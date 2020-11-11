@@ -3,6 +3,7 @@ import { LoggedInPrompt } from "../pages/LoggedInPrompt";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation";
 import Language from "./Language";
+import LanguageDataContainer from "./LanguageDataContainer";
 import Quiz from "./Quiz";
 import Help from "../pages/Help";
 import Settings from "../pages/Settings";
@@ -20,7 +21,7 @@ export const MainRouter = () => {
           <Settings />
         </Route>
         <Route path="/language">
-          <Language />
+          <LanguageDataContainer />
         </Route>
         <Route path="/quiz">
           <Quiz />

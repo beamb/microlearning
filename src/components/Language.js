@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import LanguageDataContainer from "./LanguageDataContainer";
 
 // styling
 import { JavaIcon, PythonIcon, JSIcon } from "../styling/Icons";
-import {
-  MainContainer,
-  LanguageContainer,
-  IconContainer,
-} from "../styling/Containers";
+import { IconContainer } from "../styling/Containers";
 
 function Language(props) {
   // const [language, setLanguage] = useState("");
@@ -23,10 +18,8 @@ function Language(props) {
     <JavaIcon
       size="80"
       type="button"
-      onClick={() => {
-        props.handleLanguageSelect("java");
-        history.push("/quiz");
-      }}
+      value="java"
+      onClick={this.props.handleOnChange}
     >
       Java
     </JavaIcon>
@@ -36,10 +29,9 @@ function Language(props) {
     <JSIcon
       size="80"
       type="button"
-      onClick={() => {
-        props.handleLanguageSelect("javascript");
-        history.push("/quiz");
-      }}
+      value="javascript"
+      onClick={this.props.handleOnChange}
+      // history.push("/quiz");
     >
       JavaScript
     </JSIcon>
@@ -49,26 +41,20 @@ function Language(props) {
     <PythonIcon
       size="80"
       type="button"
-      onClick={() => {
-        props.handleLanguageSelect("python");
-        history.push("/quiz");
-      }}
+      value="python"
+      onClick={this.props.handleOnChange}
+      // history.push("/quiz");
     >
       Python
     </PythonIcon>
   ));
 
   return (
-    <MainContainer>
-      <LanguageContainer>
-        <p>Which language do you want me to test you in?</p>
-        <IconContainer>
-          <JavaButton />
-          <JSButton />
-          <PythonButton />
-        </IconContainer>
-      </LanguageContainer>
-    </MainContainer>
+    <IconContainer>
+      <JavaButton />
+      <JSButton />
+      <PythonButton />
+    </IconContainer>
   );
 }
 

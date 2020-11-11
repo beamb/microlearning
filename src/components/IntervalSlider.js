@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 
@@ -85,6 +85,7 @@ export const IntervalSlider = (props) => {
         valueLabelDisplay="auto"
         min={5}
         max={60}
+        disabled={props.disable}
       />
     </div>
   );

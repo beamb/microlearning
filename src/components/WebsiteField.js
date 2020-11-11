@@ -6,6 +6,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import styled, { css } from "styled-components";
 import TextField from "@material-ui/core/TextField";
+import { Trash } from "@styled-icons/heroicons-outline";
 
 const Button = styled.button`
   background: transparent;
@@ -13,6 +14,10 @@ const Button = styled.button`
   color: black;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
+`;
+
+const DeleteButton = styled(Trash)`
+  color: red;
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -50,8 +55,16 @@ export const WebsiteField = (props) => {
     props.disableCheckboxes(props.website);
   };
 
+  const disable = () => {
+    props.disable(props.website);
+  };
+
   const handleBlur = () => {
     props.validateInput(props.website);
+  };
+
+  const handleDelete = () => {
+    props.delete(props.website);
   };
 
   return (
@@ -65,15 +78,24 @@ export const WebsiteField = (props) => {
                 color="primary"
                 checked={props.checkState}
                 onChange={handleCheckboxChange}
+                disabled={props.status}
               />
             }
             label={props.website}
             labelPlacement="end"
           />
-          <Button type="button" onClick={switchLabel}>
+          <Button
+            type="button"
+            onClick={() => {
+              switchLabel();
+              disable();
+            }}
+          >
             {label}
           </Button>
-          <Button type="button">Delete</Button>
+          <DeleteButton size="30" type="button" onClick={handleDelete}>
+            Delete
+          </DeleteButton>
           <TextField
             id="standard-number"
             type="number"
@@ -82,6 +104,7 @@ export const WebsiteField = (props) => {
             onBlur={handleBlur}
             helperText="minutes"
             InputProps={{ inputProps: { min: 5, max: 60 } }}
+            disabled={props.status}
           />
         </FormGroup>
       </FormControl>

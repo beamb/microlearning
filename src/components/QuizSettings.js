@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Button = styled.button`
   background: transparent;
@@ -29,7 +29,7 @@ export const QuizSettings = () => {
 
   return (
     <div>
-      <h3>How many questions can I ask you when I interrupt you?</h3>
+      <h4>How many questions can I ask you when I interrupt you?</h4>
       <NumberButton number="5" />
       <NumberButton number="10" />
       <NumberButton number="15" />

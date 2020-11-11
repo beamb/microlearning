@@ -6,7 +6,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import WebsiteForm from "./WebsiteForm";
 
-export const InterruptionSettings = () => {
+export const InterruptionSettings = (props) => {
   const initialState = {
     websites: [
       {
@@ -195,6 +195,21 @@ export const InterruptionSettings = () => {
     setURLInput("");
   };
 
+  /* Once we start using the database, this should be called directly in Navigation.js 
+  together with the name/URL check. Not only in InterruptionSettings.js */
+  const addWebsiteFromBrowser = () => {
+    let newWebsite = {
+      name: props.title,
+      URL: props.url,
+      state: true,
+      interval: 15,
+      isDisabled: false,
+    };
+    let websitesCopy = { ...sharedState };
+    websitesCopy.websites.push(newWebsite);
+    setSharedState(websitesCopy);
+  };
+
   const handleNameInput = (event) => {
     setNameInput(event.target.value);
   };
@@ -211,11 +226,12 @@ export const InterruptionSettings = () => {
 
   const toggleClick = () => {
     setIsClicked(!isClicked);
+    addWebsiteFromBrowser();
   };
 
   return (
     <div>
-      <h3>How often can I interrupt your procrastination?</h3>
+      <h4>How often can I interrupt your procrastination?</h4>
       <IntervalSlider
         value={interval}
         updateInterval={handleAllIntervals}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { InterruptionSettings } from "../components/InterruptionSettings";
 import { QuizSettings } from "../components/QuizSettings";
 import Help from "./Help";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
@@ -10,6 +10,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { firebaseAppAuth } from "../firebase";
+import { useLocation, withRouter } from "react-router-dom";
 
 const Container = styled.div`
   text-align: left;
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Settings = () => {
+export const Settings = (props) => {
   const classes = useStyles();
   const [value, setValue] = useState(0);
 
@@ -105,7 +106,7 @@ export const Settings = () => {
           <br />
           <QuizSettings />
           <br />
-          <InterruptionSettings/>
+          <InterruptionSettings title={props.title} url={props.url} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Help />

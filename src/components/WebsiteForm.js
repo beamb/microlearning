@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { AddCircle } from "@styled-icons/ionicons-outline";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 
 const AddButton = styled(AddCircle)`
   color: black;

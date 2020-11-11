@@ -5,7 +5,7 @@ import { NotLoggedInPrompt } from "./pages/NotLoggedInPrompt";
 import MainRouter from "./components/MainRouter";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 const Container = styled.div`
   text-align: center;

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import { Trash } from "@styled-icons/heroicons-outline";
 
@@ -20,18 +19,7 @@ const DeleteButton = styled(Trash)`
   color: red;
 `;
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: "75px",
-    },
-  },
-}));
-
 export const WebsiteField = (props) => {
-  const classes = useStyles();
-
   const [label, setLabel] = useState("Disable interruptions");
 
   const switchLabel = () => {

@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { database } from "../firebase";
 import { FireSQL } from 'firesql';
 import firebase from 'firebase/app';
 import 'firesql/rx'; 
 
 import Language from "./Language";
+import Question from "./Question";
 import { BrowserRouter as Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import styled, { css } from "styled-components";
@@ -12,7 +13,7 @@ import styled, { css } from "styled-components";
 // Style
 
 const Container = styled.div`
-  text-align: center;
+  text-adivgn: center;
   border-radius: 3px;
   padding: 0.5rem 0;
   margin: 0.5rem 1rem;
@@ -37,29 +38,22 @@ const Button = styled.button`
     `}
 `;
 
-const java = "java";
-const python = "python";
+// We need a way to access the language from the state in the Language component.
 
-const dbQuestions = database.collection('questions').doc('60IscHtSe4tSGbek18Ag');
-const fireSQL = new FireSQL(dbQuestions);
-
-// We need a way to access the langugage from the state in the Language component.
-
-// only temporary question array
 function Quiz(props) {
-  var qdescription = fireSQL.query('SELECT description FROM questions');
-  //var query = dbquestions.where("description", "==", "Which of the following function of Array object reverses the order of the elements of an array?");
+
+  // only temporary question array        
   const questions = [
     {
-      Description: qdescription.toString(),
+      Description:"Sample question... bla bla bla",
       Language: "java",
       Level: 1,
       QuestionId: 0,
       Options: [
-        { Text: "float x = 13;", isCorrect: false },
-        { Text: "num x = 13;", isCorrect: false },
-        { Text: "int x = 13;", isCorrect: true },
-        { Text: "x = 13;", isCorrect: false },
+        { Text: "A Java program that runs in a Web browser.", isCorrect: true },
+        { Text: "A standalone java program.", isCorrect: false },
+        { Text: "A tool.", isCorrect: false },
+        { Text: "A run time environment.", isCorrect: false },
       ],
     },
     {
@@ -88,7 +82,7 @@ function Quiz(props) {
       ],
     },
     {
-      Description: "Java: What langugage is this extension written in?",
+      Description: "Java: What language is this extension written in?",
       Language: "java",
       Level: 1,
       QuestionId: 3,
@@ -101,14 +95,14 @@ function Quiz(props) {
     },
   ];
 
-  const [langugage, setLanguage] = useState("");
+  const [language, setLanguage] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [buttonColor, setButtonColor] = useState("white");
   const [nextButtonDisplay, setNextButtonDisplay] = useState(true);
 
-  const handleAnswerOptionClick = (answerOption) => {
+  const handleAnswerOptionCdivck = (answerOption) => {
     setButtonColor(
       answerOption.isCorrect
         ? "rgba(165, 214, 167, 1)"
@@ -119,7 +113,7 @@ function Quiz(props) {
     }
   };
 
-  const handleNextClick = () => {
+  const handleNextCdivck = () => {
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
       setCurrentQuestion(nextQuestion);
@@ -133,7 +127,7 @@ function Quiz(props) {
     <Button
       primary
       type="button"
-      onClick={() => {
+      onCdivck={() => {
         history.push("/language");
       }}
     >
@@ -142,13 +136,13 @@ function Quiz(props) {
   ));
 
   const ExitButton = () => (
-    <button type="button" onClick={() => window.close()}>
+    <button type="button" onCdivck={() => window.close()}>
       Procrastinate
     </button>
   );
 
   return (
-    <Container>
+    <Container>      
       {showScore ? (
         <div className="finish-display">
           <p>Congratulations!</p>
@@ -165,14 +159,14 @@ function Quiz(props) {
         <>
           <div className="question-section">
             <div className="question-description">
-              {questions[currentQuestion].Description}
+              <Question />
             </div>
           </div>
           <div className="answer-section">
             {questions[currentQuestion].Options.map((answerOption) => (
               <button
                 style={{ backgroundColor: buttonColor }}
-                onClick={() => handleAnswerOptionClick(answerOption)}
+                onCdivck={() => handleAnswerOptionCdivck(answerOption)}
               >
                 {answerOption.Text}
               </button>
@@ -183,7 +177,7 @@ function Quiz(props) {
               primary
               className="NextStep"
               disabled={false}
-              onClick={() => handleNextClick()}
+              onCdivck={() => handleNextCdivck()}
             >
               Next
             </Button>

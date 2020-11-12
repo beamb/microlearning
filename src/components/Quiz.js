@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import LanguageDataContainer from "./LanguageDataContainer";
 
 //styling
 import { QuizContainer } from "../styling/Containers";
@@ -16,8 +15,7 @@ import {
 function Quiz(props) {
   const questions = [
     {
-      Description:
-        "Java: How do you create a variable with the numeric value 13?",
+      Description: "How do you create a variable with the numeric value 13?",
       Language: "java",
       Level: 1,
       QuestionId: 0,
@@ -30,7 +28,7 @@ function Quiz(props) {
     },
     {
       Description:
-        "Java: Which method can be used to return a string in upper case letters?",
+        "Which method can be used to return a string in upper case letters?",
       Language: "java",
       Level: 1,
       QuestionId: 1,
@@ -42,7 +40,7 @@ function Quiz(props) {
       ],
     },
     {
-      Description: "Java: Which operator can be used to compare two values?",
+      Description: "Which operator can be used to compare two values?",
       Language: "java",
       Level: 1,
       QuestionId: 2,
@@ -54,7 +52,7 @@ function Quiz(props) {
       ],
     },
     {
-      Description: "Java: What langugage is this extension written in?",
+      Description: "What langugage is this extension written in?",
       Language: "java",
       Level: 1,
       QuestionId: 3,
@@ -97,6 +95,7 @@ function Quiz(props) {
   ));
 
   function handleProcrastinateClick() {
+    console.log("the link was clicked to close");
     window.close();
   }
 
@@ -121,10 +120,10 @@ function Quiz(props) {
             answers.
           </p>
           <div>
-            <ProcrastinateButton onCLick={handleProcrastinateClick}>
+            <ProcrastinateButton onClick={handleProcrastinateClick}>
               Procrastinate
             </ProcrastinateButton>
-            <StartQuizButton1>Quiz</StartQuizButton1>
+            <StartQuizButton1 />
           </div>
         </div>
       ) : (
@@ -132,6 +131,7 @@ function Quiz(props) {
           {/* Question section */}
           <div>
             {/* Question description */}
+            <p>{selectedLanguage}</p>
             <div>{questions[currentQuestion].Description}</div>
           </div>
           {/* Answer section */}

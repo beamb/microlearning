@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { withRouter } from "react-router-dom";
 
 // styling
@@ -6,14 +6,6 @@ import { JavaIcon, PythonIcon, JSIcon } from "../styling/Icons";
 import { IconContainer } from "../styling/Containers";
 
 function Language(props) {
-  // const [language, setLanguage] = useState("");
-  // console.log(language);
-
-  // function handleLanguageSelect(selected) {
-  //   console.log(`The link was clicked for "${selected}"`);
-  //   setLanguage(selected);
-  // }
-
   const JavaButton = withRouter(({ history }) => (
     <JavaIcon
       size="80"

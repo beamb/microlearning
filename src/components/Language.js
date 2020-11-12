@@ -20,7 +20,6 @@ function Language(props) {
       type="button"
       onClick={() => {
         props.handleLanguageSelect("java");
-        history.push("/quiz");
       }}
     >
       Java
@@ -33,7 +32,6 @@ function Language(props) {
       type="button"
       onClick={() => {
         props.handleLanguageSelect("javascript");
-        history.push("/quiz");
       }}
     >
       JavaScript
@@ -46,7 +44,6 @@ function Language(props) {
       type="button"
       onClick={() => {
         props.handleLanguageSelect("python");
-        history.push("/quiz");
       }}
     >
       Python

@@ -17,9 +17,14 @@ function LanguageDataContainer() {
   return (
     <MainContainer>
       <LanguageContainer>
-        <p>Which language do you want me to test you in?</p>
-        <Language handleLanguageSelect={handleLanguageSelect} />
-        <Quiz selectedLanguage={selectedLanguage} />
+        {!selectedLanguage ? (
+          <React.Fragment>
+            <p>Which language do you want me to test you in?</p>
+            <Language handleLanguageSelect={handleLanguageSelect} />
+          </React.Fragment>
+        ) : (
+          <Quiz selectedLanguage={selectedLanguage} />
+        )}
       </LanguageContainer>
     </MainContainer>
   );

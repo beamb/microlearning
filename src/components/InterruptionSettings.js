@@ -37,7 +37,7 @@ export const InterruptionSettings = (props) => {
   const [sharedState, setSharedState] = useState(initialState);
   const [allDisabled, setAllDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [urlInput, setURLInput] = useState("");
+  const [urlInput, setURLInput] = useState("https://");
   const [nameInput, setNameInput] = useState("");
   const [isClicked, setIsClicked] = useState(false);
 
@@ -69,6 +69,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
+    props.updateWebsites(websitesCopy);
   };
 
   const handleSelectAllChange = (event) => {
@@ -80,6 +81,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
+    props.updateWebsites(websitesCopy);
     changingInterval();
   };
 
@@ -91,6 +93,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
+    props.updateWebsites(websitesCopy);
     changingInterval();
   };
 
@@ -104,6 +107,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
+    props.updateWebsites(websitesCopy);
   };
 
   const validateInput = (name) => {
@@ -118,6 +122,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
+    props.updateWebsites(websitesCopy);
   };
 
   const disableField = (name) => {
@@ -133,6 +138,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
+    props.updateWebsites(websitesCopy);
     disableSlider();
   };
 
@@ -162,6 +168,7 @@ export const InterruptionSettings = (props) => {
       disableSlider();
       setIsLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
   const deleteWebsite = (name) => {
@@ -169,6 +176,7 @@ export const InterruptionSettings = (props) => {
     let newWebsites = websitesCopy.websites.filter((wc) => wc.name !== name);
     websitesCopy.websites = newWebsites;
     setSharedState(websitesCopy);
+    props.updateWebsites(websitesCopy);
     setIsLoading(true);
   };
 
@@ -178,7 +186,7 @@ export const InterruptionSettings = (props) => {
         (ws) => ws.name === nameInput || ws.URL === urlInput
       )
     ) {
-      alert("A website with the same name/URL is already stored.");
+      alert("This name/URL has already been stored");
     } else {
       let newWebsite = {
         name: nameInput,
@@ -190,24 +198,73 @@ export const InterruptionSettings = (props) => {
       let websitesCopy = { ...sharedState };
       websitesCopy.websites.push(newWebsite);
       setSharedState(websitesCopy);
+      props.updateWebsites(websitesCopy);
     }
     setNameInput("");
-    setURLInput("");
+    setURLInput("https://");
   };
 
-  /* Once we start using the database, this should be called directly in Navigation.js 
-  together with the name/URL check. Not only in InterruptionSettings.js */
-  const addWebsiteFromBrowser = () => {
-    let newWebsite = {
-      name: props.title,
-      URL: props.url,
-      state: true,
-      interval: 15,
-      isDisabled: false,
-    };
-    let websitesCopy = { ...sharedState };
-    websitesCopy.websites.push(newWebsite);
-    setSharedState(websitesCopy);
+  const options = {
+    sites: [
+      {
+        name: "Disney+",
+        URL: "https://www.disneyplus.com/",
+      },
+      {
+        name: "Facebook",
+        URL: "https://www.facebook.com/",
+      },
+      {
+        name: "HBO Nordic",
+        URL: "https://dk.hbonordic.com/",
+      },
+      {
+        name: "Instagram",
+        URL: "https://www.instagram.com/",
+      },
+      {
+        name: "LinkedIn",
+        URL: "https://www.linkedin.com/",
+      },
+      {
+        name: "Netflix",
+        URL: "https://www.netflix.com/",
+      },
+      {
+        name: "Twitter",
+        URL: "https://twitter.com/",
+      },
+      {
+        name: "Youtube",
+        URL: "https://www.youtube.com/",
+      },
+    ],
+  };
+
+  const addWebsiteFromName = (name) => {
+    options.sites.forEach((o) => {
+      if (o.name === name) {
+        if (
+          sharedState.websites.some(
+            (ws) => ws.name === o.name || ws.URL === o.URL
+          )
+        ) {
+          alert("This name/URL has already been stored");
+        } else {
+          let newWebsite = {
+            name: o.name,
+            URL: o.URL,
+            state: true,
+            interval: 15,
+            isDisabled: false,
+          };
+          let websitesCopy = { ...sharedState };
+          websitesCopy.websites.push(newWebsite);
+          setSharedState(websitesCopy);
+          props.updateWebsites(websitesCopy);
+        }
+      }
+    });
   };
 
   const handleNameInput = (event) => {
@@ -226,7 +283,6 @@ export const InterruptionSettings = (props) => {
 
   const toggleClick = () => {
     setIsClicked(!isClicked);
-    addWebsiteFromBrowser();
   };
 
   return (
@@ -278,6 +334,8 @@ export const InterruptionSettings = (props) => {
         changeName={handleNameInput}
         clicked={isClicked}
         changeClick={toggleClick}
+        addNewWebsite={addWebsite}
+        addSiteFromName={addWebsiteFromName}
       />
     </div>
   );

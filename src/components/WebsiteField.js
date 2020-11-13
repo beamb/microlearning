@@ -3,6 +3,7 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Switch from "@material-ui/core/Switch";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import { Trash } from "@styled-icons/heroicons-outline";
@@ -55,6 +56,11 @@ export const WebsiteField = (props) => {
     props.delete(props.website);
   };
 
+  const handleSwitchChange = () => {
+    switchLabel();
+    disable();
+  };
+
   return (
     <div>
       <FormControl component="fieldset">
@@ -72,15 +78,18 @@ export const WebsiteField = (props) => {
             label={props.website}
             labelPlacement="end"
           />
-          <Button
-            type="button"
-            onClick={() => {
-              switchLabel();
-              disable();
-            }}
-          >
-            {label}
-          </Button>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={!props.status}
+                onChange={handleSwitchChange}
+                name="webSwitch"
+                color="primary"
+              />
+            }
+            label={label}
+          />
+
           <DeleteButton size="30" type="button" onClick={handleDelete}>
             Delete
           </DeleteButton>

@@ -3,14 +3,11 @@ import { InterruptionSettings } from "../components/InterruptionSettings";
 import { QuizSettings } from "../components/QuizSettings";
 import Help from "./Help";
 import styled from "styled-components";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
 import { firebaseAppAuth } from "../firebase";
-import { useLocation, withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useStyles, a11yProps, TabPanel } from "../components/TabPanel";
 
 const Container = styled.div`
   text-align: left;
@@ -30,69 +27,78 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
-const TabPanel = (props) => {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`vertical-tabpanel-${index}`}
-      aria-labelledby={`vertical-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-};
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-const a11yProps = (index) => {
-  return {
-    id: `vertical-tab-${index}`,
-    "aria-controls": `vertical-tabpanel-${index}`,
-  };
-};
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-    display: "flex",
-    height: 224,
-  },
-  tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
-  },
-}));
-
-export const Settings = (props) => {
+export const Settings = () => {
   const classes = useStyles();
-  const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const initialState = {
+    websites: [
+      {
+        name: "Netflix",
+        URL: "https://www.netflix.com/",
+        state: true,
+        interval: 15,
+        isDisabled: false,
+      },
+      {
+        name: "Youtube",
+        URL: "https://www.youtube.com/",
+        state: true,
+        interval: 15,
+        isDisabled: false,
+      },
+      {
+        name: "Facebook",
+        URL: "https://www.facebook.com/",
+        state: false,
+        interval: 15,
+        isDisabled: false,
+      },
+    ],
+  };
+
+  const [value, setValue] = useState(0);
+  const [interruption, setInterruption] = useState(5);
+  const [listOfWebsites, setListOfWebsites] = useState(initialState);
+
+  const buttonName = "Save & Back";
+  const history = useHistory();
+
+  const SaveBackButton = () => (
+    <Button
+      type="button"
+      onClick={() => {
+        history.goBack();
+        console.log(interruption);
+        console.log(listOfWebsites.websites);
+      }}
+    >
+      {buttonName}
+    </Button>
+  );
+
+  const handleNumberChange = (number) => {
+    setInterruption(number);
+  };
+
+  const handleTabChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const handleSignOut = () => firebaseAppAuth.signOut();
 
+  const handleWebsitesChange = (websites) => {
+    setListOfWebsites(websites);
+  };
+
   return (
     <Container>
+      <SaveBackButton />
       <div className={classes.root}>
         <Tabs
           orientation="vertical"
           variant="scrollable"
           value={value}
-          onChange={handleChange}
+          onChange={handleTabChange}
           aria-label="Vertical tabs example"
           className={classes.tabs}
         >
@@ -104,9 +110,9 @@ export const Settings = (props) => {
             Sign out
           </Button>
           <br />
-          <QuizSettings />
+          <QuizSettings setInterruption={handleNumberChange} />
           <br />
-          <InterruptionSettings title={props.title} url={props.url} />
+          <InterruptionSettings updateWebsites={handleWebsitesChange} />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Help />

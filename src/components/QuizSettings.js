@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const Button = styled.button`
@@ -9,20 +9,13 @@ const Button = styled.button`
   padding: 0.25em 1em;
 `;
 
-export const QuizSettings = () => {
-  const [interruption, setInterruption] = useState("5");
-
-  console.log("number of questions: " + interruption);
+export const QuizSettings = (props) => {
+  const handleNumberChange = (number) => {
+    props.setInterruption(number);
+  };
 
   const NumberButton = (props) => (
-    <Button
-      type="button"
-      onClick={() => {
-        console.log(props.number + " questions has been clicked.");
-        // sets the interruption in state to n questions
-        setInterruption(props.number);
-      }}
-    >
+    <Button type="button" onClick={() => handleNumberChange(props.number)}>
       {props.number}
     </Button>
   );

@@ -4,7 +4,9 @@ import Language from "./Language";
 import { BrowserRouter as Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import styled, { css } from "styled-components";
-
+import {javaQuestions} from "./javaquestions"
+import {pythonQuestions} from "./pythonquestions"
+import {javascriptQuestions} from "./javascriptquestions"
 // Style
 
 const Container = styled.div`
@@ -33,22 +35,27 @@ const Button = styled.button`
     `}
 `;
 
+function randomNumber() {
+  return Math.floor(Math.random() * 10);
+}
 // We need a way to access the langugage from the state in the Language component.
+
 
 // only temporary question array
 function Quiz(props) {
+  var number = randomNumber();
+  const firstq = javaQuestions[number];
   const questions = [
     {
-      Description:
-        "Java: How do you create a variable with the numeric value 13?",
+      Description: firstq.question,
       Language: "java",
       Level: 1,
       QuestionId: 0,
       Options: [
-        { Text: "float x = 13;", isCorrect: false },
-        { Text: "num x = 13;", isCorrect: false },
-        { Text: "int x = 13;", isCorrect: true },
-        { Text: "x = 13;", isCorrect: false },
+        { Text: firstq.answer1[0].text, isCorrect: firstq.answer1[0].is_correct },
+        { Text: firstq.answer2[0].text, isCorrect: firstq.answer2[0].is_correct },
+        { Text: firstq.answer3[0].text, isCorrect: firstq.answer3[0].is_correct },
+        { Text: firstq.answer4[0].text, isCorrect: firstq.answer4[0].is_correct },
       ],
     },
     {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //styling
 import { QuizContainer } from "../styling/Containers";
@@ -83,16 +83,19 @@ function Quiz(props) {
     }
   };
 
-  const StartQuizButton1 = withRouter(({ history }) => (
-    <StartQuizButton
-      type="button"
-      onClick={() => {
-        history.push("/language");
-      }}
-    >
-      Quiz
-    </StartQuizButton>
-  ));
+  const QuizAgainButton = () => (
+    <Link to="/language">
+      <StartQuizButton
+        primary
+        type="button"
+        onClick={() => {
+          console.log("the link was clicked to quiz again");
+        }}
+      >
+        Quiz
+      </StartQuizButton>
+    </Link>
+  );
 
   function handleProcrastinateClick() {
     console.log("the link was clicked to close");
@@ -123,7 +126,7 @@ function Quiz(props) {
             <ProcrastinateButton onClick={handleProcrastinateClick}>
               Procrastinate
             </ProcrastinateButton>
-            <StartQuizButton1 />
+            <QuizAgainButton />
           </div>
         </div>
       ) : (
@@ -139,7 +142,7 @@ function Quiz(props) {
             {questions[currentQuestion].Options.map((answerOption) => (
               <button
                 style={{ backgroundColor: buttonColor }}
-                onChange={() => handleAnswerOptionClick(answerOption)}
+                onClick={() => handleAnswerOptionClick(answerOption)}
               >
                 {answerOption.Text}
               </button>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { Link } from "react-router-dom";
 import Language from "./Language";
 import { BrowserRouter as Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
@@ -8,6 +8,13 @@ import {javaQuestions} from "./javaquestions"
 import {pythonQuestions} from "./pythonquestions"
 import {javascriptQuestions} from "./javascriptquestions"
 // Style
+import { QuizContainer, QuestionContainer } from "../styling/Containers";
+import {
+  StartQuizButton,
+  ProcrastinateButton,
+  NextButton,
+} from "../styling/Buttons";
+import { ProgressBar, ProgressStep, Label } from "../styling/Icons";
 
 const Container = styled.div`
   text-align: center;
@@ -41,7 +48,7 @@ const Button = styled.button`
 // only temporary question array
 function Quiz(props) {
 
-  const [langugage, setLanguage] = useState("");
+  const { selectedLanguage } = props;
   //const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -51,6 +58,10 @@ function Quiz(props) {
   const [questionCount, setQuestionCount] = useState(1);
   // number of questions a user want to be asked, can be found in user settings database
   const [numberOfQuestions, setNumberOfQuestions] = useState(5);
+  
+  // Stepper
+  const [activeStep, setActiveStep] = React.useState(0);
+  const numbers = [1, 2, 3, 4];
  
 
   const randomNumber = () => {
@@ -72,7 +83,6 @@ function Quiz(props) {
       setScore(score + 1);
     }
   };
-
   //The if statement should be dependent on the user settings and how many questions the user want to be asked
   //The nextQuestion variable should add together how many questions has been asked
   const handleNextClick = () => {
@@ -80,74 +90,99 @@ function Quiz(props) {
       changeNumber();
       setQuestionCount(questionCount + 1);
       console.log(questionCount);
+      
+   const QuizAgainButton = () => (
+    <Link to="/language">
+      <StartQuizButton
+        type="button"
+        onClick={() => {
+          console.log("the link was clicked to quiz again");
+        }}
+      >
+        Quiz
+      </StartQuizButton>
+    </Link>
+  );
+
+  function handleProcrastinateClick() {
+    console.log("the link was clicked to close");
+    window.close();
+  }
+
+  function handleNextButtonClick() {
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < questions.length) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      setCurrentQuestion(nextQuestion);
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
       setShowScore(true);
     }
-  };
-
-  const QuizAgainButton = withRouter(({ history }) => (
-    <Button
-      primary
-      type="button"
-      onClick={() => {
-        history.push("/language");
-      }}
-    >
-      Quiz
-    </Button>
-  ));
-
-  const ExitButton = () => (
-    <button type="button" onClick={() => window.close()}>
-      Procrastinate
-    </button>
-  );
+  }
 
   return (
-    <Container>
+    <QuizContainer>
       {showScore ? (
-        <div className="finish-display">
+        // Finish section
+        <div>
           <p>Congratulations!</p>
           <p>
             You finished the quiz with {score}/4 correct
             answers.
           </p>
           <div>
-            <ExitButton />
+            <ProcrastinateButton onClick={handleProcrastinateClick}>
+              Procrastinate
+            </ProcrastinateButton>
             <QuizAgainButton />
           </div>
         </div>
       ) : (
         <>
-          <div className="question-section">
-            <div className="question-description">
-              {javaQuestions[randomNo].question}
+            <QuestionContainer>
+            {/* Question section */}
+            <div>
+              {/* Question description */}
+              <p>{javaQuestions[randomNo].question}</p>
+              <div>{questions[currentQuestion].Description}</div>
             </div>
-          </div>
-          <div className="answer-section">
-            {javaQuestions[randomNo].options.map((answerOption) => (
+            {/* Answer section */}
+            <div>
+                {javaQuestions[randomNo].options.map((answerOption) => (
               <button
                 style={{ backgroundColor: buttonColor }}
                 onClick={() => handleAnswerOptionClick(answerOption)}
               >
                 {answerOption.text}
               </button>
-            ))} 
-          </div>
-          <div>
-            <Button
-              primary
-              className="NextStep"
-              disabled={false}
-              onClick={() => handleNextClick()}
-            >
-              Next
-            </Button>
-          </div>
+              ))}
+            </div>
+            {/* Progress bar section */}
+            <ProgressBar activeStep={activeStep} orientation="vertical">
+              {numbers.map((number) => (
+                <ProgressStep key={number}>
+                  <Label></Label>
+                </ProgressStep>
+              ))}
+            </ProgressBar>
+            <div>
+              <NextButton onClick={handleNextButtonClick}>Next</NextButton>
+            </div>
+          </QuestionContainer>
+
+              {numbers.map((number) => (
+                <ProgressStep key={number}>
+                  <Label></Label>
+                </ProgressStep>
+              ))}
+            </ProgressBar>
+            <div>
+              <NextButton onClick={handleNextButtonClick}>Next</NextButton>
+            </div>
+          </QuestionContainer>
         </>
       )}
-    </Container>
+    </QuizContainer>
   );
 }
 

@@ -1,54 +1,31 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import { Settings } from "@styled-icons/feather/Settings";
-import { Close } from "@styled-icons/evaicons-solid/Close";
 import { useLocation, withRouter } from "react-router-dom";
 import { firebaseAppAuth } from "../firebase";
 
-// Style
-const NavContainer = styled.div`
-  display: inline-block;
-  border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
-  background: white;
-  color: black;
-  text-align: center;
-`;
-
-const SettingsWeel = styled(Settings)`
-  color: grey;
-`;
-
-const CloseCross = styled(Close)`
-  color: grey;
-`;
-
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  color: black;
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
-`;
+// styling
+import { QuizButton } from "../styling/Buttons";
+import { NavContainer } from "../styling/Containers";
+import { SettingsWheel, CloseCross } from "../styling/Icons";
 
 export const Navigation = () => {
-  const buttonName = "Save & Back";
-
   const location = useLocation();
 
   const handleSignOut = () => firebaseAppAuth.signOut();
 
   const SaveBackButton = withRouter(({ history }) => (
-    <Button type="button" onClick={() => history.goBack()}>
-      {buttonName}
-    </Button>
+    <QuizButton type="button" onClick={() => history.goBack()}>
+      Save &amp; Back
+    </QuizButton>
   ));
 
   const SettingsButton = withRouter(({ history }) => (
-    <SettingsWeel size="30" type="button" onClick={() => history.push("/settings")}>
+    <SettingsWheel
+      size="30"
+      type="button"
+      onClick={() => history.push("/settings")}
+    >
       Settings
-    </SettingsWeel>
+    </SettingsWheel>
   ));
 
   const ExitButton = () => (
@@ -58,21 +35,21 @@ export const Navigation = () => {
   );
 
   const HelpButton = withRouter(({ history }) => (
-    <Button type="button" onClick={() => history.push("/help")}>
+    <QuizButton type="button" onClick={() => history.push("/help")}>
       ?
-    </Button>
+    </QuizButton>
   ));
 
   const BackButton = withRouter(({ history }) => (
-    <Button type="button" onClick={() => history.goBack()}>
+    <QuizButton type="button" onClick={() => history.goBack()}>
       back
-    </Button>
+    </QuizButton>
   ));
 
   const SignOutButton = () => (
-    <Button type="button" onClick={handleSignOut}>
+    <QuizButton type="button" onClick={handleSignOut}>
       Sign out
-    </Button>
+    </QuizButton>
   );
 
   if (location.pathname === "/settings") {

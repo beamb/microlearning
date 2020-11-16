@@ -63,3 +63,10 @@ export const IconContainer = styled.div`
   align-items: center;
   flex-direction: row;
 `;
+
+export const QuestionContainer = styled.div`
+display: flex
+justify-content: center;
+align-items: center;
+flex-direction: column;
+`;

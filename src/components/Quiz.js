@@ -35,90 +35,51 @@ const Button = styled.button`
     `}
 `;
 
-function randomNumber() {
-  return Math.floor(Math.random() * 10);
-}
-// We need a way to access the langugage from the state in the Language component.
 
+// We need a way to access the langugage from the state in the Language component.
 
 // only temporary question array
 function Quiz(props) {
-  var number = randomNumber();
-  const firstq = javaQuestions[number];
-  const questions = [
-    {
-      Description: firstq.question,
-      Language: "java",
-      Level: 1,
-      QuestionId: 0,
-      Options: [
-        { Text: firstq.answer1[0].text, isCorrect: firstq.answer1[0].is_correct },
-        { Text: firstq.answer2[0].text, isCorrect: firstq.answer2[0].is_correct },
-        { Text: firstq.answer3[0].text, isCorrect: firstq.answer3[0].is_correct },
-        { Text: firstq.answer4[0].text, isCorrect: firstq.answer4[0].is_correct },
-      ],
-    },
-    {
-      Description:
-        "Java: Which method can be used to return a string in upper case letters?",
-      Language: "java",
-      Level: 1,
-      QuestionId: 1,
-      Options: [
-        { Text: "touppercase()", isCorrect: false },
-        { Text: "toUpperCase()", isCorrect: true },
-        { Text: "tuc()", isCorrect: false },
-        { Text: "upperCase()", isCorrect: false },
-      ],
-    },
-    {
-      Description: "Java: Which operator can be used to compare two values?",
-      Language: "java",
-      Level: 1,
-      QuestionId: 2,
-      Options: [
-        { Text: "==", isCorrect: true },
-        { Text: "=", isCorrect: false },
-        { Text: "<>", isCorrect: false },
-        { Text: "><", isCorrect: false },
-      ],
-    },
-    {
-      Description: "Java: What langugage is this extension written in?",
-      Language: "java",
-      Level: 1,
-      QuestionId: 3,
-      Options: [
-        { Text: "Java", isCorrect: false },
-        { Text: "Python", isCorrect: false },
-        { Text: "SQL", isCorrect: false },
-        { Text: "JSX", isCorrect: true },
-      ],
-    },
-  ];
 
   const [langugage, setLanguage] = useState("");
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  //const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [buttonColor, setButtonColor] = useState("white");
   const [nextButtonDisplay, setNextButtonDisplay] = useState(true);
+  const [randomNo, setRandomNo] = useState(0);
+  const [questionCount, setQuestionCount] = useState(1);
+  // number of questions a user want to be asked, can be found in user settings database
+  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
+ 
+
+  const randomNumber = () => {
+    return Math.floor(Math.random() * 10);
+  }
+
+  const changeNumber = () => {
+    var number = randomNumber();
+    setRandomNo(number);
+  }
 
   const handleAnswerOptionClick = (answerOption) => {
     setButtonColor(
-      answerOption.isCorrect
+      answerOption.is_correct
         ? "rgba(165, 214, 167, 1)"
         : "rgba(239, 83, 80, 0.5)"
     );
-    if (answerOption.isCorrect) {
+    if (answerOption.is_correct) {
       setScore(score + 1);
     }
   };
 
+  //The if statement should be dependent on the user settings and how many questions the user want to be asked
+  //The nextQuestion variable should add together how many questions has been asked
   const handleNextClick = () => {
-    const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < questions.length) {
-      setCurrentQuestion(nextQuestion);
+    if (questionCount < 5) {
+      changeNumber();
+      setQuestionCount(questionCount + 1);
+      console.log(questionCount);
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
       setShowScore(true);
@@ -149,7 +110,7 @@ function Quiz(props) {
         <div className="finish-display">
           <p>Congratulations!</p>
           <p>
-            You finished the quiz with {score}/{questions.length} correct
+            You finished the quiz with {score}/4 correct
             answers.
           </p>
           <div>
@@ -161,18 +122,18 @@ function Quiz(props) {
         <>
           <div className="question-section">
             <div className="question-description">
-              {questions[currentQuestion].Description}
+              {javaQuestions[randomNo].question}
             </div>
           </div>
           <div className="answer-section">
-            {questions[currentQuestion].Options.map((answerOption) => (
+            {javaQuestions[randomNo].options.map((answerOption) => (
               <button
                 style={{ backgroundColor: buttonColor }}
                 onClick={() => handleAnswerOptionClick(answerOption)}
               >
-                {answerOption.Text}
+                {answerOption.text}
               </button>
-            ))}
+            ))} 
           </div>
           <div>
             <Button

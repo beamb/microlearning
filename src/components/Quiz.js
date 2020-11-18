@@ -1,20 +1,46 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
-//styling
-import { QuizContainer, QuestionContainer } from "../styling/Containers";
-import {
-  StartQuizButton,
-  ProcrastinateButton,
-  NextButton,
-} from "../styling/Buttons";
-import { ProgressBar, ProgressStep, Label } from "../styling/Icons";
+import Language from "./Language";
+import { BrowserRouter as Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import styled, { css } from "styled-components";
+
+// Style
+
+const Container = styled.div`
+  text-align: center;
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  width: 500px;
+  background: white;
+  color: black;
+`;
+
+const Button = styled.button`
+  background: rgba(226, 232, 240, 1);
+  border: none;
+  border-radius: 3px;
+  color: rgba(45, 55, 72, 1);
+  margin: 0.5em 1em;
+  padding: 0.25em 1em;
+
+  ${(props) =>
+    props.primary &&
+    css`
+      background: rgba(33, 182, 168, 1);
+      color: white;
+    `}
+`;
+
+// We need a way to access the langugage from the state in the Language component.
 
 // only temporary question array
 function Quiz(props) {
   const questions = [
     {
-      Description: "How do you create a variable with the numeric value 13?",
+      Description:
+        "Java: How do you create a variable with the numeric value 13?",
       Language: "java",
       Level: 1,
       QuestionId: 0,
@@ -27,7 +53,7 @@ function Quiz(props) {
     },
     {
       Description:
-        "Which method can be used to return a string in upper case letters?",
+        "Java: Which method can be used to return a string in upper case letters?",
       Language: "java",
       Level: 1,
       QuestionId: 1,
@@ -39,7 +65,7 @@ function Quiz(props) {
       ],
     },
     {
-      Description: "Which operator can be used to compare two values?",
+      Description: "Java: Which operator can be used to compare two values?",
       Language: "java",
       Level: 1,
       QuestionId: 2,
@@ -51,7 +77,7 @@ function Quiz(props) {
       ],
     },
     {
-      Description: "What langugage is this extension written in?",
+      Description: "Java: What langugage is this extension written in?",
       Language: "java",
       Level: 1,
       QuestionId: 3,
@@ -64,15 +90,12 @@ function Quiz(props) {
     },
   ];
 
-  const { selectedLanguage } = props;
+  const [langugage, setLanguage] = useState("");
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
   const [buttonColor, setButtonColor] = useState("white");
   const [nextButtonDisplay, setNextButtonDisplay] = useState(true);
-  // Stepper
-  const [activeStep, setActiveStep] = React.useState(0);
-  const numbers = [1, 2, 3, 4];
 
   const handleAnswerOptionClick = (answerOption) => {
     setButtonColor(
@@ -85,87 +108,78 @@ function Quiz(props) {
     }
   };
 
-  const QuizAgainButton = () => (
-    <Link to="/language">
-      <StartQuizButton
-        type="button"
-        onClick={() => {
-          console.log("the link was clicked to quiz again");
-        }}
-      >
-        Quiz
-      </StartQuizButton>
-    </Link>
-  );
-
-  function handleProcrastinateClick() {
-    console.log("the link was clicked to close");
-    window.close();
-  }
-
-  function handleNextButtonClick() {
+  const handleNextClick = () => {
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < questions.length) {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
       setCurrentQuestion(nextQuestion);
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
       setShowScore(true);
     }
-  }
+  };
+
+  const QuizAgainButton = withRouter(({ history }) => (
+    <Button
+      primary
+      type="button"
+      onClick={() => {
+        history.push("/language");
+      }}
+    >
+      Quiz
+    </Button>
+  ));
+
+  const ExitButton = () => (
+    <button type="button" onClick={() => window.close()}>
+      Procrastinate
+    </button>
+  );
 
   return (
-    <QuizContainer>
+    <Container>
       {showScore ? (
-        // Finish section
-        <div>
+        <div className="finish-display">
           <p>Congratulations!</p>
           <p>
             You finished the quiz with {score}/{questions.length} correct
             answers.
           </p>
           <div>
-            <ProcrastinateButton onClick={handleProcrastinateClick}>
-              Procrastinate
-            </ProcrastinateButton>
+            <ExitButton />
             <QuizAgainButton />
           </div>
         </div>
       ) : (
         <>
-          <QuestionContainer>
-            {/* Question section */}
-            <div>
-              {/* Question description */}
-              <p>{selectedLanguage}</p>
-              <div>{questions[currentQuestion].Description}</div>
+          <div className="question-section">
+            <div className="question-description">
+              {questions[currentQuestion].Description}
             </div>
-            {/* Answer section */}
-            <div>
-              {questions[currentQuestion].Options.map((answerOption) => (
-                <button
-                  style={{ backgroundColor: buttonColor }}
-                  onClick={() => handleAnswerOptionClick(answerOption)}
-                >
-                  {answerOption.Text}
-                </button>
-              ))}
-            </div>
-            {/* Progress bar section */}
-            <ProgressBar activeStep={activeStep} orientation="vertical">
-              {numbers.map((number) => (
-                <ProgressStep key={number}>
-                  <Label></Label>
-                </ProgressStep>
-              ))}
-            </ProgressBar>
-            <div>
-              <NextButton onClick={handleNextButtonClick}>Next</NextButton>
-            </div>
-          </QuestionContainer>
+          </div>
+          <div className="answer-section">
+            {questions[currentQuestion].Options.map((answerOption) => (
+              <button
+                style={{ backgroundColor: buttonColor }}
+                onClick={() => handleAnswerOptionClick(answerOption)}
+              >
+                {answerOption.Text}
+              </button>
+            ))}
+          </div>
+          <div>
+            <Button
+              primary
+              className="NextStep"
+              disabled={false}
+              onClick={() => handleNextClick()}
+            >
+              Next
+            </Button>
+          </div>
         </>
       )}
-    </QuizContainer>
+    </Container>
   );
 }
 

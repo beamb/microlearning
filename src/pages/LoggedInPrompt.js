@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { firebaseAppAuth } from "../firebase";
+import { firebaseAppAuth, database } from "../firebase";
 
 const Container = styled.div`
   text-align: center;
@@ -39,6 +39,17 @@ export const LoggedInPrompt = () => {
   }
 
   const [user] = useAuthState(firebaseAppAuth);
+
+  const setUpUser = () => {
+    if (user) {
+      database.collection("users").doc(user.uid).set({ merge: true });
+    }
+  };
+
+  if (!user) {
+    console.log("Creating user data");
+    setUpUser();
+  }
 
   const LanguageButton = () => (
     <Link to="/language">

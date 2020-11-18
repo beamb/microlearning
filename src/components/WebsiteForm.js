@@ -7,8 +7,18 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
+// Style
+const AddContainer = styled.div`
+  text-align: left;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
 const AddButton = styled(AddCircle)`
   color: black;
+  cursor: pointer;
+  margin: 0.5em;
 `;
 
 const Button = styled.button`
@@ -17,6 +27,7 @@ const Button = styled.button`
   color: black;
   margin: 0.5em 1em;
   padding: 0.25em 1em;
+  cursor: pointer;
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +40,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const styles = {
+  row: {
+    display: "flex",
+    flexDirection: "row",
+  },
+};
+
 export const WebsiteForm = (props) => {
   const classes = useStyles();
   const [webName, setWebName] = useState("");
@@ -37,6 +55,7 @@ export const WebsiteForm = (props) => {
     let name = event.target.value;
     setWebName(name);
     props.addSiteFromName(name);
+    setWebName("");
   };
 
   return props.clicked ? (
@@ -61,38 +80,42 @@ export const WebsiteForm = (props) => {
         //onError={(errors) => console.log(errors)}
       >
         <p>OR add a website below</p>
-        <TextValidator
-          required={true}
-          variant="outlined"
-          label="URL"
-          onChange={props.changeURL}
-          name="url"
-          helperText="https://www.example.com"
-          value={props.url}
-          validators={[
-            "matchRegexp:^(http|https|ftp)://([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&amp;%$-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9-]+.)*[a-zA-Z0-9-]+.(com|dk|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(/($|[a-zA-Z0-9.,?'\\+&amp;%$#=~_-]+))*$",
-          ]}
-          errorMessages={["This URL is not valid"]}
-        />
-        <TextValidator
-          required={true}
-          variant="outlined"
-          label="Name"
-          onChange={props.changeName}
-          name="name"
-          value={props.name}
-          validators={["isString"]}
-          errorMessages={["The website name is not valid"]}
-        />
-        <Button type="submit">Add</Button>
+        <div style={styles.row}>
+          <TextValidator
+            required={true}
+            variant="outlined"
+            label="URL"
+            onChange={props.changeURL}
+            name="url"
+            helperText="https://www.example.com"
+            value={props.url}
+            validators={[
+              "matchRegexp:^(http|https|ftp)://([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&amp;%$-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9-]+.)*[a-zA-Z0-9-]+.(com|dk|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(/($|[a-zA-Z0-9.,?'\\+&amp;%$#=~_-]+))*$",
+            ]}
+            errorMessages={["This URL is not valid"]}
+          />
+          <TextValidator
+            required={true}
+            variant="outlined"
+            label="Name"
+            onChange={props.changeName}
+            name="name"
+            value={props.name}
+            validators={["isString"]}
+            errorMessages={["The website name is not valid"]}
+          />
+          <Button type="submit">Add</Button>
+        </div>
       </ValidatorForm>
     </div>
   ) : (
     <div>
-      <AddButton size="30" type="button" onClick={props.changeClick}>
-        Add
-      </AddButton>
-      <p>Add more websites</p>
+      <AddContainer>
+        <AddButton size="30" type="button" onClick={props.changeClick}>
+          Add
+        </AddButton>
+        <p>Add more websites</p>
+      </AddContainer>
     </div>
   );
 };

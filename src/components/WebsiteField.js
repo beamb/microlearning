@@ -18,6 +18,7 @@ const Button = styled.button`
 
 const DeleteButton = styled(Trash)`
   color: red;
+  cursor: pointer;
 `;
 
 export const WebsiteField = (props) => {

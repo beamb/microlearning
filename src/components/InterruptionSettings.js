@@ -7,34 +7,8 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import WebsiteForm from "./WebsiteForm";
 
 export const InterruptionSettings = (props) => {
-  const initialState = {
-    websites: [
-      {
-        name: "Netflix",
-        URL: "https://www.netflix.com/",
-        state: true,
-        interval: 15,
-        isDisabled: false,
-      },
-      {
-        name: "Youtube",
-        URL: "https://www.youtube.com/",
-        state: true,
-        interval: 15,
-        isDisabled: false,
-      },
-      {
-        name: "Facebook",
-        URL: "https://www.facebook.com/",
-        state: false,
-        interval: 15,
-        isDisabled: false,
-      },
-    ],
-  };
-
   const [interval, setInterval] = useState(15);
-  const [sharedState, setSharedState] = useState(initialState);
+  const [sharedState, setSharedState] = useState(props.websitesObject);
   const [allDisabled, setAllDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [urlInput, setURLInput] = useState("https://");
@@ -262,6 +236,7 @@ export const InterruptionSettings = (props) => {
           websitesCopy.websites.push(newWebsite);
           setSharedState(websitesCopy);
           props.updateWebsites(websitesCopy);
+          toggleClick();
         }
       }
     });

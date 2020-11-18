@@ -1,11 +1,12 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { firebaseAppAuth } from "./firebase";
+import { firebaseAppAuth, database } from "./firebase";
 import { NotLoggedInPrompt } from "./pages/NotLoggedInPrompt";
 import MainRouter from "./components/MainRouter";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import styled from "styled-components";
+import "./App.css";
 
 const Container = styled.div`
   text-align: center;
@@ -17,6 +18,8 @@ const Container = styled.div`
   color: black;
 `;
 
+const font = "'Lato', sans-serif";
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -26,10 +29,27 @@ const theme = createMuiTheme({
       main: "#E2E8F0",
     },
   },
+  typography: {
+    fontFamily: font,
+    button: {
+      textTransform: "none",
+    },
+  },
 });
 
 const App = () => {
   const [user, loading] = useAuthState(firebaseAppAuth);
+
+  const setUpUser = () => {
+    if (user) {
+      database.collection("users").doc(user.uid).set({ merge: true });
+    }
+  };
+
+  if (!user) {
+    console.log("Creating user data");
+    setUpUser();
+  }
 
   if (loading) {
     return (

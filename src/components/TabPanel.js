@@ -16,7 +16,7 @@ export const TabPanel = (props) => {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box p={2}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -39,9 +39,10 @@ export const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
     display: "flex",
-    height: 224,
+    height: "100%",
   },
   tabs: {
-    borderRight: `1px solid ${theme.palette.divider}`,
+    borderRight: `1px solid #21B6A8`,
+    textTransform: `lowercase`,
   },
 }));

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Language from "./Language";
-import { withRouter } from "react-router-dom";
 import { javaQuestions } from "./javaquestions";
 import { pythonQuestions } from "./pythonquestions";
 import { javascriptQuestions } from "./javascriptquestions";

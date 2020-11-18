@@ -17,11 +17,11 @@ export const Settings = () => {
 
   const NumberButton = (props) => (
     <Button type="button"
-      onClick={() => {
+      onClick={() => 
          console.log(props.number + " questions has been clicked.");
           // sets the interruption in state to n questions
          setInterruption(props.number);
-      }}
+      }
     >
      {props.number} 
     </Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { InterruptionSettings } from "../components/InterruptionSettings";
 import { QuizSettings } from "../components/QuizSettings";
 import Help from "./Help";
@@ -8,8 +8,6 @@ import Tab from "@material-ui/core/Tab";
 import { useHistory } from "react-router-dom";
 import { useStyles, a11yProps, TabPanel } from "../components/TabPanel";
 import { ArrowBackOutline } from "@styled-icons/evaicons-outline";
-import { firebaseAppAuth, database } from "../firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 const Container = styled.div`
   text-align: left;

@@ -154,6 +154,7 @@ export const MainRouter = () => {
           <Help />
         </Route>
       </Switch>
+
       <Snackbar
         open={openSuccessSnackbar}
         autoHideDuration={6000}

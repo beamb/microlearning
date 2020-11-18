@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Settings } from "@styled-icons/feather/Settings";
 import { Close } from "@styled-icons/evaicons-solid/Close";
-import { useLocation, useHistory, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { firebaseAppAuth } from "../firebase";
 import Button from "@material-ui/core/Button";
 
@@ -41,7 +41,6 @@ const CloseCross = styled(Close)`
 
 export const Navigation = () => {
   const location = useLocation();
-  const history = useHistory();
 
   const SettingsButton = () => (
     <Link to="/settings">

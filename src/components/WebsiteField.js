@@ -4,14 +4,8 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
-import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
-import { Trash } from "@styled-icons/heroicons-outline";
-
-const DeleteButton = styled(Trash)`
-  color: red;
-  cursor: pointer;
-`;
+import { DeleteButton } from "../styling/Icons";
 
 export const WebsiteField = (props) => {
   const [label, setLabel] = useState("Disable interruptions");

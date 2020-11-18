@@ -1,16 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-
-const Container = styled.div`
-  text-align: left;
-  width: 500px;
-  background: white;
-  color: black;
-`;
+import { HelpContainer } from "../styling/Containers";
 
 export const Help = () => {
   return (
-    <Container>
+    <HelpContainer>
       <h2>FAQ</h2>
       <h4>How can I sign out of the extension?</h4>
       <p>
@@ -44,8 +37,8 @@ export const Help = () => {
         <br /> To do so, navigate to “Settings” and click the trash can icon
         next to the website you wish to delete or the "Add more websites"
         button. You can either pick a website from the predefined dropdown list
-        or you can type/copy&paste a URL and assign a name for that website in
-        the fields below. The update should be immediately visible.
+        or you can type/copy&amp;paste a URL and assign a name for that website
+        in the fields below. The update should be immediately visible.
       </p>
       <h4>After how many minutes on a website will I be interrupted?</h4>
       <p>
@@ -72,10 +65,10 @@ export const Help = () => {
       <p>
         Navigate to “Settings” and click the "Add more websites" button. You can
         either pick a website from the predefined dropdown list or you can
-        type/copy&paste a URL and assign a name for that website in the fields
-        below. The update should be immediately visible.
+        type/copy&amp;paste a URL and assign a name for that website in the
+        fields below. The update should be immediately visible.
       </p>
-    </Container>
+    </HelpContainer>
   );
 };
 

@@ -2,36 +2,13 @@ import React, { useState } from "react";
 import { InterruptionSettings } from "../components/InterruptionSettings";
 import { QuizSettings } from "../components/QuizSettings";
 import Help from "./Help";
-import styled from "styled-components";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { useHistory } from "react-router-dom";
 import { useStyles, a11yProps, TabPanel } from "../components/TabPanel";
-import { ArrowBackOutline } from "@styled-icons/evaicons-outline";
-
-const Container = styled.div`
-  text-align: left;
-  border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
-  width: 700px;
-  background: white;
-  color: black;
-`;
-
-const BackArrow = styled(ArrowBackOutline)`
-  color: black;
-`;
-
-const Button = styled.button`
-  background: transparent;
-  border: none;
-  color: black;
-  font-size: 1.5em;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: "Lato", sans-serif;
-`;
+import { SettingsContainer } from "../styling/Containers";
+import { BackArrow } from "../styling/Icons";
+import { SBButton } from "../styling/Buttons";
 
 const styles = {
   tab: {
@@ -49,11 +26,10 @@ export const Settings = (props) => {
 
   const [value, setValue] = useState(0);
 
-  const buttonName = "Save & Back";
   const history = useHistory();
 
   const SaveBackButton = () => (
-    <Button
+    <SBButton
       type="button"
       onClick={() => {
         props.update();
@@ -61,8 +37,8 @@ export const Settings = (props) => {
       }}
     >
       <BackArrow size="30" />
-      {buttonName}
-    </Button>
+      Save &amp; Back
+    </SBButton>
   );
 
   const handleNumberChange = (number) => {
@@ -78,7 +54,7 @@ export const Settings = (props) => {
   };
 
   return (
-    <Container>
+    <SettingsContainer>
       <SaveBackButton />
       <div className={classes.root}>
         <Tabs
@@ -121,7 +97,7 @@ export const Settings = (props) => {
           <Help />
         </TabPanel>
       </div>
-    </Container>
+    </SettingsContainer>
   );
 };
 

@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import Language from "./Language";
-import { BrowserRouter as Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 // Style
@@ -118,17 +117,13 @@ function Quiz(props) {
     }
   };
 
-  const QuizAgainButton = withRouter(({ history }) => (
-    <Button
-      primary
-      type="button"
-      onClick={() => {
-        history.push("/language");
-      }}
-    >
-      Quiz
-    </Button>
-  ));
+  const QuizAgainButton = () => (
+    <Link to="/language">
+      <Button primary type="button">
+        Quiz
+      </Button>
+    </Link>
+  );
 
   const ExitButton = () => (
     <button type="button" onClick={() => window.close()}>

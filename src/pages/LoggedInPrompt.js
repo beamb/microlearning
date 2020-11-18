@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { withRouter } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth } from "../firebase";
@@ -31,37 +31,26 @@ const Button = styled.button`
 `;
 
 export const LoggedInPrompt = () => {
-  const [counter, setCounter] = useState(0);
-  function handleClick(e) {
-    e.preventDefault();
-    console.log("The link was clicked.");
-    setCounter(1);
-  }
-
   const [user] = useAuthState(firebaseAppAuth);
 
-  const LanguageButton = withRouter(({ history }) => (
-    <Button
-      primary
-      type="button"
-      onClick={() => {
-        history.push("/language");
-      }}
-    >
-      Yes, let's quiz!
-    </Button>
-  ));
+  const LanguageButton = () => (
+    <Link to="/language">
+      <Button primary type="button">
+        Yes, let's quiz!
+      </Button>
+    </Link>
+  );
 
-  const NoThanksButton = withRouter(({ history }) => (
+  const NoThanksButton = () => (
     <Button
       type="button"
       onClick={() => {
-        history.push("/exit");
+        window.close();
       }}
     >
       No thanks
     </Button>
-  ));
+  );
 
   // First pop-up container
   return (

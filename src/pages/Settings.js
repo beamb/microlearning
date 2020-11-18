@@ -46,76 +46,20 @@ const styles = {
   },
 };
 
-export const Settings = () => {
+export const Settings = (props) => {
   const classes = useStyles();
 
-  const initialState = {
-    websites: [
-      {
-        name: "Netflix",
-        URL: "https://www.netflix.com/",
-        state: true,
-        interval: 15,
-        isDisabled: false,
-      },
-      {
-        name: "Youtube",
-        URL: "https://www.youtube.com/",
-        state: true,
-        interval: 15,
-        isDisabled: false,
-      },
-      {
-        name: "Facebook",
-        URL: "https://www.facebook.com/",
-        state: false,
-        interval: 15,
-        isDisabled: false,
-      },
-    ],
-  };
-
   const [value, setValue] = useState(0);
-  const [interruption, setInterruption] = useState(5);
-  const [listOfWebsites, setListOfWebsites] = useState(initialState);
-  const [settings, setSettings] = useState([]);
-  const [userName] = useAuthState(firebaseAppAuth);
 
   const buttonName = "Save & Back";
   const history = useHistory();
-
-  const initialSettings = {
-    name: userName.displayName,
-    questionNumber: interruption,
-    webPages: listOfWebsites,
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    const data = await database.collection("users").get();
-    setSettings(data.docs.map((snapshot) => snapshot.data()));
-  };
-
-  const updateSettings = () => {
-    const data = database
-      .collection("users")
-      .doc(userName.uid)
-      .set({ ...data, initialSettings });
-  };
-
-  const checkData = () => {};
 
   const SaveBackButton = () => (
     <Button
       type="button"
       onClick={() => {
+        props.update();
         history.goBack();
-        console.log(interruption);
-        console.log(listOfWebsites);
-        console.log(listOfWebsites.websites);
       }}
     >
       <BackArrow size="30" />
@@ -124,7 +68,7 @@ export const Settings = () => {
   );
 
   const handleNumberChange = (number) => {
-    setInterruption(number);
+    props.updateDuration(number);
   };
 
   const handleTabChange = (event, newValue) => {
@@ -132,7 +76,7 @@ export const Settings = () => {
   };
 
   const handleWebsitesChange = (websites) => {
-    setListOfWebsites(websites);
+    props.updateWebsites(websites);
   };
 
   return (
@@ -158,14 +102,22 @@ export const Settings = () => {
         </Tabs>
         <TabPanel value={value} index={0}>
           <QuizSettings
-            interruption={interruption}
+            interruption={props.duration}
             setInterruption={handleNumberChange}
           />
           <br />
           <InterruptionSettings
-            websitesObject={listOfWebsites}
+            websitesObject={props.websiteList}
             updateWebsites={handleWebsitesChange}
           />
+          <br />
+          <small>
+            <em>
+              Remember to hit{" "}
+              <span style={{ color: "#21B6A8" }}>"Save & back"</span> to store
+              your changes.
+            </em>
+          </small>
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Help />

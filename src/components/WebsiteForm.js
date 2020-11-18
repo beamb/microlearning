@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Button from "@material-ui/core/Button";
 
 // Style
 const AddContainer = styled.div`
@@ -21,22 +22,10 @@ const AddButton = styled(AddCircle)`
   margin: 0.5em;
 `;
 
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  color: black;
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
-  cursor: pointer;
-`;
-
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 200,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+    minWidth: 415,
   },
 }));
 
@@ -44,6 +33,7 @@ const styles = {
   row: {
     display: "flex",
     flexDirection: "row",
+    alignItems: "center",
   },
 };
 
@@ -61,9 +51,20 @@ export const WebsiteForm = (props) => {
   return props.clicked ? (
     <div>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel>Pick a website</InputLabel>
+        <InputLabel htmlFor="outlined-age-native-simple">
+          Pick a website
+        </InputLabel>
 
-        <Select native value={webName} onChange={handleSelectChange}>
+        <Select
+          native
+          value={webName}
+          onChange={handleSelectChange}
+          label="Pick a website"
+          inputProps={{
+            name: "age",
+            id: "outlined-age-native-simple",
+          }}
+        >
           <option aria-label="None" value="" />
           <option value={"Disney+"}>Disney+</option>
           <option value={"Facebook"}>Facebook</option>
@@ -77,7 +78,7 @@ export const WebsiteForm = (props) => {
       </FormControl>
       <ValidatorForm
         onSubmit={props.submit}
-        //onError={(errors) => console.log(errors)}
+        onError={(errors) => console.error("Error submitting input: ", errors)}
       >
         <p>OR add a website below</p>
         <div style={styles.row}>
@@ -87,25 +88,42 @@ export const WebsiteForm = (props) => {
             label="URL"
             onChange={props.changeURL}
             name="url"
-            helperText="https://www.example.com"
+            helperText=""
             value={props.url}
             validators={[
               "matchRegexp:^(http|https|ftp)://([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&amp;%$-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9-]+.)*[a-zA-Z0-9-]+.(com|dk|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(/($|[a-zA-Z0-9.,?'\\+&amp;%$#=~_-]+))*$",
             ]}
             errorMessages={["This URL is not valid"]}
+            style={{ margin: "0.5em" }}
           />
+
           <TextValidator
             required={true}
             variant="outlined"
             label="Name"
             onChange={props.changeName}
             name="name"
+            helperText=""
             value={props.name}
             validators={["isString"]}
             errorMessages={["The website name is not valid"]}
+            style={{ margin: "0.5em" }}
           />
-          <Button type="submit">Add</Button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            style={{
+              height: "3em",
+              float: "right",
+              margin: "0.5em",
+              color: "white",
+            }}
+          >
+            Add
+          </Button>
         </div>
+        <br />
       </ValidatorForm>
     </div>
   ) : (

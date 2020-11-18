@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { firebaseAppAuth, database } from "../firebase";
+import { firebaseAppAuth } from "../firebase";
 
 const Container = styled.div`
   text-align: center;
@@ -31,25 +31,7 @@ const Button = styled.button`
 `;
 
 export const LoggedInPrompt = () => {
-  const [counter, setCounter] = useState(0);
-  function handleClick(e) {
-    e.preventDefault();
-    console.log("The link was clicked.");
-    setCounter(1);
-  }
-
   const [user] = useAuthState(firebaseAppAuth);
-
-  const setUpUser = () => {
-    if (user) {
-      database.collection("users").doc(user.uid).set({ merge: true });
-    }
-  };
-
-  if (!user) {
-    console.log("Creating user data");
-    setUpUser();
-  }
 
   const LanguageButton = () => (
     <Link to="/language">

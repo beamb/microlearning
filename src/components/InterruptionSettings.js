@@ -6,6 +6,15 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import WebsiteForm from "./WebsiteForm";
 
+const styles = {
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+};
+
 export const InterruptionSettings = (props) => {
   const [interval, setInterval] = useState(15);
   const [sharedState, setSharedState] = useState(props.websitesObject);
@@ -14,6 +23,10 @@ export const InterruptionSettings = (props) => {
   const [urlInput, setURLInput] = useState("https://");
   const [nameInput, setNameInput] = useState("");
   const [isClicked, setIsClicked] = useState(false);
+
+  useEffect(() => {
+    changingInterval();
+  }, []);
 
   const changingInterval = () => {
     let intervals = [];
@@ -262,31 +275,32 @@ export const InterruptionSettings = (props) => {
 
   return (
     <div>
-      <h4>How often can I interrupt your procrastination?</h4>
+      <div style={styles.row}>
+        <h4>How often can I interrupt your procrastination?</h4>
+        <FormGroup aria-label="position" row style={{ marginRight: "1em" }}>
+          <FormControlLabel
+            value="select all"
+            control={
+              <Checkbox
+                color="primary"
+                checked={sharedState.websites.every(
+                  (w) => w.state || w.isDisabled
+                )}
+                onChange={handleSelectAllChange}
+                disabled={allDisabled}
+              />
+            }
+            label="select all"
+            labelPlacement="start"
+          />
+        </FormGroup>
+      </div>
       <IntervalSlider
         value={interval}
         updateInterval={handleAllIntervals}
         disable={allDisabled}
       />
       <br />
-      <h5>Where do you procrastinate?</h5>
-      <FormGroup aria-label="position" row>
-        <FormControlLabel
-          value="select all"
-          control={
-            <Checkbox
-              color="primary"
-              checked={sharedState.websites.every(
-                (w) => w.state || w.isDisabled
-              )}
-              onChange={handleSelectAllChange}
-              disabled={allDisabled}
-            />
-          }
-          label="select all"
-          labelPlacement="start"
-        />
-      </FormGroup>
       {sharedState.websites.map((website) => (
         <WebsiteField
           website={website.name}

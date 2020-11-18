@@ -4,10 +4,10 @@ import { Settings } from "@styled-icons/feather/Settings";
 import { Close } from "@styled-icons/evaicons-solid/Close";
 import { useLocation, useHistory, Link } from "react-router-dom";
 import { firebaseAppAuth } from "../firebase";
+import Button from "@material-ui/core/Button";
 
 // Style
 const NavContainer = styled.div`
-  border-radius: 3px;
   padding: 0.5rem 0;
   margin: 0.5rem 1rem;
   background: white;
@@ -15,6 +15,16 @@ const NavContainer = styled.div`
   text-align: center;
   display: flex;
   justify-content: space-between;
+`;
+
+const SettingsNavContainer = styled.div`
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  background: white;
+  color: black;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const SettingsWheel = styled(Settings)`
@@ -27,17 +37,6 @@ const CloseCross = styled(Close)`
   color: grey;
   cursor: pointer;
   margin: 0.5rem 1rem;
-`;
-
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  color: black;
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
-  cursor: pointer;
-  font-family: "Lato", sans-serif;
-  border: 2px solid grey;
 `;
 
 export const Navigation = () => {
@@ -58,24 +57,23 @@ export const Navigation = () => {
     </CloseCross>
   );
 
-  const BackButton = () => (
-    <Button type="button" onClick={() => history.goBack()}>
-      Back
-    </Button>
-  );
-
   const SignOutButton = () => (
-    <Button type="button" onClick={() => firebaseAppAuth.signOut()}>
+    <Button
+      disableElevation
+      variant="contained"
+      color="secondary"
+      onClick={() => firebaseAppAuth.signOut()}
+    >
       Sign out
     </Button>
   );
 
   if (location.pathname === "/settings") {
     return (
-      <NavContainer>
+      <SettingsNavContainer>
         <SignOutButton />
         <ExitButton />
-      </NavContainer>
+      </SettingsNavContainer>
     );
   } else {
     return (

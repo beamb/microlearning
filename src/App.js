@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { firebaseAppAuth, database } from "./firebase";
+import { firebaseAppAuth } from "./firebase";
 import { NotLoggedInPrompt } from "./pages/NotLoggedInPrompt";
 import MainRouter from "./components/MainRouter";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -39,17 +39,6 @@ const theme = createMuiTheme({
 
 const App = () => {
   const [user, loading] = useAuthState(firebaseAppAuth);
-
-  const setUpUser = () => {
-    if (user) {
-      database.collection("users").doc(user.uid).set({ merge: true });
-    }
-  };
-
-  if (!user) {
-    console.log("Creating user data");
-    setUpUser();
-  }
 
   if (loading) {
     return (

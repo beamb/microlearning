@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Language from "./Language";
-// import { BrowserRouter as Link } from "react-router-dom";
+import { BrowserRouter as Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { javaQuestions } from "./javaquestions";
-import { pythonQuestions } from "./pythonquestions";
-import { javascriptQuestions } from "./javascriptquestions";
+import {javaQuestions} from "./javaquestions"
+import {pythonQuestions} from "./pythonquestions"
+import {javascriptQuestions} from "./javascriptquestions"
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
 import {
@@ -42,10 +42,12 @@ const Button = styled.button`
     `}
 `;
 
+
 // We need a way to access the langugage from the state in the Language component.
 
 // only temporary question array
 function Quiz(props) {
+
   const { selectedLanguage } = props;
   //const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
@@ -56,19 +58,20 @@ function Quiz(props) {
   const [questionCount, setQuestionCount] = useState(1);
   // number of questions a user want to be asked, can be found in user settings database
   const [numberOfQuestions, setNumberOfQuestions] = useState(5);
-
+  
   // Stepper
   const [activeStep, setActiveStep] = React.useState(0);
   const numbers = [1, 2, 3, 4];
+ 
 
   const randomNumber = () => {
     return Math.floor(Math.random() * 10);
-  };
+  }
 
   const changeNumber = () => {
     var number = randomNumber();
     setRandomNo(number);
-  };
+  }
 
   const handleAnswerOptionClick = (answerOption) => {
     setButtonColor(
@@ -82,8 +85,13 @@ function Quiz(props) {
   };
   //The if statement should be dependent on the user settings and how many questions the user want to be asked
   //The nextQuestion variable should add together how many questions has been asked
-
-  const QuizAgainButton = () => (
+  const handleNextClick = () => {
+    if (questionCount < 5) {
+      changeNumber();
+      setQuestionCount(questionCount + 1);
+      console.log(questionCount);
+      
+   const QuizAgainButton = () => (
     <Link to="/language">
       <StartQuizButton
         type="button"
@@ -102,11 +110,10 @@ function Quiz(props) {
   }
 
   function handleNextButtonClick() {
-    if (questionCount < numberOfQuestions) {
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < questions.length) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-      changeNumber();
-      setQuestionCount(questionCount + 1);
-      console.log(questionCount);
+      setCurrentQuestion(nextQuestion);
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
       setShowScore(true);
@@ -120,7 +127,7 @@ function Quiz(props) {
         <div>
           <p>Congratulations!</p>
           <p>
-            You finished the quiz with {score}/{numberOfQuestions} correct
+            You finished the quiz with {score}/4 correct
             answers.
           </p>
           <div>
@@ -132,26 +139,37 @@ function Quiz(props) {
         </div>
       ) : (
         <>
-          <QuestionContainer>
+            <QuestionContainer>
             {/* Question section */}
             <div>
               {/* Question description */}
               <p>{javaQuestions[randomNo].question}</p>
+              <div>{questions[currentQuestion].Description}</div>
             </div>
             {/* Answer section */}
             <div>
-              {javaQuestions[randomNo].options.map((answerOption) => (
-                <button
-                  style={{ backgroundColor: buttonColor }}
-                  onClick={() => handleAnswerOptionClick(answerOption)}
-                >
-                  {answerOption.text}
-                </button>
+                {javaQuestions[randomNo].options.map((answerOption) => (
+              <button
+                style={{ backgroundColor: buttonColor }}
+                onClick={() => handleAnswerOptionClick(answerOption)}
+              >
+                {answerOption.text}
+              </button>
               ))}
             </div>
-
             {/* Progress bar section */}
             <ProgressBar activeStep={activeStep} orientation="vertical">
+              {numbers.map((number) => (
+                <ProgressStep key={number}>
+                  <Label></Label>
+                </ProgressStep>
+              ))}
+            </ProgressBar>
+            <div>
+              <NextButton onClick={handleNextButtonClick}>Next</NextButton>
+            </div>
+          </QuestionContainer>
+
               {numbers.map((number) => (
                 <ProgressStep key={number}>
                   <Label></Label>

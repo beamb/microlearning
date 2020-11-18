@@ -1,22 +1,26 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
+  "name": "Practice.now()",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArag3B4TKHbdZf9AtWqTVjXRGwNCpwM36a5tmeWcCpwQArt78Eqwi/YYOcokN/K8wFbmN+O79NL0Rrfgdg3RyMzyTM/ganjidVQURFdF6SVfnzx8WlvIHeEV1WHzuw1n632bgxHpkehnfK2aKkkQCrUeYJTKlE5+405P/Yjp1CVBR/xQYbII173PcBtolPzL/PSB5nZRtxh3XIjC8BetbqCP9REnMg5ygMy3VbATpmN6DB59D7xdbmZNay0+UJ0j7uvkEHEu9ayiVsQ4kgIXthl9f8Eujo78PaHFPlqI6rL3j0bgJrhLRODN6LYocE3cQuhg5xskWDL3pYVqtwwovWwIDAQAB",
+  "description": "Microlearning for Programming Languages",
+  "icons": {
+    "512": "logo512.png"
+  },
+  "browser_action": {
+    "default_icon": "logo512.png",
+    "default_popup": "index.html",
+    "default_title": "Microlearning – programming practice"
+  },
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "clipboardRead",
+    "clipboardWrite",
+    "declarativeContent",
+    "identity",
+    "tabs",
+    "unlimitedStorage"
   ],
   "start_url": ".",
   "display": "standalone",

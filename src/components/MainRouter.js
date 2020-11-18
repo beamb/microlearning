@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { LoggedInPrompt } from "../pages/LoggedInPrompt";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation";
-import Language from "./Language";
 import Quiz from "./Quiz";
 import Help from "../pages/Help";
 import Settings from "../pages/Settings";
+import LanguageDataContainer from "./LanguageDataContainer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth, database } from "../firebase";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -145,7 +145,7 @@ export const MainRouter = () => {
           />
         </Route>
         <Route path="/language">
-          <Language />
+          <LanguageDataContainer />
         </Route>
         <Route path="/quiz">
           <Quiz />

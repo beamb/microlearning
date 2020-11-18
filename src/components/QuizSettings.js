@@ -2,7 +2,6 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import { purple } from "@material-ui/core/colors";
 
 const NumberButton = withStyles(() => ({
   root: {

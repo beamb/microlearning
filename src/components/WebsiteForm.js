@@ -1,26 +1,12 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { AddCircle } from "@styled-icons/ionicons-outline";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
-
-// Style
-const AddContainer = styled.div`
-  text-align: left;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-`;
-
-const AddButton = styled(AddCircle)`
-  color: black;
-  cursor: pointer;
-  margin: 0.5em;
-`;
+import { AddContainer } from "../styling/Containers";
+import { AddButton } from "../styling/Icons";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {

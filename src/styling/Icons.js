@@ -12,10 +12,12 @@ import { AddCircle } from "@styled-icons/ionicons-outline";
 
 export const SettingsWheel = styled(Settings)`
   color: grey;
+  cursor: pointer;
 `;
 
 export const CloseCross = styled(Close)`
   color: grey;
+  cursor: pointer;
 `;
 
 export const DeleteButton = styled(Trash)`
@@ -26,16 +28,19 @@ export const DeleteButton = styled(Trash)`
 export const JavaIcon = styled(Java)`
   margin: 0.5em 1em;
   color: rgba(33, 182, 168, 1);
+  cursor: pointer;
 `;
 
 export const PythonIcon = styled(Python)`
   margin: 0.5em 1em;
   color: rgba(33, 182, 168, 1);
+  cursor: pointer;
 `;
 
 export const JSIcon = styled(Javascript)`
   margin: 0.5em 1em;
   color: rgba(33, 182, 168, 1);
+  cursor: pointer;
 `;
 
 export const ProgressBar = styled(Stepper)`
@@ -52,6 +57,7 @@ export const Label = styled(StepLabel)`
 
 export const BackArrow = styled(ArrowBackOutline)`
   color: black;
+  cursor: pointer;
 `;
 
 export const AddButton = styled(AddCircle)`

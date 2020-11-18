@@ -26,6 +26,7 @@ export const InterruptionSettings = (props) => {
 
   useEffect(() => {
     changingInterval();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const changingInterval = () => {

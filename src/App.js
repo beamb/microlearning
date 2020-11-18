@@ -5,8 +5,7 @@ import { NotLoggedInPrompt } from "./pages/NotLoggedInPrompt";
 import MainRouter from "./components/MainRouter";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-slider/dist/css/bootstrap-slider.css";
-import './App.css';
-
+import "./App.css";
 
 const App = () => {
   // We're using a package where someone else created a "hook" for using Firebase functionality

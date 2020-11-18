@@ -5,15 +5,15 @@ of the Microlearning App project in the Technical Interaction Design course.
 
 ## Authors
 
-* **Anne Schjødt-Pedersen**
-* **Beatrice Ambrosi de Magistris Verzier**
-* **Cecilia Andersen**
-* **Monica Souza**
+- **Anne Schjødt-Pedersen**
+- **Beatrice Ambrosi de Magistris Verzier**
+- **Cecilia Andersen**
+- **Monica Souza**
 
 ## How to set up the project as an extension
 
-1. Run `npm run build` in your command line. 
-2. Open **chrome://extensions/** in Google Chrome. 
+1. Run `npm run build` in your command line.
+2. Open **chrome://extensions/** in Google Chrome.
 3. On that page, make sure 'Developer mode' (in the top right corner) is enabled.
 4. Click "**Load unpacked**".
 5. Browse to the `build` folder and press the **OK** button.
@@ -21,8 +21,8 @@ of the Microlearning App project in the Technical Interaction Design course.
 
 ## How to update the extension
 
-1. Run `npm run build` in your command line. 
-2. Open **chrome://extensions/** in Google Chrome. 
+1. Run `npm run build` in your command line.
+2. Open **chrome://extensions/** in Google Chrome.
 3. Click the reload button in the "**Microlearning 0.0.1**" extension card
 
 ## Data Modeling
@@ -32,6 +32,5 @@ Initially, our data model was defined as a mixture of embedded and normalized st
 <img src="https://user-images.githubusercontent.com/72602527/98544119-ceccd780-2293-11eb-8a8b-5e16c7627192.png" width="90%"></img>
 
 The `counter` field keeps track of how many times the user answered a question correctly. After x times, `learned` will be set to `true`, meaning the user does not need to answer this question anymore.
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

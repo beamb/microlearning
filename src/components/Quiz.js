@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { javaQuestions } from "./javaquestions";
 import { pythonQuestions } from "./pythonquestions";
 import { javascriptQuestions } from "./javascriptquestions";
-import { button } from '@material/ui/core';
+import Button from "@material-ui/core/Button";
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
 import {
@@ -29,7 +29,7 @@ function Quiz(props) {
 
   // Stepper
   const [activeStep, setActiveStep] = React.useState(0);
-  const numbers = [1, 2, 3, 4];
+  const numbers = Array.from(Array(numberOfQuestions).keys());
 
   const randomNumber = () => {
     return Math.floor(Math.random() * 10);
@@ -37,19 +37,18 @@ function Quiz(props) {
 
   const changeNumber = () => {
     var number = randomNumber();
-    if(questionsAsked.includes(number)) {
+    if (questionsAsked.includes(number)) {
       var newNumber = randomNumber();
       setRandomNo(newNumber);
-      setQuestionsAsked([...questionsAsked, newNumber]); 
+      setQuestionsAsked([...questionsAsked, newNumber]);
     } else {
-    setRandomNo(number);
-    setQuestionsAsked([...questionsAsked, number]);
-   }
+      setRandomNo(number);
+      setQuestionsAsked([...questionsAsked, number]);
+    }
     console.log(questionsAsked);
   };
 
-
-/*  const checkForNumber = (number) => {
+  /*  const checkForNumber = (number) => {
     if(questionsAsked.includes(number)) {
       var newNumber = randomNumber()
         checkForNumber(newNumber);
@@ -57,7 +56,6 @@ function Quiz(props) {
         return number;
       } 
   } */
-
 
   const handleAnswerOptionClick = (answerOption) => {
     setShouldShowCorrectAnswer(true);
@@ -88,7 +86,7 @@ function Quiz(props) {
 
   function handleNextButtonClick() {
     setShouldShowCorrectAnswer(false);
-    if (questionCount < 9) {
+    if (questionCount < numberOfQuestions) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       changeNumber();
       setQuestionCount(questionCount + 1);
@@ -128,20 +126,20 @@ function Quiz(props) {
             <div>
               {javaQuestions[randomNo].options.map((answerOption) => {
                 let buttonColor = "white";
-                if(shouldShowCorrectAnswer) {
+                if (shouldShowCorrectAnswer) {
                   buttonColor = answerOption.is_correct
-                  ? "rgba(165, 214, 167, 1)"
-                  : "rgba(239, 83, 80, 0.5)";
+                    ? "rgba(165, 214, 167, 1)"
+                    : "rgba(239, 83, 80, 0.5)";
                 }
-                return(
-                <button
-                  style={{ backgroundColor: buttonColor }}
-                  onClick={() => handleAnswerOptionClick(answerOption)}
-                >
-                  {answerOption.text}
-                </button>
+                return (
+                  <button
+                    style={{ backgroundColor: buttonColor }}
+                    onClick={() => handleAnswerOptionClick(answerOption)}
+                  >
+                    {answerOption.text}
+                  </button>
                 );
-                })}
+              })}
             </div>
 
             {/* Progress bar section */}

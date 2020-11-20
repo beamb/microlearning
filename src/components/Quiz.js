@@ -185,7 +185,7 @@ const Quiz = (props) => {
       ) : (
         <>
           <QuestionContainer>
-            {/* Question section */}   
+            {/* Question section */}
             <div style={styles.row}>
               {/* Answer section */}
               {props.selectedLanguage === "java" ? (
@@ -222,18 +222,6 @@ const Quiz = (props) => {
                     <p></p>
                   )}
                 </div>
-              <div>
-              {disable ? (
-                <StyledButton variant="outlined" disabled={true}>
-                  <p>
-                    <strong>Explanation:</strong>{" "}
-                    {javaQuestions[randomNo].description}
-                  </p>{" "}
-                </StyledButton>
-              ) : (
-                <p></p>
-              )}
-            </div>
               ) : props.selectedLanguage === "javascript" ? (
                 <div style={styles.column}>
                   <h2>{javascriptQuestions[randomNo].question}</h2>
@@ -268,18 +256,6 @@ const Quiz = (props) => {
                     <p></p>
                   )}
                 </div>
-              <div>
-              {disable ? (
-                <StyledButton variant="outlined" disabled={true}>
-                  <p>
-                    <strong>Explanation:</strong>{" "}
-                    {javaQuestions[randomNo].description}
-                  </p>{" "}
-                </StyledButton>
-              ) : (
-                <p></p>
-              )}
-            </div>
               ) : (
                 <div style={styles.column}>
                   <h2>{pythonQuestions[randomNo].question}</h2>
@@ -314,18 +290,6 @@ const Quiz = (props) => {
                     <p></p>
                   )}
                 </div>
-              <div>
-              {disable ? (
-                <StyledButton variant="outlined" disabled={true}>
-                  <p>
-                    <strong>Explanation:</strong>{" "}
-                    {javaQuestions[randomNo].description}
-                  </p>{" "}
-                </StyledButton>
-              ) : (
-                <p></p>
-              )}
-            </div>
               )}
               {/* Progress bar section */}
               <ProgressBar activeStep={activeStep} orientation="vertical">

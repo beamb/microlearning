@@ -5,6 +5,7 @@ import { pythonQuestions } from "./pythonquestions";
 import { javascriptQuestions } from "./javascriptquestions";
 import Button from '@material-ui/core/Button';
 import { withStyles } from "@material-ui/core/styles";
+
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
 import {
@@ -51,8 +52,7 @@ const StyledButton = withStyles({
   },
 })(Button);
 // only temporary question array
-function Quiz(props) {
-  const { selectedLanguage } = props;
+const Quiz = (props) => {
   //const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -75,19 +75,18 @@ function Quiz(props) {
 
   const changeNumber = () => {
     var number = randomNumber();
-    if(questionsAsked.includes(number)) {
+    if (questionsAsked.includes(number)) {
       var newNumber = randomNumber();
       setRandomNo(newNumber);
-      setQuestionsAsked([...questionsAsked, newNumber]); 
+      setQuestionsAsked([...questionsAsked, newNumber]);
     } else {
-    setRandomNo(number);
-    setQuestionsAsked([...questionsAsked, number]);
-   }
+      setRandomNo(number);
+      setQuestionsAsked([...questionsAsked, number]);
+    }
     console.log(questionsAsked);
   };
 
-
-/*  const checkForNumber = (number) => {
+  /*  const checkForNumber = (number) => {
     if(questionsAsked.includes(number)) {
       var newNumber = randomNumber()
         checkForNumber(newNumber);
@@ -95,7 +94,6 @@ function Quiz(props) {
         return number;
       } 
   } */
-
 
   const handleAnswerOptionClick = (answerOption) => {
     setShouldShowCorrectAnswer(true);
@@ -160,32 +158,78 @@ function Quiz(props) {
         <>
           <QuestionContainer>
             {/* Question section */}
-            <div>
-              {/* Question description */}
-              <p>{javaQuestions[randomNo].question}</p>
-            </div>
+            {props.selectedLanguage === "java" ? (
+              <div>
+                <p>{javaQuestions[randomNo].question}</p>
+              </div>
+            ) : props.selectedLanguage === "javascript" ? (
+              <div>
+                <p>{javascriptQuestions[randomNo].question}</p>
+              </div>
+            ) : (
+              <div>
+                <p>{pythonQuestions[randomNo].question}</p>
+              </div>
+            )}
             {/* Answer section */}
-            <div style={styles.column}>
-              {javaQuestions[randomNo].options.map((answerOption) => {
-                let buttonColor = "white";
-                if(shouldShowCorrectAnswer) {
-                  buttonColor = answerOption.is_correct
-                  ? "rgba(165, 214, 167, 1)"
-                  : "rgba(239, 83, 80, 0.5)";
-                }
-                return(
-                <StyledButton
-                variant="outlined"
-                  style={{ backgroundColor: buttonColor }}
-                  onClick={() => handleAnswerOptionClick(answerOption)}
-                  disabled={disable}
-                >
-                  {answerOption.text}
-                </StyledButton>
-                );
+            {props.selectedLanguage === "java" ? (
+              <div>
+                {javaQuestions[randomNo].options.map((answerOption) => {
+                  let buttonColor = "white";
+                  if (shouldShowCorrectAnswer) {
+                    buttonColor = answerOption.is_correct
+                      ? "rgba(165, 214, 167, 1)"
+                      : "rgba(239, 83, 80, 0.5)";
+                  }
+                  return (
+                    <button
+                      style={{ backgroundColor: buttonColor }}
+                      onClick={() => handleAnswerOptionClick(answerOption)}
+                    >
+                      {answerOption.text}
+                    </button>
+                  );
                 })}
-            </div>
-
+              </div>
+            ) : props.selectedLanguage === "javascript" ? (
+              <div>
+                {javascriptQuestions[randomNo].options.map((answerOption) => {
+                  let buttonColor = "white";
+                  if (shouldShowCorrectAnswer) {
+                    buttonColor = answerOption.is_correct
+                      ? "rgba(165, 214, 167, 1)"
+                      : "rgba(239, 83, 80, 0.5)";
+                  }
+                  return (
+                    <button
+                      style={{ backgroundColor: buttonColor }}
+                      onClick={() => handleAnswerOptionClick(answerOption)}
+                    >
+                      {answerOption.text}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              <div>
+                {pythonQuestions[randomNo].options.map((answerOption) => {
+                  let buttonColor = "white";
+                  if (shouldShowCorrectAnswer) {
+                    buttonColor = answerOption.is_correct
+                      ? "rgba(165, 214, 167, 1)"
+                      : "rgba(239, 83, 80, 0.5)";
+                  }
+                  return (
+                    <button
+                      style={{ backgroundColor: buttonColor }}
+                      onClick={() => handleAnswerOptionClick(answerOption)}
+                    >
+                      {answerOption.text}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
             {/* Progress bar section */}
             <ProgressBar activeStep={activeStep} orientation="vertical">
               {numbers.map((number) => (
@@ -202,6 +246,6 @@ function Quiz(props) {
       )}
     </QuizContainer>
   );
-}
+};
 
 export default Quiz;

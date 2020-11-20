@@ -207,6 +207,18 @@ const Quiz = (props) => {
                       </StyledButton>
                     );
                   })}
+                  {disable ? (
+                    <div>
+                      <StyledButton variant="outlined" disabled={true}>
+                        <p>
+                          <strong>Explanation:</strong>{" "}
+                          {javaQuestions[randomNo].description}
+                        </p>{" "}
+                      </StyledButton>
+                    </div>
+                  ) : (
+                    <p></p>
+                  )}
                 </div>
               ) : props.selectedLanguage === "javascript" ? (
                 <div style={styles.column}>
@@ -229,6 +241,18 @@ const Quiz = (props) => {
                       </StyledButton>
                     );
                   })}
+                  {disable ? (
+                    <div>
+                      <StyledButton variant="outlined" disabled={true}>
+                        <p>
+                          <strong>Explanation:</strong>{" "}
+                          {javascriptQuestions[randomNo].description}
+                        </p>{" "}
+                      </StyledButton>
+                    </div>
+                  ) : (
+                    <p></p>
+                  )}
                 </div>
               ) : (
                 <div style={styles.column}>
@@ -251,6 +275,18 @@ const Quiz = (props) => {
                       </StyledButton>
                     );
                   })}
+                  {disable ? (
+                    <div>
+                      <StyledButton variant="outlined" disabled={true}>
+                        <p>
+                          <strong>Explanation:</strong>{" "}
+                          {pythonQuestions[randomNo].description}
+                        </p>{" "}
+                      </StyledButton>
+                    </div>
+                  ) : (
+                    <p></p>
+                  )}
                 </div>
               )}
               {/* Progress bar section */}

@@ -52,20 +52,22 @@ export const MainContainer = styled.div`
   background: white;
   color: black;
   text-align: center;
-  width: 500px;
-  height: 400px;
+  min-width: 700px;
+  min-height: 400px;
+  overflow: hidden;
 `;
 
 export const LanguageContainer = styled.div`
   display: flex;
   border-radius: 3px;
-  padding: 15% 0;
+  padding: 5% 0;
   margin: 0.5rem 4rem;
   background: white;
   color: black;
   text-align: center;
   align-items: center;
   flex-direction: column;
+  overflow: hidden;
 `;
 
 export const IconContainer = styled.div`
@@ -73,6 +75,7 @@ export const IconContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: row;
+  margin: 3em;
 `;
 
 export const QuestionContainer = styled.div`
@@ -102,6 +105,16 @@ export const SettingsContainer = styled.div`
   padding: 0.5rem 0;
   margin: 0.5rem 1rem;
   width: 700px;
+  background: white;
+  color: black;
+`;
+
+export const SmallContainer = styled.div`
+  text-align: center;
+  border-radius: 3px;
+  padding: 0.5rem 0;
+  margin: 0.5rem 1rem;
+  width: 50px;
   background: white;
   color: black;
 `;

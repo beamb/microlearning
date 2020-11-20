@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { LoggedInPrompt } from "../pages/LoggedInPrompt";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation";
-import Quiz from "./Quiz";
 import Help from "../pages/Help";
 import Settings from "../pages/Settings";
 import LanguageDataContainer from "./LanguageDataContainer";
@@ -96,10 +95,7 @@ export const MainRouter = () => {
   };
 
   const setUpSettings = () => {
-    const data = database
-      .collection("users")
-      .doc(user.uid)
-      .set({ ...data, userSettings });
+    database.collection("users").doc(user.uid).set({ userSettings });
   };
 
   const updateNumberOfQuestions = (number) => {
@@ -155,21 +151,29 @@ export const MainRouter = () => {
 
       <Snackbar
         open={openSuccessSnackbar}
-        autoHideDuration={6000}
+        autoHideDuration={4000}
         onClose={handleClose}
         style={{ width: "100%" }}
       >
-        <Alert onClose={handleClose} severity="success">
+        <Alert
+          onClose={handleClose}
+          severity="success"
+          style={{ background: "#A5D6A7", color: "black" }}
+        >
           Your settings have been updated and stored!
         </Alert>
       </Snackbar>
       <Snackbar
         open={openErrorSnackbar}
-        autoHideDuration={6000}
+        autoHideDuration={4000}
         onClose={handleClose}
         style={{ width: "100%" }}
       >
-        <Alert onClose={handleClose} severity="error">
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          style={{ background: "#EF5350" }}
+        >
           Oh no! Something went wrong! Try signing out, sign back in and retry
           :-/
         </Alert>

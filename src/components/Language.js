@@ -2,6 +2,7 @@ import React from "react";
 // styling
 import { JavaIcon, PythonIcon, JSIcon } from "../styling/Icons";
 import { IconContainer } from "../styling/Containers";
+import { LanguageContainer } from "../styling/Containers";
 
 const Language = (props) => {
   const JavaButton = () => (
@@ -41,11 +42,15 @@ const Language = (props) => {
   );
 
   return (
-    <IconContainer>
-      <JavaButton />
-      <JSButton />
-      <PythonButton />
-    </IconContainer>
+    <LanguageContainer>
+      <h1>Which language do you want me to test you in?</h1>
+      <br />
+      <IconContainer>
+        <JavaButton />
+        <JSButton />
+        <PythonButton />
+      </IconContainer>
+    </LanguageContainer>
   );
 };
 

@@ -5,18 +5,8 @@ import { NotLoggedInPrompt } from "./pages/NotLoggedInPrompt";
 import MainRouter from "./components/MainRouter";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import styled from "styled-components";
+import { SmallContainer } from "./styling/Containers";
 import "./App.css";
-
-const Container = styled.div`
-  text-align: center;
-  border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
-  width: 50px;
-  background: white;
-  color: black;
-`;
 
 const font = "'Lato', sans-serif";
 
@@ -42,11 +32,11 @@ const App = () => {
 
   if (loading) {
     return (
-      <Container>
+      <SmallContainer>
         <ThemeProvider theme={theme}>
           <CircularProgress />
         </ThemeProvider>
-      </Container>
+      </SmallContainer>
     );
   }
 
@@ -55,7 +45,11 @@ const App = () => {
       <MainRouter />
     </ThemeProvider>
   ) : (
-    <NotLoggedInPrompt />
+    <SmallContainer>
+      <ThemeProvider theme={theme}>
+        <NotLoggedInPrompt />
+      </ThemeProvider>
+    </SmallContainer>
   );
 };
 

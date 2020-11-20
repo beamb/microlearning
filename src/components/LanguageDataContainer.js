@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Language from "./Language";
 import Quiz from "./Quiz";
-
 // styling
-import { MainContainer, LanguageContainer } from "../styling/Containers";
+import { MainContainer } from "../styling/Containers";
 
 function LanguageDataContainer() {
   const [selectedLanguage, setLanguage] = useState("");
@@ -17,16 +16,11 @@ function LanguageDataContainer() {
 
   return (
     <MainContainer>
-      <LanguageContainer>
-        {!selectedLanguage ? (
-          <React.Fragment>
-            <p>Which language do you want me to test you in?</p>
-            <Language handleLanguageSelect={handleLanguageSelect} />
-          </React.Fragment>
-        ) : (
-          <Quiz selectedLanguage={selectedLanguage} />
-        )}
-      </LanguageContainer>
+      {!selectedLanguage ? (
+        <Language handleLanguageSelect={handleLanguageSelect} />
+      ) : (
+        <Quiz selectedLanguage={selectedLanguage} />
+      )}
     </MainContainer>
   );
 }

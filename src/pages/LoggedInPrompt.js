@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth } from "../firebase";
 import Button from "@material-ui/core/Button";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 //styling
 import { PromptContainer } from "../styling/Containers";
 
@@ -12,6 +13,7 @@ export const LoggedInPrompt = () => {
   const LanguageButton = () => (
     <Link to="/language" style={{ textDecoration: "none" }}>
       <Button
+        startIcon={<PlayCircleOutlineIcon />}
         size="large"
         variant="contained"
         color="primary"

@@ -4,9 +4,9 @@ import styled from "styled-components";
 export const QuizContainer = styled.div`
   text-align: center;
   border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
-  width: 500px;
+  padding: 0.5rem;
+  margin: 0.5rem 0.5rem;
+  min-width: 500px;
   background: white;
   color: black;
 `;
@@ -38,7 +38,7 @@ export const PromptContainer = styled.div`
   text-align: center;
   border-radius: 3px;
   padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
+  margin: 0.5rem 0.5rem;
   width: 500px;
   background: white;
   color: black;
@@ -47,11 +47,12 @@ export const PromptContainer = styled.div`
 export const MainContainer = styled.div`
   display: flex;
   border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 4rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0.5rem;
   background: white;
   color: black;
   text-align: center;
+  justify-content: center;
   min-width: 700px;
   min-height: 400px;
   overflow: hidden;
@@ -61,7 +62,7 @@ export const LanguageContainer = styled.div`
   display: flex;
   border-radius: 3px;
   padding: 5% 0;
-  margin: 0.5rem 4rem;
+  margin: 0.5rem 0.5rem;
   background: white;
   color: black;
   text-align: center;

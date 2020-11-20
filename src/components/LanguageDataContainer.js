@@ -12,6 +12,7 @@ function LanguageDataContainer() {
   function handleLanguageSelect(selected) {
     console.log(`The link was clicked for "${selected}"`);
     setLanguage(selected);
+    console.log(selectedLanguage);
   }
 
   return (

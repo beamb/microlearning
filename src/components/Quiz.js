@@ -5,6 +5,8 @@ import { pythonQuestions } from "./pythonquestions";
 import { javascriptQuestions } from "./javascriptquestions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
+import bravo from "../styling/kingdom-1.png";
+import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
 import { ProgressBar, ProgressStep, Label } from "../styling/Icons";
@@ -123,6 +125,7 @@ const Quiz = (props) => {
           borderRadius: 999,
           margin: "2em",
         }}
+        startIcon={<PlayCircleOutlineIcon />}
         onClick={() => {
           console.log("the link was clicked to quiz again");
         }}
@@ -156,11 +159,12 @@ const Quiz = (props) => {
       {showScore ? (
         // Finish section
         <div>
-          <p>Congratulations!</p>
-          <p>
+          <h2>Congratulations!</h2>
+          <h2>
             You finished the quiz with {score}/{numberOfQuestions} correct
             answers.
-          </p>
+          </h2>
+          <img src={bravo} />
           <div>
             <Button
               size="large"
@@ -168,7 +172,6 @@ const Quiz = (props) => {
               color="secondary"
               type="button"
               style={{
-                color: "white",
                 borderRadius: 999,
                 margin: "2em",
               }}
@@ -206,6 +209,18 @@ const Quiz = (props) => {
                       </StyledButton>
                     );
                   })}
+                  {disable ? (
+                    <div>
+                      <StyledButton variant="outlined" disabled={true}>
+                        <p>
+                          <strong>Explanation:</strong>{" "}
+                          {javaQuestions[randomNo].description}
+                        </p>{" "}
+                      </StyledButton>
+                    </div>
+                  ) : (
+                    <p></p>
+                  )}
                 </div>
               <div>
               {disable ? (
@@ -240,6 +255,18 @@ const Quiz = (props) => {
                       </StyledButton>
                     );
                   })}
+                  {disable ? (
+                    <div>
+                      <StyledButton variant="outlined" disabled={true}>
+                        <p>
+                          <strong>Explanation:</strong>{" "}
+                          {javascriptQuestions[randomNo].description}
+                        </p>{" "}
+                      </StyledButton>
+                    </div>
+                  ) : (
+                    <p></p>
+                  )}
                 </div>
               <div>
               {disable ? (
@@ -274,6 +301,18 @@ const Quiz = (props) => {
                       </StyledButton>
                     );
                   })}
+                  {disable ? (
+                    <div>
+                      <StyledButton variant="outlined" disabled={true}>
+                        <p>
+                          <strong>Explanation:</strong>{" "}
+                          {pythonQuestions[randomNo].description}
+                        </p>{" "}
+                      </StyledButton>
+                    </div>
+                  ) : (
+                    <p></p>
+                  )}
                 </div>
               <div>
               {disable ? (

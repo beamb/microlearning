@@ -148,9 +148,6 @@ export const MainRouter = () => {
         <Route path="/language">
           <LanguageDataContainer />
         </Route>
-        <Route path="/quiz">
-          <Quiz />
-        </Route>
         <Route path="/help">
           <Help />
         </Route>

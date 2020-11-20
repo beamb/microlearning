@@ -5,7 +5,6 @@ import { pythonQuestions } from "./pythonquestions";
 import { javascriptQuestions } from "./javascriptquestions";
 import Button from '@material-ui/core/Button';
 import { withStyles } from "@material-ui/core/styles";
-
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
 import {
@@ -67,7 +66,7 @@ const Quiz = (props) => {
 
   // Stepper
   const [activeStep, setActiveStep] = React.useState(0);
-  const numbers = [1, 2, 3, 4];
+  const numbers = Array.from(Array(numberOfQuestions).keys());
 
   const randomNumber = () => {
     return Math.floor(Math.random() * 10);
@@ -126,7 +125,7 @@ const Quiz = (props) => {
   function handleNextButtonClick() {
     setShouldShowCorrectAnswer(false);
     setDisable(false);
-    if (questionCount < 9) {
+    if (questionCount < numberOfQuestions) {    
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       changeNumber();
       setQuestionCount(questionCount + 1);

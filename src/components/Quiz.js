@@ -7,17 +7,16 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
-import {
-  StartQuizButton,
-  ProcrastinateButton,
-  NextButton,
-} from "../styling/Buttons";
 import { ProgressBar, ProgressStep, Label } from "../styling/Icons";
 
 const styles = {
   column: {
     display: "flex",
     flexDirection: "column",
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
     alignItems: "center",
   },
 };
@@ -32,6 +31,7 @@ const StyledButton = withStyles({
     width: 500,
     padding: "0 30px",
     borderColor: "#d4d4d4",
+    margin: "0.3em",
     "&:hover": {
       borderColor: "#21B6A8",
       background: "none",
@@ -58,8 +58,7 @@ const StyledButton = withStyles({
   },
 })(Button);
 // only temporary question array
-function Quiz(props) {
-  const { selectedLanguage } = props;
+const Quiz = (props) => {
   //const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -74,7 +73,7 @@ function Quiz(props) {
 
   // Stepper
   const [activeStep, setActiveStep] = React.useState(0);
-  const numbers = [1, 2, 3, 4];
+  const numbers = Array.from(Array(numberOfQuestions).keys());
 
   const randomNumber = () => {
     return Math.floor(Math.random() * 10);
@@ -113,15 +112,23 @@ function Quiz(props) {
   //The nextQuestion variable should add together how many questions has been asked
 
   const QuizAgainButton = () => (
-    <Link to="/language">
-      <StartQuizButton
+    <Link to="/language" style={{ textDecoration: "none" }}>
+      <Button
+        size="large"
+        variant="contained"
+        color="primary"
         type="button"
+        style={{
+          color: "white",
+          borderRadius: 999,
+          margin: "2em",
+        }}
         onClick={() => {
           console.log("the link was clicked to quiz again");
         }}
       >
         Quiz
-      </StartQuizButton>
+      </Button>
     </Link>
   );
 
@@ -133,7 +140,7 @@ function Quiz(props) {
   function handleNextButtonClick() {
     setShouldShowCorrectAnswer(false);
     setDisable(false);
-    if (questionCount < 9) {
+    if (questionCount < numberOfQuestions) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       changeNumber();
       setQuestionCount(questionCount + 1);
@@ -155,42 +162,52 @@ function Quiz(props) {
             answers.
           </p>
           <div>
-            <ProcrastinateButton onClick={handleProcrastinateClick}>
+            <Button
+              size="large"
+              variant="contained"
+              color="secondary"
+              type="button"
+              style={{
+                color: "white",
+                borderRadius: 999,
+                margin: "2em",
+              }}
+              onClick={handleProcrastinateClick}
+            >
               Procrastinate
-            </ProcrastinateButton>
+            </Button>
             <QuizAgainButton />
           </div>
         </div>
       ) : (
         <>
           <QuestionContainer>
-            {/* Question section */}
-            <div>
-              {/* Question description */}
-              <p>{javaQuestions[randomNo].question}</p>
-            </div>
-            {/* Answer section */}
-            <div style={styles.column}>
-              {javaQuestions[randomNo].options.map((answerOption) => {
-                let buttonColor = "white";
-                if (shouldShowCorrectAnswer) {
-                  buttonColor = answerOption.is_correct
-                    ? "rgba(165, 214, 167, 1)"
-                    : "rgba(239, 83, 80, 0.5)";
-                }
-                return (
-                  <StyledButton
-                    variant="outlined"
-                    style={{ backgroundColor: buttonColor }}
-                    onClick={() => handleAnswerOptionClick(answerOption)}
-                    disabled={disable}
-                  >
-                    {answerOption.text}
-                  </StyledButton>
-                );
-              })}
-            </div>
-            <div>
+            {/* Question section */}   
+            <div style={styles.row}>
+              {/* Answer section */}
+              {props.selectedLanguage === "java" ? (
+                <div style={styles.column}>
+                  <h2>{javaQuestions[randomNo].question}</h2>
+                  {javaQuestions[randomNo].options.map((answerOption) => {
+                    let buttonColor = "white";
+                    if (shouldShowCorrectAnswer) {
+                      buttonColor = answerOption.is_correct
+                        ? "rgba(165, 214, 167, 1)"
+                        : "rgba(239, 83, 80, 0.5)";
+                    }
+                    return (
+                      <StyledButton
+                        variant="outlined"
+                        style={{ backgroundColor: buttonColor }}
+                        onClick={() => handleAnswerOptionClick(answerOption)}
+                        disabled={disable}
+                      >
+                        {answerOption.text}
+                      </StyledButton>
+                    );
+                  })}
+                </div>
+              <div>
               {disable ? (
                 <StyledButton variant="outlined" disabled={true}>
                   <p>
@@ -202,23 +219,100 @@ function Quiz(props) {
                 <p></p>
               )}
             </div>
-
-            {/* Progress bar section */}
-            <ProgressBar activeStep={activeStep} orientation="vertical">
-              {numbers.map((number) => (
-                <ProgressStep key={number}>
-                  <Label></Label>
-                </ProgressStep>
-              ))}
-            </ProgressBar>
-            <div>
-              <NextButton onClick={handleNextButtonClick}>Next</NextButton>
+              ) : props.selectedLanguage === "javascript" ? (
+                <div style={styles.column}>
+                  <h2>{javascriptQuestions[randomNo].question}</h2>
+                  {javascriptQuestions[randomNo].options.map((answerOption) => {
+                    let buttonColor = "white";
+                    if (shouldShowCorrectAnswer) {
+                      buttonColor = answerOption.is_correct
+                        ? "rgba(165, 214, 167, 1)"
+                        : "rgba(239, 83, 80, 0.5)";
+                    }
+                    return (
+                      <StyledButton
+                        variant="outlined"
+                        style={{ backgroundColor: buttonColor }}
+                        onClick={() => handleAnswerOptionClick(answerOption)}
+                        disabled={disable}
+                      >
+                        {answerOption.text}
+                      </StyledButton>
+                    );
+                  })}
+                </div>
+              <div>
+              {disable ? (
+                <StyledButton variant="outlined" disabled={true}>
+                  <p>
+                    <strong>Explanation:</strong>{" "}
+                    {javaQuestions[randomNo].description}
+                  </p>{" "}
+                </StyledButton>
+              ) : (
+                <p></p>
+              )}
+            </div>
+              ) : (
+                <div style={styles.column}>
+                  <h2>{pythonQuestions[randomNo].question}</h2>
+                  {pythonQuestions[randomNo].options.map((answerOption) => {
+                    let buttonColor = "white";
+                    if (shouldShowCorrectAnswer) {
+                      buttonColor = answerOption.is_correct
+                        ? "rgba(165, 214, 167, 1)"
+                        : "rgba(239, 83, 80, 0.5)";
+                    }
+                    return (
+                      <StyledButton
+                        variant="outlined"
+                        style={{ backgroundColor: buttonColor }}
+                        onClick={() => handleAnswerOptionClick(answerOption)}
+                        disabled={disable}
+                      >
+                        {answerOption.text}
+                      </StyledButton>
+                    );
+                  })}
+                </div>
+              <div>
+              {disable ? (
+                <StyledButton variant="outlined" disabled={true}>
+                  <p>
+                    <strong>Explanation:</strong>{" "}
+                    {javaQuestions[randomNo].description}
+                  </p>{" "}
+                </StyledButton>
+              ) : (
+                <p></p>
+              )}
+            </div>
+              )}
+              {/* Progress bar section */}
+              <ProgressBar activeStep={activeStep} orientation="vertical">
+                {numbers.map((number) => (
+                  <ProgressStep key={number}>
+                    <Label></Label>
+                  </ProgressStep>
+                ))}
+              </ProgressBar>
+            </div>
+            <div style={{ float: "right" }}>
+              <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                disabled={!disable}
+                onClick={handleNextButtonClick}
+              >
+                Next
+              </Button>
             </div>
           </QuestionContainer>
         </>
       )}
     </QuizContainer>
   );
-}
+};
 
 export default Quiz;

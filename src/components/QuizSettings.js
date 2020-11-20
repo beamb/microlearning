@@ -14,6 +14,7 @@ const StyledToggleButton = withStyles({
     borderColor: "#d4d4d4",
     "&:hover": {
       borderColor: "#21B6A8",
+      background: "none",
     },
   },
   selected: {
@@ -23,6 +24,7 @@ const StyledToggleButton = withStyles({
       background: "none",
       color: "black",
       "&:hover": {
+        background: "none",
         borderColor: "#21B6A8",
       },
     },

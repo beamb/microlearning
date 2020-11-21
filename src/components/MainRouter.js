@@ -156,7 +156,10 @@ export const MainRouter = () => {
         </Route>
         <Route path="/quiz">
           <MainContainer>
-            <Quiz selectedLanguage={selectedLanguage} />
+            <Quiz
+              selectedLanguage={selectedLanguage}
+              numberOfQuestions={numberOfQuestions}
+            />
           </MainContainer>
         </Route>
         <Route path="/help">

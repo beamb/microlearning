@@ -51,7 +51,7 @@ const StyledButton = withStyles({
 // only temporary question array
 const Quiz = (props) => {
   const randomNumber = () => {
-    return Math.floor(Math.random() * 10);
+    return Math.floor(Math.random() * 20);
   };
   //const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);

@@ -245,4 +245,248 @@ export const javascriptQuestions = [
       },
     ],
   },
+  {
+    qid: 10,
+    question:
+      "What is the HTML tag under which one can write the JavaScript code?",
+    description:
+      "If we want to write a JavaScript code under HTML tag, you will have to use the “script” tag.",
+    options: [
+      {
+        text: "<javascript>",
+        is_correct: false,
+      },
+      {
+        text: "<scripted>",
+        is_correct: false,
+      },
+      {
+        text: "<script>",
+        is_correct: true,
+      },
+      {
+        text: "<js>",
+        is_correct: false,
+      },
+    ],
+  },
+  {
+    qid: 11,
+    question:
+      "Which of the following is the correct syntax to display “Practice.now()” in an alert box using JavaScript?",
+    description:
+      "To display any text in the alert box, you need to write it as alert(“Practice.now()”);.",
+    options: [
+      {
+        text: "alert(“Practice.now()”);",
+        is_correct: true,
+      },
+      {
+        text: "alertbox(“Practice.now()”);",
+        is_correct: false,
+      },
+      {
+        text: "msg(“Practice.now()”);",
+        is_correct: false,
+      },
+      {
+        text: "msgbox(“Practice.now()”);",
+        is_correct: false,
+      },
+    ],
+  },
+  {
+    qid: 12,
+    question:
+      "What is the correct syntax for referring to an external script called “geek.js”?",
+    description: "The “src” term is used to refer to any JavaScript file.",
+    options: [
+      {
+        text: "<script name=”geek.js”>",
+        is_correct: false,
+      },
+      {
+        text: "<script src=”geek.js”>",
+        is_correct: true,
+      },
+      {
+        text: "<script href=”geek.js”>",
+        is_correct: false,
+      },
+      {
+        text: "<script ref=”geek.js”>",
+        is_correct: false,
+      },
+    ],
+  },
+  {
+    qid: 13,
+    question:
+      "Predict the output of the following JavaScript code. <script type='text/javascript'> a = 8 + '8'; document.write(a); </script>",
+    description:
+      "In the above given code, 8+”8″ have first integer and second string data types. Rather than adding the two numbers, it concatenated the two.",
+    options: [
+      {
+        text: "16",
+        is_correct: false,
+      },
+      {
+        text: "Compilation Error",
+        is_correct: false,
+      },
+      {
+        text: "Run Time Error",
+        is_correct: false,
+      },
+      {
+        text: "88",
+        is_correct: true,
+      },
+    ],
+  },
+  {
+    qid: 14,
+    question: "Which of the following is not a reserved word in JavaScript?",
+    description:
+      "In JavaScript, interface, throws and short are reserved keywords.",
+    options: [
+      {
+        text: "interface",
+        is_correct: false,
+      },
+      {
+        text: "throws",
+        is_correct: false,
+      },
+      {
+        text: "program",
+        is_correct: true,
+      },
+      {
+        text: "short",
+        is_correct: false,
+      },
+    ],
+  },
+  {
+    qid: 15,
+    question:
+      "How to write an ‘if’ statement for executing some code. If “i” is NOT equal to 5?",
+    description: "JavaScript do not accept <> operator as not equal to.",
+    options: [
+      {
+        text: "if(i<>5)",
+        is_correct: false,
+      },
+      {
+        text: "if i<>5",
+        is_correct: false,
+      },
+      {
+        text: "if(i!=5)",
+        is_correct: true,
+      },
+      {
+        text: "if i!=5",
+        is_correct: false,
+      },
+    ],
+  },
+  {
+    qid: 16,
+    question: "What is the correct syntax for adding comments in JavaScript?",
+    description: "Correct Syntax for comments in JavaScript is //comment.",
+    options: [
+      {
+        text: "//This is a comment",
+        is_correct: true,
+      },
+      {
+        text: "<!–This is a comment–&gt",
+        is_correct: false,
+      },
+      {
+        text: "–This is a comment",
+        is_correct: false,
+      },
+      {
+        text: "**This is a comment**",
+        is_correct: false,
+      },
+    ],
+  },
+  {
+    qid: 17,
+    question:
+      "What is the method in JavaScript used to remove the whitespace at the beginning and end of any string ?",
+    description:
+      "The trim() method in JavaScript is used to remove the whitespaces at the beginning and end of the string.",
+    options: [
+      {
+        text: "strip()",
+        is_correct: false,
+      },
+      {
+        text: "stripped()",
+        is_correct: false,
+      },
+      {
+        text: "trim()",
+        is_correct: true,
+      },
+      {
+        text: "trimmed()",
+        is_correct: false,
+      },
+    ],
+  },
+  {
+    qid: 18,
+    question:
+      "In JavaScript, we do not have datatypes like integer and float. What is the function that can be used to check if the number is an integer or not?",
+    description:
+      "isInteger() function is used to check whether a number is integer or not. The function is used as: document.write(number.isInteger(2018)) will result as true.",
+    options: [
+      {
+        text: "Integer(value)",
+        is_correct: false,
+      },
+      {
+        text: "ifInteger(value)",
+        is_correct: false,
+      },
+      {
+        text: "ifinteger(value)",
+        is_correct: false,
+      },
+      {
+        text: "isInteger(value)",
+        is_correct: true,
+      },
+    ],
+  },
+  {
+    qid: 19,
+    question: "JavaScript is a ________ Side Scripting Language.",
+    description:
+      "JavaScript is a Browser Side Scripting Language. ASP, PHP, Perl are Server Side Scripting Language.",
+    options: [
+      {
+        text: "Browser",
+        is_correct: true,
+      },
+      {
+        text: "Server",
+        is_correct: false,
+      },
+      {
+        text: "ISP",
+        is_correct: false,
+      },
+      {
+        text: "None of the above",
+        is_correct: false,
+      },
+    ],
+  },
 ];

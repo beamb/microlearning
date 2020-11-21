@@ -3,12 +3,15 @@ import { LoggedInPrompt } from "../pages/LoggedInPrompt";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation";
 import Help from "../pages/Help";
+import Quiz from "./Quiz";
 import Settings from "../pages/Settings";
 import LanguageDataContainer from "./LanguageDataContainer";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth, database } from "../firebase";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+//styling
+import { MainContainer } from "../styling/Containers";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -46,6 +49,13 @@ export const MainRouter = () => {
   const [numberOfQuestions, setNumberOfQuestions] = useState(5);
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
+  const [selectedLanguage, setLanguage] = useState("");
+
+  const handleLanguageChange = (selected) => {
+    console.log(`The link was clicked for "${selected}"`);
+    setLanguage(selected);
+    console.log(selectedLanguage);
+  };
 
   const handleSuccessClick = () => {
     setOpenSuccessSnackbar(true);
@@ -142,7 +152,12 @@ export const MainRouter = () => {
           />
         </Route>
         <Route path="/language">
-          <LanguageDataContainer />
+          <LanguageDataContainer changeLanguage={handleLanguageChange} />
+        </Route>
+        <Route path="/quiz">
+          <MainContainer>
+            <Quiz selectedLanguage={selectedLanguage} />
+          </MainContainer>
         </Route>
         <Route path="/help">
           <Help />

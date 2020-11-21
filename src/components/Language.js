@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // styling
 import { JavaIcon, PythonIcon, JSIcon } from "../styling/Icons";
 import { IconContainer } from "../styling/Containers";
@@ -6,39 +7,45 @@ import { LanguageContainer } from "../styling/Containers";
 
 const Language = (props) => {
   const JavaButton = () => (
-    <JavaIcon
-      size="80"
-      type="button"
-      onClick={() => {
-        props.handleLanguageSelect("java");
-      }}
-    >
-      Java
-    </JavaIcon>
+    <Link to="/quiz">
+      <JavaIcon
+        size="80"
+        type="button"
+        onClick={() => {
+          props.handleLanguageSelect("java");
+        }}
+      >
+        Java
+      </JavaIcon>
+    </Link>
   );
 
   const JSButton = () => (
-    <JSIcon
-      size="80"
-      type="button"
-      onClick={() => {
-        props.handleLanguageSelect("javascript");
-      }}
-    >
-      JavaScript
-    </JSIcon>
+    <Link to="/quiz">
+      <JSIcon
+        size="80"
+        type="button"
+        onClick={() => {
+          props.handleLanguageSelect("javascript");
+        }}
+      >
+        JavaScript
+      </JSIcon>
+    </Link>
   );
 
   const PythonButton = () => (
-    <PythonIcon
-      size="80"
-      type="button"
-      onClick={() => {
-        props.handleLanguageSelect("python");
-      }}
-    >
-      Python
-    </PythonIcon>
+    <Link to="/quiz">
+      <PythonIcon
+        size="80"
+        type="button"
+        onClick={() => {
+          props.handleLanguageSelect("python");
+        }}
+      >
+        Python
+      </PythonIcon>
+    </Link>
   );
 
   return (

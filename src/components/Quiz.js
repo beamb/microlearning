@@ -31,7 +31,7 @@ const StyledButton = withStyles({
     color: "black",
     height: 64,
     width: 500,
-    padding: "0 30px",
+    padding: "5 30",
     borderColor: "#d4d4d4",
     margin: "0.3em",
     "&:hover": {

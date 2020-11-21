@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { javaQuestions } from "./javaquestions";
 import { pythonQuestions } from "./pythonquestions";
@@ -20,6 +20,7 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-evenly",
   },
 };
 
@@ -39,18 +40,6 @@ const StyledButton = withStyles({
       background: "none",
     },
   },
-  selected: {
-    "&&": {
-      borderColor: "#21B6A8",
-      borderWidth: "medium",
-      background: "none",
-      color: "black",
-      "&:hover": {
-        background: "none",
-        borderColor: "#21B6A8",
-      },
-    },
-  },
   disabled: {
     "&&": {
       background: "white",
@@ -61,25 +50,31 @@ const StyledButton = withStyles({
 })(Button);
 // only temporary question array
 const Quiz = (props) => {
+  const randomNumber = () => {
+    return Math.floor(Math.random() * 10);
+  };
   //const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
-  const [shouldShowCorrectAnswer, setShouldShowCorrectAnswer] = useState(false);
   const [nextButtonDisplay, setNextButtonDisplay] = useState(true);
-  const [randomNo, setRandomNo] = useState(0);
+  const [randomNo, setRandomNo] = useState(randomNumber);
   const [questionCount, setQuestionCount] = useState(1);
-  // number of questions a user want to be asked, can be found in user settings database
-  const [numberOfQuestions, setNumberOfQuestions] = useState(5);
   const [questionsAsked, setQuestionsAsked] = useState([0]);
   const [disable, setDisable] = useState(false);
 
   // Stepper
-  const [activeStep, setActiveStep] = React.useState(0);
-  const numbers = Array.from(Array(numberOfQuestions).keys());
+  const [activeStep, setActiveStep] = useState(0);
+  const numbers = Array.from(Array(props.numberOfQuestions).keys());
 
-  const randomNumber = () => {
-    return Math.floor(Math.random() * 10);
-  };
+  const white = "white";
+  // Answers
+  const [buttonColor, setButtonColor] = useState({
+    0: white,
+    1: white,
+  });
+  const [correct, setCorrect] = useState(0);
+  const red = "rgba(239, 83, 80, 0.5)";
+  const green = "rgba(165, 214, 167, 1)";
 
   const changeNumber = () => {
     var number = randomNumber();
@@ -103,10 +98,45 @@ const Quiz = (props) => {
       } 
   } */
 
-  const handleAnswerOptionClick = (answerOption) => {
-    setShouldShowCorrectAnswer(true);
+  const tagCorrect = (index) => {
+    setCorrect(index);
+  };
+
+  useEffect(() => {
+    checkAnswers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionCount]);
+
+  const checkAnswers = () => {
+    if (props.selectedLanguage === "java") {
+      javaQuestions[randomNo].options.forEach((op, index) => {
+        if (op.is_correct) {
+          tagCorrect(index);
+        }
+      });
+    } else if (props.selectedLanguage === "javascript") {
+      javascriptQuestions[randomNo].options.forEach((op, index) => {
+        if (op.is_correct) {
+          tagCorrect(index);
+        }
+      });
+    } else if (props.selectedLanguage === "python") {
+      pythonQuestions[randomNo].options.forEach((op, index) => {
+        if (op.is_correct) {
+          tagCorrect(index);
+        }
+      });
+    }
+  };
+
+  const handleAnswerOptionClick = (index, answerOption) => {
     if (answerOption.is_correct) {
       setScore(score + 1);
+      const newState = { ...buttonColor, [index]: green };
+      setButtonColor(newState);
+    } else {
+      const newState = { ...buttonColor, [correct]: green, [index]: red };
+      setButtonColor(newState);
     }
     setDisable(true);
   };
@@ -135,15 +165,15 @@ const Quiz = (props) => {
     </Link>
   );
 
-  function handleProcrastinateClick() {
+  const handleProcrastinateClick = () => {
     console.log("the link was clicked to close");
     window.close();
-  }
+  };
 
-  function handleNextButtonClick() {
-    setShouldShowCorrectAnswer(false);
+  const handleNextButtonClick = () => {
+    setButtonColor({ 0: white, 1: white });
     setDisable(false);
-    if (questionCount < numberOfQuestions) {
+    if (questionCount < props.numberOfQuestions) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       changeNumber();
       setQuestionCount(questionCount + 1);
@@ -152,7 +182,7 @@ const Quiz = (props) => {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
       setShowScore(true);
     }
-  }
+  };
 
   return (
     <QuizContainer>
@@ -161,10 +191,13 @@ const Quiz = (props) => {
         <div>
           <h2>Congratulations!</h2>
           <h2>
-            You finished the quiz with {score}/{numberOfQuestions} correct
+            You finished the quiz with {score}/{props.numberOfQuestions} correct
             answers.
           </h2>
-          <img src={bravo} />
+          <img
+            alt="Drawing of king or queen holding two thumbs up"
+            src={bravo}
+          />
           <div>
             <Button
               size="large"
@@ -191,27 +224,30 @@ const Quiz = (props) => {
               {props.selectedLanguage === "java" ? (
                 <div style={styles.column}>
                   <h2>{javaQuestions[randomNo].question}</h2>
-                  {javaQuestions[randomNo].options.map((answerOption) => {
-                    let buttonColor = "white";
-                    if (shouldShowCorrectAnswer) {
-                      buttonColor = answerOption.is_correct
-                        ? "rgba(165, 214, 167, 1)"
-                        : "rgba(239, 83, 80, 0.5)";
+                  {javaQuestions[randomNo].options.map(
+                    (answerOption, index) => {
+                      return (
+                        <StyledButton
+                          key={index}
+                          variant="outlined"
+                          style={{ backgroundColor: buttonColor[index] }}
+                          onClick={() =>
+                            handleAnswerOptionClick(index, answerOption)
+                          }
+                          disabled={disable}
+                        >
+                          {answerOption.text}
+                        </StyledButton>
+                      );
                     }
-                    return (
-                      <StyledButton
-                        variant="outlined"
-                        style={{ backgroundColor: buttonColor }}
-                        onClick={() => handleAnswerOptionClick(answerOption)}
-                        disabled={disable}
-                      >
-                        {answerOption.text}
-                      </StyledButton>
-                    );
-                  })}
+                  )}
                   {disable ? (
                     <div>
-                      <StyledButton variant="outlined" disabled={true}>
+                      <StyledButton
+                        variant="outlined"
+                        disabled={true}
+                        style={{ height: "fit-content" }}
+                      >
                         <p>
                           <strong>Explanation:</strong>{" "}
                           {javaQuestions[randomNo].description}
@@ -225,27 +261,30 @@ const Quiz = (props) => {
               ) : props.selectedLanguage === "javascript" ? (
                 <div style={styles.column}>
                   <h2>{javascriptQuestions[randomNo].question}</h2>
-                  {javascriptQuestions[randomNo].options.map((answerOption) => {
-                    let buttonColor = "white";
-                    if (shouldShowCorrectAnswer) {
-                      buttonColor = answerOption.is_correct
-                        ? "rgba(165, 214, 167, 1)"
-                        : "rgba(239, 83, 80, 0.5)";
+                  {javascriptQuestions[randomNo].options.map(
+                    (answerOption, index) => {
+                      return (
+                        <StyledButton
+                          key={index}
+                          variant="outlined"
+                          style={{ backgroundColor: buttonColor[index] }}
+                          onClick={() =>
+                            handleAnswerOptionClick(index, answerOption)
+                          }
+                          disabled={disable}
+                        >
+                          {answerOption.text}
+                        </StyledButton>
+                      );
                     }
-                    return (
-                      <StyledButton
-                        variant="outlined"
-                        style={{ backgroundColor: buttonColor }}
-                        onClick={() => handleAnswerOptionClick(answerOption)}
-                        disabled={disable}
-                      >
-                        {answerOption.text}
-                      </StyledButton>
-                    );
-                  })}
+                  )}
                   {disable ? (
                     <div>
-                      <StyledButton variant="outlined" disabled={true}>
+                      <StyledButton
+                        variant="outlined"
+                        disabled={true}
+                        style={{ height: "fit-content" }}
+                      >
                         <p>
                           <strong>Explanation:</strong>{" "}
                           {javascriptQuestions[randomNo].description}
@@ -259,27 +298,30 @@ const Quiz = (props) => {
               ) : (
                 <div style={styles.column}>
                   <h2>{pythonQuestions[randomNo].question}</h2>
-                  {pythonQuestions[randomNo].options.map((answerOption) => {
-                    let buttonColor = "white";
-                    if (shouldShowCorrectAnswer) {
-                      buttonColor = answerOption.is_correct
-                        ? "rgba(165, 214, 167, 1)"
-                        : "rgba(239, 83, 80, 0.5)";
+                  {pythonQuestions[randomNo].options.map(
+                    (answerOption, index) => {
+                      return (
+                        <StyledButton
+                          key={index}
+                          variant="outlined"
+                          style={{ backgroundColor: buttonColor[index] }}
+                          onClick={() =>
+                            handleAnswerOptionClick(index, answerOption)
+                          }
+                          disabled={disable}
+                        >
+                          {answerOption.text}
+                        </StyledButton>
+                      );
                     }
-                    return (
-                      <StyledButton
-                        variant="outlined"
-                        style={{ backgroundColor: buttonColor }}
-                        onClick={() => handleAnswerOptionClick(answerOption)}
-                        disabled={disable}
-                      >
-                        {answerOption.text}
-                      </StyledButton>
-                    );
-                  })}
+                  )}
                   {disable ? (
                     <div>
-                      <StyledButton variant="outlined" disabled={true}>
+                      <StyledButton
+                        variant="outlined"
+                        disabled={true}
+                        style={{ height: "fit-content" }}
+                      >
                         <p>
                           <strong>Explanation:</strong>{" "}
                           {pythonQuestions[randomNo].description}

@@ -7,6 +7,9 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import bravo from "../styling/kingdom-1.png";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import Congratulations from "./Congratulations";
+import OhNo from "./OhNo";
+
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
 import { ProgressBar, ProgressStep, Label } from "../styling/Icons";
@@ -65,6 +68,7 @@ const Quiz = (props) => {
   // Stepper
   const [activeStep, setActiveStep] = useState(0);
   const numbers = Array.from(Array(props.numberOfQuestions).keys());
+  const [isCorrect, setIsCorrect] = useState("true");
 
   const white = "white";
   // Answers
@@ -137,6 +141,7 @@ const Quiz = (props) => {
     } else {
       const newState = { ...buttonColor, [correct]: green, [index]: red };
       setButtonColor(newState);
+      setIsCorrect("false");
     }
     setDisable(true);
   };
@@ -186,35 +191,18 @@ const Quiz = (props) => {
 
   return (
     <QuizContainer>
-      {showScore ? (
+      {showScore && score > 0 ? (
         // Finish section
-        <div>
-          <h2>Congratulations!</h2>
-          <h2>
-            You finished the quiz with {score}/{props.numberOfQuestions} correct
-            answers.
-          </h2>
-          <img
-            alt="Drawing of king or queen holding two thumbs up"
-            src={bravo}
-          />
-          <div>
-            <Button
-              size="large"
-              variant="contained"
-              color="secondary"
-              type="button"
-              style={{
-                borderRadius: 999,
-                margin: "2em",
-              }}
-              onClick={handleProcrastinateClick}
-            >
-              Procrastinate
-            </Button>
-            <QuizAgainButton />
-          </div>
-        </div>
+        <Congratulations
+          handleProcrastinateClick={handleProcrastinateClick}
+          QuizAgainButton={QuizAgainButton}
+          score={score}
+        />
+      ) : showScore && score === 0 ? (
+        <OhNo
+          handleProcrastinateClick={handleProcrastinateClick}
+          QuizAgainButton={QuizAgainButton}
+        />
       ) : (
         <>
           <QuestionContainer>
@@ -337,7 +325,7 @@ const Quiz = (props) => {
               <ProgressBar activeStep={activeStep} orientation="vertical">
                 {numbers.map((number) => (
                   <ProgressStep key={number}>
-                    <Label></Label>
+                    <Label />
                   </ProgressStep>
                 ))}
               </ProgressBar>

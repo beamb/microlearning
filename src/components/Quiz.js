@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { javaQuestions } from "./javaquestions";
 import { pythonQuestions } from "./pythonquestions";
 import { javascriptQuestions } from "./javascriptquestions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import bravo from "../styling/kingdom-1.png";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
+import { useHistory } from "react-router-dom";
+
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
 import { ProgressBar, ProgressStep, Label } from "../styling/Icons";
@@ -49,13 +48,11 @@ const StyledButton = withStyles({
   },
 })(Button);
 // only temporary question array
-const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
+const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * 20);
   };
   //const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [showScore, setShowScore] = useState(false);
-  const [score, setScore] = useState(0);
   const [nextButtonDisplay, setNextButtonDisplay] = useState(true);
   const [randomNo, setRandomNo] = useState(randomNumber);
   const [questionCount, setQuestionCount] = useState(1);
@@ -71,6 +68,10 @@ const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
   // Stepper
   const [activeStep, setActiveStep] = useState(0);
   const numbers = Array.from(Array(numberOfQuestions).keys());
+  const [isCorrect, setIsCorrect] = useState("true");
+
+  // History stuff
+  const history = useHistory();
 
   const white = "white";
   // Answers
@@ -101,7 +102,6 @@ const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
   }, [questionCount]);
 
   const checkAnswers = () => {
-    
     questions[selectedLanguage][randomNo].options.forEach((op, index) => {
       if (op.is_correct) {
         setCorrect(index);
@@ -117,38 +117,13 @@ const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
     } else {
       const newState = { ...buttonColor, [correct]: green, [index]: red };
       setButtonColor(newState);
+      setIsCorrect("false");
     }
     setDisable(true);
   };
+
   //The if statement should be dependent on the user settings and how many questions the user want to be asked
   //The nextQuestion variable should add together how many questions has been asked
-
-  const QuizAgainButton = () => (
-    <Link to="/language" style={{ textDecoration: "none" }}>
-      <Button
-        size="large"
-        variant="contained"
-        color="primary"
-        type="button"
-        style={{
-          color: "white",
-          borderRadius: 999,
-          margin: "2em",
-        }}
-        startIcon={<PlayCircleOutlineIcon />}
-        onClick={() => {
-          console.log("the link was clicked to quiz again");
-        }}
-      >
-        Quiz
-      </Button>
-    </Link>
-  );
-
-  const handleProcrastinateClick = () => {
-    console.log("the link was clicked to close");
-    window.close();
-  };
 
   const handleNextButtonClick = () => {
     setButtonColor({ 0: white, 1: white });
@@ -160,109 +135,72 @@ const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
       console.log(questionCount);
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
-      setShowScore(true);
+      history.push("/final_page");
     }
   };
 
   return (
     <QuizContainer>
-      {showScore ? (
-        // Finish section
-        <div>
-          <h2>Congratulations!</h2>
-          <h2>
-            You finished the quiz with {score}/{numberOfQuestions} correct
-            answers.
-          </h2>
-          <img
-            alt="Drawing of king or queen holding two thumbs up"
-            src={bravo}
-          />
-          <div>
-            <Button
-              size="large"
-              variant="contained"
-              color="secondary"
-              type="button"
-              style={{
-                borderRadius: 999,
-                margin: "2em",
-              }}
-              onClick={handleProcrastinateClick}
-            >
-              Procrastinate
-            </Button>
-            <QuizAgainButton />
-          </div>
-        </div>
-      ) : (
-        <>
-          <QuestionContainer>
-            {/* Question section */}
-            <div style={styles.row}>
-              {/* Answer section */}
-              <div style={styles.column}>
-                <h2>{questions[selectedLanguage][randomNo].question}</h2>
-                {questions[selectedLanguage][randomNo].options.map(
-                  (answerOption, index) => {
-                    return (
-                      <StyledButton
-                        key={index}
-                        variant="outlined"
-                        style={{ backgroundColor: buttonColor[index] }}
-                        onClick={() =>
-                          handleAnswerOptionClick(index, answerOption)
-                        }
-                        disabled={disable}
-                      >
-                        {answerOption.text}
-                      </StyledButton>
-                    );
-                  }
-                )}
-                {disable ? (
-                  <div>
-                    <StyledButton
-                      variant="outlined"
-                      disabled={true}
-                      style={{ height: "fit-content" }}
-                    >
-                      <p>
-                        <strong>Explanation:</strong>{" "}
-                        {
-                          questions[selectedLanguage][randomNo]
-                            .description
-                        }
-                      </p>{" "}
-                    </StyledButton>
-                  </div>
-                ) : (
-                  <p></p>
-                )}
+      <QuestionContainer>
+        {/* Question section */}
+        <div style={styles.row}>
+          {/* Answer section */}
+          <div style={styles.column}>
+            <h2>{questions[selectedLanguage][randomNo].question}</h2>
+            {questions[selectedLanguage][randomNo].options.map(
+              (answerOption, index) => {
+                return (
+                  <StyledButton
+                    key={index}
+                    variant="outlined"
+                    style={{ backgroundColor: buttonColor[index] }}
+                    onClick={() => handleAnswerOptionClick(index, answerOption)}
+                    disabled={disable}
+                  >
+                    {answerOption.text}
+                  </StyledButton>
+                );
+              }
+            )}
+            {disable ? (
+              <div>
+                <StyledButton
+                  variant="outlined"
+                  disabled={true}
+                  style={{ height: "fit-content" }}
+                >
+                  <p>
+                    <strong>Explanation:</strong>{" "}
+                    {questions[selectedLanguage][randomNo].description}
+                  </p>{" "}
+                </StyledButton>
               </div>
-              {/* Progress bar section */}
-              <ProgressBar activeStep={activeStep} orientation="vertical">
-                {numbers.map((number) => (
-                  <ProgressStep key={number}>
-                    <Label></Label>
-                  </ProgressStep>
-                ))}
-              </ProgressBar>
-            </div>
-            <div style={{ float: "right" }}>
-              <Button
-                variant="contained"
-                size="large"
-                color="primary"
-                disabled={!disable}
-                onClick={handleNextButtonClick}
-              >
-                Next
-              </Button>
-            </div>
-          </QuestionContainer>
-        </>
-      )}
+            ) : (
+              <p></p>
+            )}
+          </div>
+
+          {/* Progress bar section */}
+          <ProgressBar activeStep={activeStep} orientation="vertical">
+            {numbers.map((number) => (
+              <ProgressStep key={number}>
+                <Label></Label>
+              </ProgressStep>
+            ))}
+          </ProgressBar>
+        </div>
+        <div style={{ float: "right" }}>
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            disabled={!disable}
+            onClick={handleNextButtonClick}
+          >
+            Next
+          </Button>
+        </div>
+      </QuestionContainer>
     </QuizContainer>
   );
 };

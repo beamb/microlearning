@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation";
 import Help from "../pages/Help";
 import Quiz from "./Quiz";
-import Congratulations from "./Congratulations";
-import OhNo from "./OhNo";
+import FinalPage from "./FinalPage";
 import Settings from "../pages/Settings";
 import LanguageDataContainer from "./LanguageDataContainer";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -14,6 +13,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 //styling
 import { MainContainer } from "../styling/Containers";
+import { SettingsInputComponentRounded } from "@material-ui/icons";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -52,6 +52,7 @@ export const MainRouter = () => {
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const [selectedLanguage, setLanguage] = useState("");
+  const [score, setScore] = useState(0);
 
   const handleClose = () => {
     setOpenSuccessSnackbar(false);
@@ -136,20 +137,21 @@ export const MainRouter = () => {
             <Quiz
               selectedLanguage={selectedLanguage}
               numberOfQuestions={numberOfQuestions}
+              score={score}
+              setScore={setScore}
             />
           </MainContainer>
         </Route>
         <Route path="/help">
           <Help />
         </Route>
-        <Route path="/congratulations">
+        <Route path="/final_page">
           <MainContainer>
-            <Congratulations numberOfQuestions={numberOfQuestions} />
-          </MainContainer>
-        </Route>
-        <Route path="/oh_no">
-          <MainContainer>
-            <OhNo />
+            <FinalPage
+              numberOfQuestions={numberOfQuestions}
+              score={score}
+              setScore={setScore}
+            />
           </MainContainer>
         </Route>
       </Switch>

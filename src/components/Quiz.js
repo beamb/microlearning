@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { javaQuestions } from "./javaquestions";
 import { pythonQuestions } from "./pythonquestions";
 import { javascriptQuestions } from "./javascriptquestions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
-import bravo from "../styling/kingdom-1.png";
-import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import Congratulations from "./Congratulations";
-import OhNo from "./OhNo";
+import { useHistory } from "react-router-dom";
 
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
@@ -70,6 +66,9 @@ const Quiz = (props) => {
   const numbers = Array.from(Array(props.numberOfQuestions).keys());
   const [isCorrect, setIsCorrect] = useState("true");
 
+  // History stuff
+  const history = useHistory();
+
   const white = "white";
   // Answers
   const [buttonColor, setButtonColor] = useState({
@@ -92,15 +91,6 @@ const Quiz = (props) => {
     }
     console.log(questionsAsked);
   };
-
-  /*  const checkForNumber = (number) => {
-    if(questionsAsked.includes(number)) {
-      var newNumber = randomNumber()
-        checkForNumber(newNumber);
-      } else {
-        return number;
-      } 
-  } */
 
   const tagCorrect = (index) => {
     setCorrect(index);
@@ -145,35 +135,9 @@ const Quiz = (props) => {
     }
     setDisable(true);
   };
+
   //The if statement should be dependent on the user settings and how many questions the user want to be asked
   //The nextQuestion variable should add together how many questions has been asked
-
-  const QuizAgainButton = () => (
-    <Link to="/language" style={{ textDecoration: "none" }}>
-      <Button
-        size="large"
-        variant="contained"
-        color="primary"
-        type="button"
-        style={{
-          color: "white",
-          borderRadius: 999,
-          margin: "2em",
-        }}
-        startIcon={<PlayCircleOutlineIcon />}
-        onClick={() => {
-          console.log("the link was clicked to quiz again");
-        }}
-      >
-        Quiz
-      </Button>
-    </Link>
-  );
-
-  const handleProcrastinateClick = () => {
-    console.log("the link was clicked to close");
-    window.close();
-  };
 
   const handleNextButtonClick = () => {
     setButtonColor({ 0: white, 1: white });
@@ -185,165 +149,145 @@ const Quiz = (props) => {
       console.log(questionCount);
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
-      setShowScore(true);
+      if (score > 0) {
+        history.push("/congratulations");
+      } else {
+        history.push("/oh_no");
+      }
     }
   };
 
   return (
     <QuizContainer>
-      {showScore && score > 0 ? (
-        // Finish section
-        <Congratulations
-          handleProcrastinateClick={handleProcrastinateClick}
-          QuizAgainButton={QuizAgainButton}
-          score={score}
-        />
-      ) : showScore && score === 0 ? (
-        <OhNo
-          handleProcrastinateClick={handleProcrastinateClick}
-          QuizAgainButton={QuizAgainButton}
-        />
-      ) : (
-        <>
-          <QuestionContainer>
-            {/* Question section */}
-            <div style={styles.row}>
-              {/* Answer section */}
-              {props.selectedLanguage === "java" ? (
-                <div style={styles.column}>
-                  <h2>{javaQuestions[randomNo].question}</h2>
-                  {javaQuestions[randomNo].options.map(
-                    (answerOption, index) => {
-                      return (
-                        <StyledButton
-                          key={index}
-                          variant="outlined"
-                          style={{ backgroundColor: buttonColor[index] }}
-                          onClick={() =>
-                            handleAnswerOptionClick(index, answerOption)
-                          }
-                          disabled={disable}
-                        >
-                          {answerOption.text}
-                        </StyledButton>
-                      );
-                    }
-                  )}
-                  {disable ? (
-                    <div>
-                      <StyledButton
-                        variant="outlined"
-                        disabled={true}
-                        style={{ height: "fit-content" }}
-                      >
-                        <p>
-                          <strong>Explanation:</strong>{" "}
-                          {javaQuestions[randomNo].description}
-                        </p>{" "}
-                      </StyledButton>
-                    </div>
-                  ) : (
-                    <p></p>
-                  )}
-                </div>
-              ) : props.selectedLanguage === "javascript" ? (
-                <div style={styles.column}>
-                  <h2>{javascriptQuestions[randomNo].question}</h2>
-                  {javascriptQuestions[randomNo].options.map(
-                    (answerOption, index) => {
-                      return (
-                        <StyledButton
-                          key={index}
-                          variant="outlined"
-                          style={{ backgroundColor: buttonColor[index] }}
-                          onClick={() =>
-                            handleAnswerOptionClick(index, answerOption)
-                          }
-                          disabled={disable}
-                        >
-                          {answerOption.text}
-                        </StyledButton>
-                      );
-                    }
-                  )}
-                  {disable ? (
-                    <div>
-                      <StyledButton
-                        variant="outlined"
-                        disabled={true}
-                        style={{ height: "fit-content" }}
-                      >
-                        <p>
-                          <strong>Explanation:</strong>{" "}
-                          {javascriptQuestions[randomNo].description}
-                        </p>{" "}
-                      </StyledButton>
-                    </div>
-                  ) : (
-                    <p></p>
-                  )}
+      <QuestionContainer>
+        {/* Question section */}
+        <div style={styles.row}>
+          {/* Answer section */}
+          {props.selectedLanguage === "java" ? (
+            <div style={styles.column}>
+              <h2>{javaQuestions[randomNo].question}</h2>
+              {javaQuestions[randomNo].options.map((answerOption, index) => {
+                return (
+                  <StyledButton
+                    key={index}
+                    variant="outlined"
+                    style={{ backgroundColor: buttonColor[index] }}
+                    onClick={() => handleAnswerOptionClick(index, answerOption)}
+                    disabled={disable}
+                  >
+                    {answerOption.text}
+                  </StyledButton>
+                );
+              })}
+              {disable ? (
+                <div>
+                  <StyledButton
+                    variant="outlined"
+                    disabled={true}
+                    style={{ height: "fit-content" }}
+                  >
+                    <p>
+                      <strong>Explanation:</strong>{" "}
+                      {javaQuestions[randomNo].description}
+                    </p>{" "}
+                  </StyledButton>
                 </div>
               ) : (
-                <div style={styles.column}>
-                  <h2>{pythonQuestions[randomNo].question}</h2>
-                  {pythonQuestions[randomNo].options.map(
-                    (answerOption, index) => {
-                      return (
-                        <StyledButton
-                          key={index}
-                          variant="outlined"
-                          style={{ backgroundColor: buttonColor[index] }}
-                          onClick={() =>
-                            handleAnswerOptionClick(index, answerOption)
-                          }
-                          disabled={disable}
-                        >
-                          {answerOption.text}
-                        </StyledButton>
-                      );
-                    }
-                  )}
-                  {disable ? (
-                    <div>
-                      <StyledButton
-                        variant="outlined"
-                        disabled={true}
-                        style={{ height: "fit-content" }}
-                      >
-                        <p>
-                          <strong>Explanation:</strong>{" "}
-                          {pythonQuestions[randomNo].description}
-                        </p>{" "}
-                      </StyledButton>
-                    </div>
-                  ) : (
-                    <p></p>
-                  )}
-                </div>
+                <p></p>
               )}
-              {/* Progress bar section */}
-              <ProgressBar activeStep={activeStep} orientation="vertical">
-                {numbers.map((number) => (
-                  <ProgressStep key={number}>
-                    <Label />
-                  </ProgressStep>
-                ))}
-              </ProgressBar>
             </div>
-            <div style={{ float: "right" }}>
-              <Button
-                variant="contained"
-                size="large"
-                color="primary"
-                disabled={!disable}
-                onClick={handleNextButtonClick}
-              >
-                Next
-              </Button>
+          ) : props.selectedLanguage === "javascript" ? (
+            <div style={styles.column}>
+              <h2>{javascriptQuestions[randomNo].question}</h2>
+              {javascriptQuestions[randomNo].options.map(
+                (answerOption, index) => {
+                  return (
+                    <StyledButton
+                      key={index}
+                      variant="outlined"
+                      style={{ backgroundColor: buttonColor[index] }}
+                      onClick={() =>
+                        handleAnswerOptionClick(index, answerOption)
+                      }
+                      disabled={disable}
+                    >
+                      {answerOption.text}
+                    </StyledButton>
+                  );
+                }
+              )}
+              {disable ? (
+                <div>
+                  <StyledButton
+                    variant="outlined"
+                    disabled={true}
+                    style={{ height: "fit-content" }}
+                  >
+                    <p>
+                      <strong>Explanation:</strong>{" "}
+                      {javascriptQuestions[randomNo].description}
+                    </p>{" "}
+                  </StyledButton>
+                </div>
+              ) : (
+                <p></p>
+              )}
             </div>
-          </QuestionContainer>
-        </>
-      )}
+          ) : (
+            <div style={styles.column}>
+              <h2>{pythonQuestions[randomNo].question}</h2>
+              {pythonQuestions[randomNo].options.map((answerOption, index) => {
+                return (
+                  <StyledButton
+                    key={index}
+                    variant="outlined"
+                    style={{ backgroundColor: buttonColor[index] }}
+                    onClick={() => handleAnswerOptionClick(index, answerOption)}
+                    disabled={disable}
+                  >
+                    {answerOption.text}
+                  </StyledButton>
+                );
+              })}
+              {disable ? (
+                <div>
+                  <StyledButton
+                    variant="outlined"
+                    disabled={true}
+                    style={{ height: "fit-content" }}
+                  >
+                    <p>
+                      <strong>Explanation:</strong>{" "}
+                      {pythonQuestions[randomNo].description}
+                    </p>{" "}
+                  </StyledButton>
+                </div>
+              ) : (
+                <p></p>
+              )}
+            </div>
+          )}
+          {/* Progress bar section */}
+          <ProgressBar activeStep={activeStep} orientation="vertical">
+            {numbers.map((number) => (
+              <ProgressStep key={number}>
+                <Label></Label>
+              </ProgressStep>
+            ))}
+          </ProgressBar>
+        </div>
+        <div style={{ float: "right" }}>
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            disabled={!disable}
+            onClick={handleNextButtonClick}
+          >
+            Next
+          </Button>
+        </div>
+      </QuestionContainer>
     </QuizContainer>
   );
 };

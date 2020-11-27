@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation";
 import Help from "../pages/Help";
 import Quiz from "./Quiz";
+import Congratulations from "./Congratulations";
+import OhNo from "./OhNo";
 import Settings from "../pages/Settings";
 import LanguageDataContainer from "./LanguageDataContainer";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -164,6 +166,16 @@ export const MainRouter = () => {
         </Route>
         <Route path="/help">
           <Help />
+        </Route>
+        <Route path="/congratulations">
+          <MainContainer>
+            <Congratulations numberOfQuestions={numberOfQuestions} />
+          </MainContainer>
+        </Route>
+        <Route path="/oh_no">
+          <MainContainer>
+            <OhNo />
+          </MainContainer>
         </Route>
       </Switch>
 

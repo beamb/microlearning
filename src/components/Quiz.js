@@ -48,7 +48,7 @@ const StyledButton = withStyles({
   },
 })(Button);
 // only temporary question array
-const Quiz = (props) => {
+const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * 20);
   };
@@ -61,9 +61,15 @@ const Quiz = (props) => {
   const [questionsAsked, setQuestionsAsked] = useState([0]);
   const [disable, setDisable] = useState(false);
 
+  const questions = {
+    python: pythonQuestions,
+    javascript: javascriptQuestions,
+    java: javaQuestions,
+  };
+
   // Stepper
   const [activeStep, setActiveStep] = useState(0);
-  const numbers = Array.from(Array(props.numberOfQuestions).keys());
+  const numbers = Array.from(Array(numberOfQuestions).keys());
   const [isCorrect, setIsCorrect] = useState("true");
 
   // History stuff
@@ -92,35 +98,17 @@ const Quiz = (props) => {
     console.log(questionsAsked);
   };
 
-  const tagCorrect = (index) => {
-    setCorrect(index);
-  };
-
   useEffect(() => {
     checkAnswers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionCount]);
 
   const checkAnswers = () => {
-    if (props.selectedLanguage === "java") {
-      javaQuestions[randomNo].options.forEach((op, index) => {
-        if (op.is_correct) {
-          tagCorrect(index);
-        }
-      });
-    } else if (props.selectedLanguage === "javascript") {
-      javascriptQuestions[randomNo].options.forEach((op, index) => {
-        if (op.is_correct) {
-          tagCorrect(index);
-        }
-      });
-    } else if (props.selectedLanguage === "python") {
-      pythonQuestions[randomNo].options.forEach((op, index) => {
-        if (op.is_correct) {
-          tagCorrect(index);
-        }
-      });
-    }
+    questions[selectedLanguage][randomNo].options.forEach((op, index) => {
+      if (op.is_correct) {
+        setCorrect(index);
+      }
+    });
   };
 
   const handleAnswerOptionClick = (index, answerOption) => {
@@ -142,7 +130,7 @@ const Quiz = (props) => {
   const handleNextButtonClick = () => {
     setButtonColor({ 0: white, 1: white });
     setDisable(false);
-    if (questionCount < props.numberOfQuestions) {
+    if (questionCount < numberOfQuestions) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       changeNumber();
       setQuestionCount(questionCount + 1);
@@ -163,10 +151,10 @@ const Quiz = (props) => {
         {/* Question section */}
         <div style={styles.row}>
           {/* Answer section */}
-          {props.selectedLanguage === "java" ? (
-            <div style={styles.column}>
-              <h2>{javaQuestions[randomNo].question}</h2>
-              {javaQuestions[randomNo].options.map((answerOption, index) => {
+          <div style={styles.column}>
+            <h2>{questions[selectedLanguage][randomNo].question}</h2>
+            {questions[selectedLanguage][randomNo].options.map(
+              (answerOption, index) => {
                 return (
                   <StyledButton
                     key={index}
@@ -178,95 +166,25 @@ const Quiz = (props) => {
                     {answerOption.text}
                   </StyledButton>
                 );
-              })}
-              {disable ? (
-                <div>
-                  <StyledButton
-                    variant="outlined"
-                    disabled={true}
-                    style={{ height: "fit-content" }}
-                  >
-                    <p>
-                      <strong>Explanation:</strong>{" "}
-                      {javaQuestions[randomNo].description}
-                    </p>{" "}
-                  </StyledButton>
-                </div>
-              ) : (
-                <p></p>
-              )}
-            </div>
-          ) : props.selectedLanguage === "javascript" ? (
-            <div style={styles.column}>
-              <h2>{javascriptQuestions[randomNo].question}</h2>
-              {javascriptQuestions[randomNo].options.map(
-                (answerOption, index) => {
-                  return (
-                    <StyledButton
-                      key={index}
-                      variant="outlined"
-                      style={{ backgroundColor: buttonColor[index] }}
-                      onClick={() =>
-                        handleAnswerOptionClick(index, answerOption)
-                      }
-                      disabled={disable}
-                    >
-                      {answerOption.text}
-                    </StyledButton>
-                  );
-                }
-              )}
-              {disable ? (
-                <div>
-                  <StyledButton
-                    variant="outlined"
-                    disabled={true}
-                    style={{ height: "fit-content" }}
-                  >
-                    <p>
-                      <strong>Explanation:</strong>{" "}
-                      {javascriptQuestions[randomNo].description}
-                    </p>{" "}
-                  </StyledButton>
-                </div>
-              ) : (
-                <p></p>
-              )}
-            </div>
-          ) : (
-            <div style={styles.column}>
-              <h2>{pythonQuestions[randomNo].question}</h2>
-              {pythonQuestions[randomNo].options.map((answerOption, index) => {
-                return (
-                  <StyledButton
-                    key={index}
-                    variant="outlined"
-                    style={{ backgroundColor: buttonColor[index] }}
-                    onClick={() => handleAnswerOptionClick(index, answerOption)}
-                    disabled={disable}
-                  >
-                    {answerOption.text}
-                  </StyledButton>
-                );
-              })}
-              {disable ? (
-                <div>
-                  <StyledButton
-                    variant="outlined"
-                    disabled={true}
-                    style={{ height: "fit-content" }}
-                  >
-                    <p>
-                      <strong>Explanation:</strong>{" "}
-                      {pythonQuestions[randomNo].description}
-                    </p>{" "}
-                  </StyledButton>
-                </div>
-              ) : (
-                <p></p>
-              )}
-            </div>
-          )}
+              }
+            )}
+            {disable ? (
+              <div>
+                <StyledButton
+                  variant="outlined"
+                  disabled={true}
+                  style={{ height: "fit-content" }}
+                >
+                  <p>
+                    <strong>Explanation:</strong>{" "}
+                    {questions[selectedLanguage][randomNo].description}
+                  </p>{" "}
+                </StyledButton>
+              </div>
+            ) : (
+              <p></p>
+            )}
+          </div>
           {/* Progress bar section */}
           <ProgressBar activeStep={activeStep} orientation="vertical">
             {numbers.map((number) => (
@@ -276,6 +194,47 @@ const Quiz = (props) => {
             ))}
           </ProgressBar>
         </div>
+        ) : (
+        <div style={styles.column}>
+          <h2>{pythonQuestions[randomNo].question}</h2>
+          {pythonQuestions[randomNo].options.map((answerOption, index) => {
+            return (
+              <StyledButton
+                key={index}
+                variant="outlined"
+                style={{ backgroundColor: buttonColor[index] }}
+                onClick={() => handleAnswerOptionClick(index, answerOption)}
+                disabled={disable}
+              >
+                {answerOption.text}
+              </StyledButton>
+            );
+          })}
+          {disable ? (
+            <div>
+              <StyledButton
+                variant="outlined"
+                disabled={true}
+                style={{ height: "fit-content" }}
+              >
+                <p>
+                  <strong>Explanation:</strong>{" "}
+                  {pythonQuestions[randomNo].description}
+                </p>{" "}
+              </StyledButton>
+            </div>
+          ) : (
+            <p></p>
+          )}
+        </div>
+        {/* Progress bar section */}
+        <ProgressBar activeStep={activeStep} orientation="vertical">
+          {numbers.map((number) => (
+            <ProgressStep key={number}>
+              <Label></Label>
+            </ProgressStep>
+          ))}
+        </ProgressBar>
         <div style={{ float: "right" }}>
           <Button
             variant="contained"

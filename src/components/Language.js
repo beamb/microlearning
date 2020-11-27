@@ -5,14 +5,14 @@ import { JavaIcon, PythonIcon, JSIcon } from "../styling/Icons";
 import { IconContainer } from "../styling/Containers";
 import { LanguageContainer } from "../styling/Containers";
 
-const Language = (props) => {
+const Language = ({ setLanguage }) => {
   const JavaButton = () => (
     <Link to="/quiz">
       <JavaIcon
         size="80"
         type="button"
         onClick={() => {
-          props.handleLanguageSelect("java");
+          setLanguage("java");
         }}
       >
         Java
@@ -26,7 +26,7 @@ const Language = (props) => {
         size="80"
         type="button"
         onClick={() => {
-          props.handleLanguageSelect("javascript");
+          setLanguage("javascript");
         }}
       >
         JavaScript
@@ -40,7 +40,7 @@ const Language = (props) => {
         size="80"
         type="button"
         onClick={() => {
-          props.handleLanguageSelect("python");
+          setLanguage("python");
         }}
       >
         Python

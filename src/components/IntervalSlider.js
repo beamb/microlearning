@@ -66,17 +66,21 @@ const valuetext = (value) => {
   return `${value} minutes`;
 };
 
-export const IntervalSlider = (props) => {
+export const IntervalSlider = ({
+  interval,
+  handleAllIntervals,
+  allDisabled,
+}) => {
   const classes = useStyles();
 
   const handleSliderChange = (event, newValue) => {
-    props.updateInterval(newValue);
+    handleAllIntervals(newValue);
   };
 
   return (
     <div className={classes.root}>
       <Slider
-        value={props.value}
+        value={interval}
         getAriaValueText={valuetext}
         onChange={handleSliderChange}
         aria-labelledby="discrete-slider-always"
@@ -85,7 +89,7 @@ export const IntervalSlider = (props) => {
         valueLabelDisplay="auto"
         min={5}
         max={60}
-        disabled={props.disable}
+        disabled={allDisabled}
       />
     </div>
   );

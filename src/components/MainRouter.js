@@ -53,24 +53,7 @@ export const MainRouter = () => {
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const [selectedLanguage, setLanguage] = useState("");
 
-  const handleLanguageChange = (selected) => {
-    console.log(`The link was clicked for "${selected}"`);
-    setLanguage(selected);
-    console.log(selectedLanguage);
-  };
-
-  const handleSuccessClick = () => {
-    setOpenSuccessSnackbar(true);
-  };
-  const handleErrorClick = () => {
-    setOpenErrorSnackbar(true);
-  };
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
+  const handleClose = () => {
     setOpenSuccessSnackbar(false);
     setOpenErrorSnackbar(false);
   };
@@ -110,14 +93,6 @@ export const MainRouter = () => {
     database.collection("users").doc(user.uid).set({ userSettings });
   };
 
-  const updateNumberOfQuestions = (number) => {
-    setNumberOfQuestions(number);
-  };
-
-  const updateUserWebPages = (webpages) => {
-    setUserWebPages(webpages);
-  };
-
   const updateUserSettings = () => {
     database
       .collection("users")
@@ -127,12 +102,12 @@ export const MainRouter = () => {
         "userSettings.webPages": userWebPages,
       })
       .then(function () {
-        handleSuccessClick();
+        setOpenSuccessSnackbar(true);
       })
       .catch(function (error) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
-        handleErrorClick();
+        setOpenErrorSnackbar(true);
       });
   };
 
@@ -146,15 +121,15 @@ export const MainRouter = () => {
         </Route>
         <Route path="/settings">
           <Settings
-            duration={numberOfQuestions}
-            websiteList={userWebPages}
-            updateDuration={updateNumberOfQuestions}
-            updateWebsites={updateUserWebPages}
-            update={updateUserSettings}
+            numberOfQuestions={numberOfQuestions}
+            userWebPages={userWebPages}
+            setNumberOfQuestions={setNumberOfQuestions}
+            setUserWebPages={setUserWebPages}
+            updateUserSettings={updateUserSettings}
           />
         </Route>
         <Route path="/language">
-          <LanguageDataContainer changeLanguage={handleLanguageChange} />
+          <LanguageDataContainer setLanguage={setLanguage} />
         </Route>
         <Route path="/quiz">
           <MainContainer>

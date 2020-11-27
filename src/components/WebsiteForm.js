@@ -23,18 +23,27 @@ const styles = {
   },
 };
 
-export const WebsiteForm = (props) => {
+export const WebsiteForm = ({
+  handleSubmit,
+  urlInput,
+  handleURLInput,
+  nameInput,
+  handleNameInput,
+  isClicked,
+  toggleClick,
+  addWebsiteFromName,
+}) => {
   const classes = useStyles();
   const [webName, setWebName] = useState("");
 
   const handleSelectChange = (event) => {
     let name = event.target.value;
     setWebName(name);
-    props.addSiteFromName(name);
+    addWebsiteFromName(name);
     setWebName("");
   };
 
-  return props.clicked ? (
+  return isClicked ? (
     <div>
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel htmlFor="outlined-age-native-simple">
@@ -63,7 +72,7 @@ export const WebsiteForm = (props) => {
         </Select>
       </FormControl>
       <ValidatorForm
-        onSubmit={props.submit}
+        onSubmit={handleSubmit}
         onError={(errors) => console.error("Error submitting input: ", errors)}
       >
         <p>OR add a website below</p>
@@ -72,10 +81,10 @@ export const WebsiteForm = (props) => {
             required={true}
             variant="outlined"
             label="URL"
-            onChange={props.changeURL}
+            onChange={handleURLInput}
             name="url"
             helperText=""
-            value={props.url}
+            value={urlInput}
             validators={[
               "matchRegexp:^(http|https|ftp)://([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&amp;%$-]+)*@)*((25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0).(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])|([a-zA-Z0-9-]+.)*[a-zA-Z0-9-]+.(com|dk|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(/($|[a-zA-Z0-9.,?'\\+&amp;%$#=~_-]+))*$",
             ]}
@@ -87,10 +96,10 @@ export const WebsiteForm = (props) => {
             required={true}
             variant="outlined"
             label="Name"
-            onChange={props.changeName}
+            onChange={handleNameInput}
             name="name"
             helperText=""
-            value={props.name}
+            value={nameInput}
             validators={["isString"]}
             errorMessages={["The website name is not valid"]}
             style={{ margin: "0.5em" }}
@@ -115,7 +124,7 @@ export const WebsiteForm = (props) => {
   ) : (
     <div>
       <AddContainer>
-        <AddButton size="30" type="button" onClick={props.changeClick}>
+        <AddButton size="30" type="button" onClick={toggleClick}>
           Add
         </AddButton>
         <p>Add more websites</p>

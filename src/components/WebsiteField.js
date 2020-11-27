@@ -34,16 +34,8 @@ export const WebsiteField = ({
   };
 
   const handleInputChange = (event) => {
-    disableOtherCheckboxes();
-    handleInputInterval(event.target.value);
-  };
-
-  const disableOtherCheckboxes = () => {
     toggleCheckboxes(websiteName);
-  };
-
-  const disable = () => {
-    disableField(websiteName);
+    handleInputInterval(event.target.value);
   };
 
   const handleBlur = () => {
@@ -56,7 +48,7 @@ export const WebsiteField = ({
 
   const handleSwitchChange = () => {
     switchLabel();
-    disable();
+    disableField(websiteName);
   };
 
   return (

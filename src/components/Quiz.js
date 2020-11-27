@@ -62,6 +62,12 @@ const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
   const [questionsAsked, setQuestionsAsked] = useState([0]);
   const [disable, setDisable] = useState(false);
 
+  const questions = {
+    python: pythonQuestions,
+    javascript: javascriptQuestions,
+    java: javaQuestions,
+  };
+
   // Stepper
   const [activeStep, setActiveStep] = useState(0);
   const numbers = Array.from(Array(numberOfQuestions).keys());
@@ -89,44 +95,18 @@ const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
     console.log(questionsAsked);
   };
 
-  /*  const checkForNumber = (number) => {
-    if(questionsAsked.includes(number)) {
-      var newNumber = randomNumber()
-        checkForNumber(newNumber);
-      } else {
-        return number;
-      } 
-  } */
-
-  const tagCorrect = (index) => {
-    setCorrect(index);
-  };
-
   useEffect(() => {
     checkAnswers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionCount]);
 
   const checkAnswers = () => {
-    if (selectedLanguage === "java") {
-      javaQuestions[randomNo].options.forEach((op, index) => {
-        if (op.is_correct) {
-          tagCorrect(index);
-        }
-      });
-    } else if (selectedLanguage === "javascript") {
-      javascriptQuestions[randomNo].options.forEach((op, index) => {
-        if (op.is_correct) {
-          tagCorrect(index);
-        }
-      });
-    } else if (selectedLanguage === "python") {
-      pythonQuestions[randomNo].options.forEach((op, index) => {
-        if (op.is_correct) {
-          tagCorrect(index);
-        }
-      });
-    }
+    
+    questions[selectedLanguage][randomNo].options.forEach((op, index) => {
+      if (op.is_correct) {
+        setCorrect(index);
+      }
+    });
   };
 
   const handleAnswerOptionClick = (index, answerOption) => {
@@ -221,118 +201,45 @@ const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
             {/* Question section */}
             <div style={styles.row}>
               {/* Answer section */}
-              {selectedLanguage === "java" ? (
-                <div style={styles.column}>
-                  <h2>{javaQuestions[randomNo].question}</h2>
-                  {javaQuestions[randomNo].options.map(
-                    (answerOption, index) => {
-                      return (
-                        <StyledButton
-                          key={index}
-                          variant="outlined"
-                          style={{ backgroundColor: buttonColor[index] }}
-                          onClick={() =>
-                            handleAnswerOptionClick(index, answerOption)
-                          }
-                          disabled={disable}
-                        >
-                          {answerOption.text}
-                        </StyledButton>
-                      );
-                    }
-                  )}
-                  {disable ? (
-                    <div>
+              <div style={styles.column}>
+                <h2>{questions[selectedLanguage][randomNo].question}</h2>
+                {questions[selectedLanguage][randomNo].options.map(
+                  (answerOption, index) => {
+                    return (
                       <StyledButton
+                        key={index}
                         variant="outlined"
-                        disabled={true}
-                        style={{ height: "fit-content" }}
+                        style={{ backgroundColor: buttonColor[index] }}
+                        onClick={() =>
+                          handleAnswerOptionClick(index, answerOption)
+                        }
+                        disabled={disable}
                       >
-                        <p>
-                          <strong>Explanation:</strong>{" "}
-                          {javaQuestions[randomNo].description}
-                        </p>{" "}
+                        {answerOption.text}
                       </StyledButton>
-                    </div>
-                  ) : (
-                    <p></p>
-                  )}
-                </div>
-              ) : selectedLanguage === "javascript" ? (
-                <div style={styles.column}>
-                  <h2>{javascriptQuestions[randomNo].question}</h2>
-                  {javascriptQuestions[randomNo].options.map(
-                    (answerOption, index) => {
-                      return (
-                        <StyledButton
-                          key={index}
-                          variant="outlined"
-                          style={{ backgroundColor: buttonColor[index] }}
-                          onClick={() =>
-                            handleAnswerOptionClick(index, answerOption)
-                          }
-                          disabled={disable}
-                        >
-                          {answerOption.text}
-                        </StyledButton>
-                      );
-                    }
-                  )}
-                  {disable ? (
-                    <div>
-                      <StyledButton
-                        variant="outlined"
-                        disabled={true}
-                        style={{ height: "fit-content" }}
-                      >
-                        <p>
-                          <strong>Explanation:</strong>{" "}
-                          {javascriptQuestions[randomNo].description}
-                        </p>{" "}
-                      </StyledButton>
-                    </div>
-                  ) : (
-                    <p></p>
-                  )}
-                </div>
-              ) : (
-                <div style={styles.column}>
-                  <h2>{pythonQuestions[randomNo].question}</h2>
-                  {pythonQuestions[randomNo].options.map(
-                    (answerOption, index) => {
-                      return (
-                        <StyledButton
-                          key={index}
-                          variant="outlined"
-                          style={{ backgroundColor: buttonColor[index] }}
-                          onClick={() =>
-                            handleAnswerOptionClick(index, answerOption)
-                          }
-                          disabled={disable}
-                        >
-                          {answerOption.text}
-                        </StyledButton>
-                      );
-                    }
-                  )}
-                  {disable ? (
-                    <div>
-                      <StyledButton
-                        variant="outlined"
-                        disabled={true}
-                        style={{ height: "fit-content" }}
-                      >
-                        <p>
-                          <strong>Explanation:</strong>{" "}
-                          {pythonQuestions[randomNo].description}
-                        </p>{" "}
-                      </StyledButton>
-                    </div>
-                  ) : (
-                    <p></p>
-                  )}
-                </div>
-              )}
+                    );
+                  }
+                )}
+                {disable ? (
+                  <div>
+                    <StyledButton
+                      variant="outlined"
+                      disabled={true}
+                      style={{ height: "fit-content" }}
+                    >
+                      <p>
+                        <strong>Explanation:</strong>{" "}
+                        {
+                          questions[selectedLanguage][randomNo]
+                            .description
+                        }
+                      </p>{" "}
+                    </StyledButton>
+                  </div>
+                ) : (
+                  <p></p>
+                )}
+              </div>
               {/* Progress bar section */}
               <ProgressBar activeStep={activeStep} orientation="vertical">
                 {numbers.map((number) => (

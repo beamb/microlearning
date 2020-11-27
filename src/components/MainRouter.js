@@ -5,7 +5,7 @@ import Navigation from "./Navigation";
 import Help from "../pages/Help";
 import Quiz from "./Quiz";
 import Settings from "../pages/Settings";
-import LanguageDataContainer from "./LanguageDataContainer";
+import Language from "./Language";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth, database } from "../firebase";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -127,7 +127,9 @@ export const MainRouter = () => {
           />
         </Route>
         <Route path="/language">
-          <LanguageDataContainer setLanguage={setLanguage} />
+          <MainContainer>
+            <Language setLanguage={setLanguage} />
+          </MainContainer>
         </Route>
         <Route path="/quiz">
           <MainContainer>

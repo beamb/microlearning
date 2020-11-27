@@ -6,56 +6,54 @@ import { IconContainer } from "../styling/Containers";
 import { LanguageContainer } from "../styling/Containers";
 
 const Language = ({ setLanguage }) => {
-  const JavaButton = () => (
-    <Link to="/quiz">
-      <JavaIcon
-        size="80"
-        type="button"
-        onClick={() => {
-          setLanguage("java");
-        }}
-      >
-        Java
-      </JavaIcon>
-    </Link>
-  );
-
-  const JSButton = () => (
-    <Link to="/quiz">
-      <JSIcon
-        size="80"
-        type="button"
-        onClick={() => {
-          setLanguage("javascript");
-        }}
-      >
-        JavaScript
-      </JSIcon>
-    </Link>
-  );
-
-  const PythonButton = () => (
-    <Link to="/quiz">
-      <PythonIcon
-        size="80"
-        type="button"
-        onClick={() => {
-          setLanguage("python");
-        }}
-      >
-        Python
-      </PythonIcon>
-    </Link>
-  );
+  const LanguageButton = (props) => {
+    if (props.language === "java") {
+      return (
+        <Link to="/quiz">
+          <JavaIcon
+            size="80"
+            type="button"
+            onClick={() => {
+              setLanguage(props.language);
+            }}
+          />
+        </Link>
+      );
+    } else if (props.language === "javascript") {
+      return (
+        <Link to="/quiz">
+          <JSIcon
+            size="80"
+            type="button"
+            onClick={() => {
+              setLanguage(props.language);
+            }}
+          />
+        </Link>
+      );
+    } else {
+      return (
+        <Link to="/quiz">
+          <PythonIcon
+            size="80"
+            type="button"
+            onClick={() => {
+              setLanguage(props.language);
+            }}
+          />
+        </Link>
+      );
+    }
+  };
 
   return (
     <LanguageContainer>
       <h1>Which language do you want me to test you in?</h1>
       <br />
       <IconContainer>
-        <JavaButton />
-        <JSButton />
-        <PythonButton />
+        <LanguageButton language="java" />
+        <LanguageButton language="javascript" />
+        <LanguageButton language="python" />
       </IconContainer>
     </LanguageContainer>
   );

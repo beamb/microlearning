@@ -79,14 +79,6 @@ export const IconContainer = styled.div`
   margin: 3em;
 `;
 
-export const TextContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  margin: 3em;
-`;
-
 export const QuestionContainer = styled.div`
 display: flex
 justify-content: center;

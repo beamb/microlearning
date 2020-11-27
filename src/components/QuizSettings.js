@@ -31,17 +31,16 @@ const StyledToggleButton = withStyles({
   },
 })(ToggleButton);
 
-export const QuizSettings = (props) => {
+export const QuizSettings = ({ numberOfQuestions, setNumberOfQuestions }) => {
   const handleNumberChange = (event, number) => {
-    console.log(number);
-    props.setInterruption(number);
+    setNumberOfQuestions(number);
   };
 
   return (
     <div>
       <h4>How many questions can I ask you when I interrupt you?</h4>
       <ToggleButtonGroup
-        value={props.interruption}
+        value={numberOfQuestions}
         exclusive
         onChange={handleNumberChange}
         aria-label="number of questions"

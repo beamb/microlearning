@@ -3,14 +3,10 @@ import Language from "./Language";
 // styling
 import { MainContainer } from "../styling/Containers";
 
-const LanguageDataContainer = (props) => {
-  const handleLanguageSelect = (selected) => {
-    props.changeLanguage(selected);
-  };
-
+const LanguageDataContainer = ({ setLanguage }) => {
   return (
     <MainContainer>
-      <Language handleLanguageSelect={handleLanguageSelect} />
+      <Language setLanguage={setLanguage} />
     </MainContainer>
   );
 };

@@ -49,7 +49,7 @@ const StyledButton = withStyles({
   },
 })(Button);
 // only temporary question array
-const Quiz = (props) => {
+const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * 20);
   };
@@ -70,7 +70,7 @@ const Quiz = (props) => {
 
   // Stepper
   const [activeStep, setActiveStep] = useState(0);
-  const numbers = Array.from(Array(props.numberOfQuestions).keys());
+  const numbers = Array.from(Array(numberOfQuestions).keys());
 
   const white = "white";
   // Answers
@@ -101,7 +101,8 @@ const Quiz = (props) => {
   }, [questionCount]);
 
   const checkAnswers = () => {
-    questions[props.selectedLanguage][randomNo].options.forEach((op, index) => {
+    
+    questions[selectedLanguage][randomNo].options.forEach((op, index) => {
       if (op.is_correct) {
         setCorrect(index);
       }
@@ -152,7 +153,7 @@ const Quiz = (props) => {
   const handleNextButtonClick = () => {
     setButtonColor({ 0: white, 1: white });
     setDisable(false);
-    if (questionCount < props.numberOfQuestions) {
+    if (questionCount < numberOfQuestions) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       changeNumber();
       setQuestionCount(questionCount + 1);
@@ -170,7 +171,7 @@ const Quiz = (props) => {
         <div>
           <h2>Congratulations!</h2>
           <h2>
-            You finished the quiz with {score}/{props.numberOfQuestions} correct
+            You finished the quiz with {score}/{numberOfQuestions} correct
             answers.
           </h2>
           <img
@@ -201,8 +202,8 @@ const Quiz = (props) => {
             <div style={styles.row}>
               {/* Answer section */}
               <div style={styles.column}>
-                <h2>{questions[props.selectedLanguage][randomNo].question}</h2>
-                {questions[props.selectedLanguage][randomNo].options.map(
+                <h2>{questions[selectedLanguage][randomNo].question}</h2>
+                {questions[selectedLanguage][randomNo].options.map(
                   (answerOption, index) => {
                     return (
                       <StyledButton
@@ -229,7 +230,7 @@ const Quiz = (props) => {
                       <p>
                         <strong>Explanation:</strong>{" "}
                         {
-                          questions[props.selectedLanguage][randomNo]
+                          questions[selectedLanguage][randomNo]
                             .description
                         }
                       </p>{" "}

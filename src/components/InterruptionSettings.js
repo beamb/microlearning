@@ -15,9 +15,9 @@ const styles = {
   },
 };
 
-export const InterruptionSettings = (props) => {
+export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
   const [interval, setInterval] = useState(15);
-  const [sharedState, setSharedState] = useState(props.websitesObject);
+  const [sharedState, setSharedState] = useState(userWebPages);
   const [allDisabled, setAllDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [urlInput, setURLInput] = useState("https://");
@@ -57,7 +57,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
-    props.updateWebsites(websitesCopy);
+    setUserWebPages(websitesCopy);
   };
 
   const handleSelectAllChange = (event) => {
@@ -69,7 +69,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
-    props.updateWebsites(websitesCopy);
+    setUserWebPages(websitesCopy);
     changingInterval();
   };
 
@@ -81,7 +81,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
-    props.updateWebsites(websitesCopy);
+    setUserWebPages(websitesCopy);
     changingInterval();
   };
 
@@ -95,7 +95,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
-    props.updateWebsites(websitesCopy);
+    setUserWebPages(websitesCopy);
   };
 
   const validateInput = (name) => {
@@ -110,7 +110,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
-    props.updateWebsites(websitesCopy);
+    setUserWebPages(websitesCopy);
   };
 
   const disableField = (name) => {
@@ -126,7 +126,7 @@ export const InterruptionSettings = (props) => {
       }
     });
     setSharedState(websitesCopy);
-    props.updateWebsites(websitesCopy);
+    setUserWebPages(websitesCopy);
     disableSlider();
   };
 
@@ -164,7 +164,7 @@ export const InterruptionSettings = (props) => {
     let newWebsites = websitesCopy.websites.filter((wc) => wc.name !== name);
     websitesCopy.websites = newWebsites;
     setSharedState(websitesCopy);
-    props.updateWebsites(websitesCopy);
+    setUserWebPages(websitesCopy);
     setIsLoading(true);
   };
 
@@ -186,7 +186,7 @@ export const InterruptionSettings = (props) => {
       let websitesCopy = { ...sharedState };
       websitesCopy.websites.push(newWebsite);
       setSharedState(websitesCopy);
-      props.updateWebsites(websitesCopy);
+      setUserWebPages(websitesCopy);
     }
     setNameInput("");
     setURLInput("https://");
@@ -249,7 +249,7 @@ export const InterruptionSettings = (props) => {
           let websitesCopy = { ...sharedState };
           websitesCopy.websites.push(newWebsite);
           setSharedState(websitesCopy);
-          props.updateWebsites(websitesCopy);
+          setUserWebPages(websitesCopy);
           toggleClick();
         }
       }
@@ -297,35 +297,34 @@ export const InterruptionSettings = (props) => {
         </FormGroup>
       </div>
       <IntervalSlider
-        value={interval}
-        updateInterval={handleAllIntervals}
-        disable={allDisabled}
+        interval={interval}
+        handleAllIntervals={handleAllIntervals}
+        allDisabled={allDisabled}
       />
       <br />
       {sharedState.websites.map((website) => (
         <WebsiteField
-          website={website.name}
-          value={website.interval}
-          checkState={website.state}
-          changeCheckState={updateWebsite}
-          updateInterval={handleInputInterval}
-          disableCheckboxes={toggleCheckboxes}
+          websiteName={website.name}
+          websiteInterval={website.interval}
+          websiteState={website.state}
+          updateWebsite={updateWebsite}
+          handleInputInterval={handleInputInterval}
+          toggleCheckboxes={toggleCheckboxes}
           validateInput={validateInput}
-          disable={disableField}
-          status={website.isDisabled}
-          delete={deleteWebsite}
+          disableField={disableField}
+          websiteIsDisabled={website.isDisabled}
+          deleteWebsite={deleteWebsite}
         />
       ))}
       <WebsiteForm
-        submit={handleSubmit}
-        url={urlInput}
-        changeURL={handleURLInput}
-        name={nameInput}
-        changeName={handleNameInput}
-        clicked={isClicked}
-        changeClick={toggleClick}
-        addNewWebsite={addWebsite}
-        addSiteFromName={addWebsiteFromName}
+        handleSubmit={handleSubmit}
+        urlInput={urlInput}
+        handleURLInput={handleURLInput}
+        nameInput={nameInput}
+        handleNameInput={handleNameInput}
+        isClicked={isClicked}
+        toggleClick={toggleClick}
+        addWebsiteFromName={addWebsiteFromName}
       />
     </div>
   );

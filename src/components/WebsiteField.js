@@ -7,45 +7,48 @@ import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
 import { DeleteButton } from "../styling/Icons";
 
-export const WebsiteField = (props) => {
-  const [label, setLabel] = useState("Disable interruptions");
+export const WebsiteField = ({
+  websiteName,
+  websiteInterval,
+  websiteState,
+  updateWebsite,
+  handleInputInterval,
+  toggleCheckboxes,
+  validateInput,
+  disableField,
+  websiteIsDisabled,
+  deleteWebsite,
+}) => {
+  const [label, setLabel] = useState("Interruptions enabled");
 
   const switchLabel = () => {
     setLabel(
-      label === "Disable interruptions"
-        ? "Enable interruptions"
-        : "Disable interruptions"
+      label === "Interruptions enabled"
+        ? "Interruptions disabled"
+        : "Interruptions enabled"
     );
   };
 
   const handleCheckboxChange = () => {
-    props.changeCheckState(props.website);
+    updateWebsite(websiteName);
   };
 
   const handleInputChange = (event) => {
-    disableOtherCheckboxes();
-    props.updateInterval(event.target.value);
-  };
-
-  const disableOtherCheckboxes = () => {
-    props.disableCheckboxes(props.website);
-  };
-
-  const disable = () => {
-    props.disable(props.website);
+    toggleCheckboxes(websiteName);
+    handleInputInterval(event.target.value);
   };
 
   const handleBlur = () => {
-    props.validateInput(props.website);
+    validateInput(websiteName);
   };
 
   const handleDelete = () => {
-    props.delete(props.website);
+    deleteWebsite(websiteName);
   };
 
   const handleSwitchChange = () => {
     switchLabel();
-    disable();
+    disableField(websiteName);
   };
 
   return (
@@ -57,22 +60,22 @@ export const WebsiteField = (props) => {
           style={{ display: "flex", alignItems: "center" }}
         >
           <FormControlLabel
-            value={props.website}
+            value={websiteName}
             control={
               <Checkbox
                 color="primary"
-                checked={props.checkState}
+                checked={websiteState}
                 onChange={handleCheckboxChange}
-                disabled={props.status}
+                disabled={websiteIsDisabled}
               />
             }
-            label={props.website}
+            label={websiteName}
             labelPlacement="end"
           />
           <FormControlLabel
             control={
               <Switch
-                checked={!props.status}
+                checked={!websiteIsDisabled}
                 onChange={handleSwitchChange}
                 name="webSwitch"
                 color="primary"
@@ -92,12 +95,12 @@ export const WebsiteField = (props) => {
           <TextField
             id="standard-number"
             type="number"
-            value={props.value}
+            value={websiteInterval}
             onChange={handleInputChange}
             onBlur={handleBlur}
             helperText="minutes"
             InputProps={{ inputProps: { min: 5, max: 60 } }}
-            disabled={props.status}
+            disabled={websiteIsDisabled}
             style={{ margin: "0.25em" }}
           />
         </FormGroup>

@@ -49,7 +49,7 @@ const StyledButton = withStyles({
   },
 })(Button);
 // only temporary question array
-const Quiz = (props) => {
+const Quiz = ({ selectedLanguage, numberOfQuestions }) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * 20);
   };
@@ -64,7 +64,7 @@ const Quiz = (props) => {
 
   // Stepper
   const [activeStep, setActiveStep] = useState(0);
-  const numbers = Array.from(Array(props.numberOfQuestions).keys());
+  const numbers = Array.from(Array(numberOfQuestions).keys());
 
   const white = "white";
   // Answers
@@ -108,19 +108,19 @@ const Quiz = (props) => {
   }, [questionCount]);
 
   const checkAnswers = () => {
-    if (props.selectedLanguage === "java") {
+    if (selectedLanguage === "java") {
       javaQuestions[randomNo].options.forEach((op, index) => {
         if (op.is_correct) {
           tagCorrect(index);
         }
       });
-    } else if (props.selectedLanguage === "javascript") {
+    } else if (selectedLanguage === "javascript") {
       javascriptQuestions[randomNo].options.forEach((op, index) => {
         if (op.is_correct) {
           tagCorrect(index);
         }
       });
-    } else if (props.selectedLanguage === "python") {
+    } else if (selectedLanguage === "python") {
       pythonQuestions[randomNo].options.forEach((op, index) => {
         if (op.is_correct) {
           tagCorrect(index);
@@ -173,7 +173,7 @@ const Quiz = (props) => {
   const handleNextButtonClick = () => {
     setButtonColor({ 0: white, 1: white });
     setDisable(false);
-    if (questionCount < props.numberOfQuestions) {
+    if (questionCount < numberOfQuestions) {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       changeNumber();
       setQuestionCount(questionCount + 1);
@@ -191,7 +191,7 @@ const Quiz = (props) => {
         <div>
           <h2>Congratulations!</h2>
           <h2>
-            You finished the quiz with {score}/{props.numberOfQuestions} correct
+            You finished the quiz with {score}/{numberOfQuestions} correct
             answers.
           </h2>
           <img
@@ -221,7 +221,7 @@ const Quiz = (props) => {
             {/* Question section */}
             <div style={styles.row}>
               {/* Answer section */}
-              {props.selectedLanguage === "java" ? (
+              {selectedLanguage === "java" ? (
                 <div style={styles.column}>
                   <h2>{javaQuestions[randomNo].question}</h2>
                   {javaQuestions[randomNo].options.map(
@@ -258,7 +258,7 @@ const Quiz = (props) => {
                     <p></p>
                   )}
                 </div>
-              ) : props.selectedLanguage === "javascript" ? (
+              ) : selectedLanguage === "javascript" ? (
                 <div style={styles.column}>
                   <h2>{javascriptQuestions[randomNo].question}</h2>
                   {javascriptQuestions[randomNo].options.map(

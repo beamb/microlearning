@@ -21,7 +21,13 @@ const styles = {
   },
 };
 
-export const Settings = (props) => {
+export const Settings = ({
+  numberOfQuestions,
+  userWebPages,
+  setNumberOfQuestions,
+  setUserWebPages,
+  updateUserSettings,
+}) => {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
@@ -32,7 +38,7 @@ export const Settings = (props) => {
     <SBButton
       type="button"
       onClick={() => {
-        props.update();
+        updateUserSettings();
         history.goBack();
       }}
     >
@@ -41,16 +47,8 @@ export const Settings = (props) => {
     </SBButton>
   );
 
-  const handleNumberChange = (number) => {
-    props.updateDuration(number);
-  };
-
   const handleTabChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleWebsitesChange = (websites) => {
-    props.updateWebsites(websites);
   };
 
   return (
@@ -76,20 +74,20 @@ export const Settings = (props) => {
         </Tabs>
         <TabPanel value={value} index={0}>
           <QuizSettings
-            interruption={props.duration}
-            setInterruption={handleNumberChange}
+            numberOfQuestions={numberOfQuestions}
+            setNumberOfQuestions={setNumberOfQuestions}
           />
           <br />
           <InterruptionSettings
-            websitesObject={props.websiteList}
-            updateWebsites={handleWebsitesChange}
+            userWebPages={userWebPages}
+            setUserWebPages={setUserWebPages}
           />
           <br />
           <small>
             <em>
               Remember to hit{" "}
-              <span style={{ color: "#21B6A8" }}>"Save & back"</span> to store
-              your changes.
+              <span style={{ color: "#21B6A8" }}>"Save &amp; back"</span> to
+              store your changes.
             </em>
           </small>
         </TabPanel>

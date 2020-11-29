@@ -10,7 +10,7 @@
   "browser_action": {
     "default_icon": "logo512.png",
     "default_popup": "index.html",
-    "default_title": "Microlearning – programming practice"
+    "default_title": "Practice.now() – quick programming practice"
   },
   "permissions": [
     "activeTab",
@@ -22,8 +22,5 @@
     "tabs",
     "unlimitedStorage"
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "content_security_policy": "script-src 'self' 'sha256-prAgginqQug3PAKYgGDUmdls9hltyRScXATPJORFZFc=' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://apis.google.com; object-src 'self'"
 }

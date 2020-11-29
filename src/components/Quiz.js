@@ -1,186 +1,208 @@
-import React, { useState } from "react";
-
-import Language from "./Language";
-import { BrowserRouter as Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
-import styled, { css } from "styled-components";
+import React, { useState, useEffect } from "react";
+import { javaQuestions } from "./javaquestions";
+import { pythonQuestions } from "./pythonquestions";
+import { javascriptQuestions } from "./javascriptquestions";
+import Button from "@material-ui/core/Button";
+import { withStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 // Style
+import { QuizContainer, QuestionContainer } from "../styling/Containers";
+import { ProgressBar, ProgressStep, Label } from "../styling/Icons";
 
-const Container = styled.div`
-  text-align: center;
-  border-radius: 3px;
-  padding: 0.5rem 0;
-  margin: 0.5rem 1rem;
-  width: 500px;
-  background: white;
-  color: black;
-`;
+const styles = {
+  column: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-evenly",
+  },
+};
 
-const Button = styled.button`
-  background: rgba(226, 232, 240, 1);
-  border: none;
-  border-radius: 3px;
-  color: rgba(45, 55, 72, 1);
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
-
-  ${(props) =>
-    props.primary &&
-    css`
-      background: rgba(33, 182, 168, 1);
-      color: white;
-    `}
-`;
-
-// We need a way to access the langugage from the state in the Language component.
-
+const StyledButton = withStyles({
+  root: {
+    display: "flex",
+    background: "none",
+    borderRadius: 4,
+    color: "black",
+    height: 64,
+    width: 500,
+    padding: "5 30",
+    borderColor: "#d4d4d4",
+    margin: "0.3em",
+    "&:hover": {
+      borderColor: "#21B6A8",
+      background: "none",
+    },
+  },
+  disabled: {
+    "&&": {
+      background: "white",
+      color: "black",
+      "align-content": "flex-start",
+    },
+  },
+})(Button);
 // only temporary question array
-function Quiz(props) {
-  const questions = [
-    {
-      Description:
-        "Java: How do you create a variable with the numeric value 13?",
-      Language: "java",
-      Level: 1,
-      QuestionId: 0,
-      Options: [
-        { Text: "float x = 13;", isCorrect: false },
-        { Text: "num x = 13;", isCorrect: false },
-        { Text: "int x = 13;", isCorrect: true },
-        { Text: "x = 13;", isCorrect: false },
-      ],
-    },
-    {
-      Description:
-        "Java: Which method can be used to return a string in upper case letters?",
-      Language: "java",
-      Level: 1,
-      QuestionId: 1,
-      Options: [
-        { Text: "touppercase()", isCorrect: false },
-        { Text: "toUpperCase()", isCorrect: true },
-        { Text: "tuc()", isCorrect: false },
-        { Text: "upperCase()", isCorrect: false },
-      ],
-    },
-    {
-      Description: "Java: Which operator can be used to compare two values?",
-      Language: "java",
-      Level: 1,
-      QuestionId: 2,
-      Options: [
-        { Text: "==", isCorrect: true },
-        { Text: "=", isCorrect: false },
-        { Text: "<>", isCorrect: false },
-        { Text: "><", isCorrect: false },
-      ],
-    },
-    {
-      Description: "Java: What langugage is this extension written in?",
-      Language: "java",
-      Level: 1,
-      QuestionId: 3,
-      Options: [
-        { Text: "Java", isCorrect: false },
-        { Text: "Python", isCorrect: false },
-        { Text: "SQL", isCorrect: false },
-        { Text: "JSX", isCorrect: true },
-      ],
-    },
-  ];
-
-  const [langugage, setLanguage] = useState("");
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [showScore, setShowScore] = useState(false);
-  const [score, setScore] = useState(0);
-  const [buttonColor, setButtonColor] = useState("white");
+const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
+  const randomNumber = () => {
+    return Math.floor(Math.random() * 20);
+  };
+  //const [currentQuestion, setCurrentQuestion] = useState(0);
   const [nextButtonDisplay, setNextButtonDisplay] = useState(true);
+  const [randomNo, setRandomNo] = useState(randomNumber);
+  const [questionCount, setQuestionCount] = useState(1);
+  const [questionsAsked, setQuestionsAsked] = useState([0]);
+  const [disable, setDisable] = useState(false);
 
-  const handleAnswerOptionClick = (answerOption) => {
-    setButtonColor(
-      answerOption.isCorrect
-        ? "rgba(165, 214, 167, 1)"
-        : "rgba(239, 83, 80, 0.5)"
-    );
-    if (answerOption.isCorrect) {
-      setScore(score + 1);
-    }
+  const questions = {
+    python: pythonQuestions,
+    javascript: javascriptQuestions,
+    java: javaQuestions,
   };
 
-  const handleNextClick = () => {
-    const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < questions.length) {
-      setCurrentQuestion(nextQuestion);
+  // Stepper
+  const [activeStep, setActiveStep] = useState(0);
+  const numbers = Array.from(Array(numberOfQuestions).keys());
+  const [isCorrect, setIsCorrect] = useState("true");
+
+  // History stuff
+  const history = useHistory();
+
+  const white = "white";
+  // Answers
+  const [buttonColor, setButtonColor] = useState({
+    0: white,
+    1: white,
+  });
+  const [correct, setCorrect] = useState(0);
+  const red = "rgba(239, 83, 80, 0.5)";
+  const green = "rgba(165, 214, 167, 1)";
+
+  const changeNumber = () => {
+    var number = randomNumber();
+    if (questionsAsked.includes(number)) {
+      var newNumber = randomNumber();
+      setRandomNo(newNumber);
+      setQuestionsAsked([...questionsAsked, newNumber]);
+    } else {
+      setRandomNo(number);
+      setQuestionsAsked([...questionsAsked, number]);
+    }
+    console.log(questionsAsked);
+  };
+
+  useEffect(() => {
+    checkAnswers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questionCount]);
+
+  const checkAnswers = () => {
+    questions[selectedLanguage][randomNo].options.forEach((op, index) => {
+      if (op.is_correct) {
+        setCorrect(index);
+      }
+    });
+  };
+
+  const handleAnswerOptionClick = (index, answerOption) => {
+    if (answerOption.is_correct) {
+      setScore(score + 1);
+      const newState = { ...buttonColor, [index]: green };
+      setButtonColor(newState);
+    } else {
+      const newState = { ...buttonColor, [correct]: green, [index]: red };
+      setButtonColor(newState);
+      setIsCorrect("false");
+    }
+    setDisable(true);
+  };
+
+  //The if statement should be dependent on the user settings and how many questions the user want to be asked
+  //The nextQuestion variable should add together how many questions has been asked
+
+  const handleNextButtonClick = () => {
+    setButtonColor({ 0: white, 1: white });
+    setDisable(false);
+    if (questionCount < numberOfQuestions) {
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
+      changeNumber();
+      setQuestionCount(questionCount + 1);
+      console.log(questionCount);
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
-      setShowScore(true);
+      history.push("/final_page");
     }
   };
 
-  const QuizAgainButton = withRouter(({ history }) => (
-    <Button
-      primary
-      type="button"
-      onClick={() => {
-        history.push("/language");
-      }}
-    >
-      Quiz
-    </Button>
-  ));
-
-  const ExitButton = () => (
-    <button type="button" onClick={() => window.close()}>
-      Procrastinate
-    </button>
-  );
-
   return (
-    <Container>
-      {showScore ? (
-        <div className="finish-display">
-          <p>Congratulations!</p>
-          <p>
-            You finished the quiz with {score}/{questions.length} correct
-            answers.
-          </p>
-          <div>
-            <ExitButton />
-            <QuizAgainButton />
+    <QuizContainer>
+      <QuestionContainer>
+        {/* Question section */}
+        <div style={styles.row}>
+          {/* Answer section */}
+          <div style={styles.column}>
+            <h2>{questions[selectedLanguage][randomNo].question}</h2>
+            {questions[selectedLanguage][randomNo].options.map(
+              (answerOption, index) => {
+                return (
+                  <StyledButton
+                    key={index}
+                    variant="outlined"
+                    style={{ backgroundColor: buttonColor[index] }}
+                    onClick={() => handleAnswerOptionClick(index, answerOption)}
+                    disabled={disable}
+                  >
+                    {answerOption.text}
+                  </StyledButton>
+                );
+              }
+            )}
+            {disable ? (
+              <div>
+                <StyledButton
+                  variant="outlined"
+                  disabled={true}
+                  style={{ height: "fit-content" }}
+                >
+                  <p>
+                    <strong>Explanation:</strong>{" "}
+                    {questions[selectedLanguage][randomNo].description}
+                  </p>{" "}
+                </StyledButton>
+              </div>
+            ) : (
+              <p></p>
+            )}
           </div>
-        </div>
-      ) : (
-        <>
-          <div className="question-section">
-            <div className="question-description">
-              {questions[currentQuestion].Description}
-            </div>
-          </div>
-          <div className="answer-section">
-            {questions[currentQuestion].Options.map((answerOption) => (
-              <button
-                style={{ backgroundColor: buttonColor }}
-                onClick={() => handleAnswerOptionClick(answerOption)}
-              >
-                {answerOption.Text}
-              </button>
+
+          {/* Progress bar section */}
+          <ProgressBar activeStep={activeStep} orientation="vertical">
+            {numbers.map((number) => (
+              <ProgressStep key={number}>
+                <Label></Label>
+              </ProgressStep>
             ))}
-          </div>
-          <div>
-            <Button
-              primary
-              className="NextStep"
-              disabled={false}
-              onClick={() => handleNextClick()}
-            >
-              Next
-            </Button>
-          </div>
-        </>
-      )}
-    </Container>
+          </ProgressBar>
+        </div>
+        <div style={{ float: "right" }}>
+          <Button
+            variant="contained"
+            size="large"
+            color="primary"
+            disabled={!disable}
+            onClick={handleNextButtonClick}
+          >
+            Next
+          </Button>
+        </div>
+      </QuestionContainer>
+    </QuizContainer>
   );
-}
+};
 
 export default Quiz;

@@ -3,22 +3,54 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth } from "./firebase";
 import { NotLoggedInPrompt } from "./pages/NotLoggedInPrompt";
 import MainRouter from "./components/MainRouter";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-slider/dist/css/bootstrap-slider.css";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { SmallContainer } from "./styling/Containers";
 import "./App.css";
 
+const font = "'Lato', sans-serif";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#21B6A8",
+    },
+    secondary: {
+      main: "#d4d4d4",
+    },
+  },
+  typography: {
+    fontFamily: font,
+    button: {
+      textTransform: "none",
+    },
+  },
+});
+
 const App = () => {
-  // We're using a package where someone else created a "hook" for using Firebase functionality
   const [user, loading] = useAuthState(firebaseAppAuth);
 
-  // If it's still loading the user-state, we're showing "Loading...". We might show a spinner,
-  // but it will change very fast and it might be more confusing than a less attractive "Loading..." message
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <SmallContainer>
+        <ThemeProvider theme={theme}>
+          <CircularProgress />
+        </ThemeProvider>
+      </SmallContainer>
+    );
   }
 
-  // We will show a component based on whether we have a "user" or not
-  return user ? <MainRouter /> : <NotLoggedInPrompt />;
+  return user ? (
+    <ThemeProvider theme={theme}>
+      <MainRouter />
+    </ThemeProvider>
+  ) : (
+    <SmallContainer>
+      <ThemeProvider theme={theme}>
+        <NotLoggedInPrompt />
+      </ThemeProvider>
+    </SmallContainer>
+  );
 };
 
 export default App;

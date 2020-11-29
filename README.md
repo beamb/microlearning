@@ -27,10 +27,8 @@ of the Microlearning App project in the Technical Interaction Design course.
 
 ## Data Modeling
 
-Initially, our data model was defined as a mixture of embedded and normalized structure in two collections. Because a set of answers has information related to a single question, the `questions` collections will have embedded answers containing text and an indication of false or true values for each question. The `users` collection is updated upon every new login in the system, and it will be connected to the questions collections by the `questionID`. The relation between both collections is many-to-many, henceforward the choice for a normalized structure in this part.
+Our primary goal is to deliver an MVP; henceforward, we decided to change the data structure to locally store the quiz's questions and use Firebase to focus on the user's settings storage. Following is the drawing of the current model. We will update it once we include the saving user's progress functionality.
 
-<img src="https://user-images.githubusercontent.com/72602527/98544119-ceccd780-2293-11eb-8a8b-5e16c7627192.png" width="90%"></img>
-
-The `counter` field keeps track of how many times the user answered a question correctly. After x times, `learned` will be set to `true`, meaning the user does not need to answer this question anymore.
+![Data Modeling](https://user-images.githubusercontent.com/72602527/99968534-89cb9980-2d99-11eb-92df-9ba84a96946c.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

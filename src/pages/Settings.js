@@ -1,44 +1,101 @@
 import React, { useState } from "react";
-import { Slider } from "../components/Slider";
-import styled, { css } from "styled-components";
+import { InterruptionSettings } from "../components/InterruptionSettings";
+import { QuizSettings } from "../components/QuizSettings";
+import Help from "./Help";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import { useHistory } from "react-router-dom";
+import { useStyles, a11yProps, TabPanel } from "../components/TabPanel";
+import { SettingsContainer } from "../styling/Containers";
+import { BackArrow } from "../styling/Icons";
+import { SBButton } from "../styling/Buttons";
 
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  color: black;
-  margin: 0.5em 1em;
-  padding: 0.25em 1em;
-`;
+const styles = {
+  tab: {
+    padding: "0.25em 1em",
+    fontSize: "x-large",
+    height: "3em",
+  },
+  tabItemContainer: {
+    background: "none",
+  },
+};
 
-export const Settings = () => {
-  const [interruption, setInterruption] = useState("5");
+export const Settings = ({
+  numberOfQuestions,
+  userWebPages,
+  setNumberOfQuestions,
+  setUserWebPages,
+  updateUserSettings,
+}) => {
+  const classes = useStyles();
 
-  console.log("number of questions: " + interruption);
+  const [value, setValue] = useState(0);
 
-  const NumberButton = (props) => (
-    <Button type="button"
-      onClick={() => 
-         console.log(props.number + " questions has been clicked.");
-          // sets the interruption in state to n questions
-         setInterruption(props.number);
-      }
+  const history = useHistory();
+
+  const SaveBackButton = () => (
+    <SBButton
+      type="button"
+      onClick={() => {
+        updateUserSettings();
+        history.goBack();
+      }}
     >
-     {props.number} 
-    </Button>
+      <BackArrow size="30" />
+      Save &amp; Back
+    </SBButton>
   );
 
-  
+  const handleTabChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
-    <div>
-      <h3>How many questions can I ask you when I interrupt you?</h3>
-      <NumberButton number="5" />
-      <NumberButton number="10" />
-      <NumberButton number="15" />
-      <br />
-      <h3>How often can I interrupt your procrastination?</h3>
-      <Slider initialInterval={15} minInterval={5} maxInterval={60} />
-    </div>
+    <SettingsContainer>
+      <SaveBackButton />
+      <div className={classes.root}>
+        <Tabs
+          TabIndicatorProps={{
+            style: {
+              display: "none",
+            },
+          }}
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleTabChange}
+          aria-label="Vertical tabs example"
+          className={classes.tabs}
+          textColor="primary"
+        >
+          <Tab style={styles.tab} label="Settings" {...a11yProps(0)} />
+          <Tab style={styles.tab} label="Help ?" {...a11yProps(1)} />
+        </Tabs>
+        <TabPanel value={value} index={0}>
+          <QuizSettings
+            numberOfQuestions={numberOfQuestions}
+            setNumberOfQuestions={setNumberOfQuestions}
+          />
+          <br />
+          <InterruptionSettings
+            userWebPages={userWebPages}
+            setUserWebPages={setUserWebPages}
+          />
+          <br />
+          <small>
+            <em>
+              Remember to hit{" "}
+              <span style={{ color: "#21B6A8" }}>"Save &amp; back"</span> to
+              store your changes.
+            </em>
+          </small>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Help />
+        </TabPanel>
+      </div>
+    </SettingsContainer>
   );
 };
 

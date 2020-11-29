@@ -95,7 +95,7 @@ export const WebsiteForm = ({
           <TextValidator
             required={true}
             variant="outlined"
-            label="Name"
+            label="Website name"
             onChange={handleNameInput}
             name="name"
             helperText=""
@@ -118,7 +118,6 @@ export const WebsiteForm = ({
             Add
           </Button>
         </div>
-        <br />
       </ValidatorForm>
     </div>
   ) : (

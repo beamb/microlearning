@@ -13,7 +13,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 //styling
 import { MainContainer } from "../styling/Containers";
-import { SettingsInputComponentRounded } from "@material-ui/icons";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

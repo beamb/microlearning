@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation";
 import Help from "../pages/Help";
 import Quiz from "./Quiz";
+import FinalPage from "./FinalPage";
 import Settings from "../pages/Settings";
 import Language from "./Language";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -12,6 +13,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 //styling
 import { MainContainer } from "../styling/Containers";
+import { SettingsInputComponentRounded } from "@material-ui/icons";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -50,6 +52,7 @@ export const MainRouter = () => {
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const [selectedLanguage, setLanguage] = useState("");
+  const [score, setScore] = useState(0);
 
   const handleClose = () => {
     setOpenSuccessSnackbar(false);
@@ -136,11 +139,22 @@ export const MainRouter = () => {
             <Quiz
               selectedLanguage={selectedLanguage}
               numberOfQuestions={numberOfQuestions}
+              score={score}
+              setScore={setScore}
             />
           </MainContainer>
         </Route>
         <Route path="/help">
           <Help />
+        </Route>
+        <Route path="/final_page">
+          <MainContainer>
+            <FinalPage
+              numberOfQuestions={numberOfQuestions}
+              score={score}
+              setScore={setScore}
+            />
+          </MainContainer>
         </Route>
       </Switch>
 

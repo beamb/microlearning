@@ -1,49 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // styling
-import { JavaIcon, PythonIcon, JSIcon } from "../styling/Icons";
 import { IconContainer } from "../styling/Containers";
 import { LanguageContainer } from "../styling/Containers";
 
 const Language = ({ setLanguage }) => {
   const LanguageButton = (props) => {
-    if (props.language === "java") {
-      return (
-        <Link to="/quiz">
-          <JavaIcon
-            size="80"
-            type="button"
-            onClick={() => {
-              setLanguage(props.language);
-            }}
-          />
-        </Link>
-      );
-    } else if (props.language === "javascript") {
-      return (
-        <Link to="/quiz">
-          <JSIcon
-            size="80"
-            type="button"
-            onClick={() => {
-              setLanguage(props.language);
-            }}
-          />
-        </Link>
-      );
-    } else {
-      return (
-        <Link to="/quiz">
-          <PythonIcon
-            size="80"
-            type="button"
-            onClick={() => {
-              setLanguage(props.language);
-            }}
-          />
-        </Link>
-      );
-    }
+    var icon = props.language;
+    return (
+      <Link to="/quiz">
+        <img
+          //type="image"
+          width="85"
+          height="85"
+          onClick={() => {
+            setLanguage(props.language);
+          }}
+          src={require("../images/" + icon + ".svg")}
+        />
+      </Link>
+    );
   };
 
   return (

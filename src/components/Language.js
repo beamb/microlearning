@@ -10,13 +10,14 @@ const Language = ({ setLanguage }) => {
     return (
       <Link to="/quiz">
         <img
-          //type="image"
+          alt={icon + " icon"}
           width="85"
           height="85"
+          style={{ margin: "1em" }}
           onClick={() => {
             setLanguage(props.language);
           }}
-          src={require("../images/" + icon + ".svg")}
+          src={require("../components/images/" + icon + ".svg")}
         />
       </Link>
     );
@@ -25,7 +26,6 @@ const Language = ({ setLanguage }) => {
   return (
     <LanguageContainer>
       <h1>Which language do you want me to test you in?</h1>
-      <br />
       <IconContainer>
         <LanguageButton language="java" />
         <LanguageButton language="javascript" />

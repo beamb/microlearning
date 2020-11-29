@@ -126,6 +126,7 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   //The nextQuestion variable should add together how many questions has been asked
 
   const handleNextButtonClick = () => {
+    setIsCorrect(false);
     setButtonColor({ 0: white, 1: white });
     setDisable(false);
     if (questionCount < numberOfQuestions) {
@@ -146,13 +147,9 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
         <div style={styles.row}>
           {/* Answer section */}
           <div style={styles.column}>
-            <Confetti
-              width={720}
-              height={620}
-              run={isCorrect}
-              recycle={!isCorrect}
-              onConfettiComplete={() => setIsCorrect(false)}
-            />
+            {isCorrect && (
+              <Confetti width={720} height={620} recycle={!isCorrect} />
+            )}
             <h2>{questions[selectedLanguage][randomNo].question}</h2>
             {questions[selectedLanguage][randomNo].options.map(
               (answerOption, index) => {

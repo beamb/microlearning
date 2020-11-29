@@ -147,9 +147,7 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
         <div style={styles.row}>
           {/* Answer section */}
           <div style={styles.column}>
-            {isCorrect && (
-              <Confetti width={720} height={620} recycle={!isCorrect} />
-            )}
+            {isCorrect && <Confetti width={720} height={620} recycle={false} />}
             <h2>{questions[selectedLanguage][randomNo].question}</h2>
             {questions[selectedLanguage][randomNo].options.map(
               (answerOption, index) => {

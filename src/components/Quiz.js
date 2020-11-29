@@ -5,7 +5,7 @@ import { javascriptQuestions } from "./javascriptquestions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
-
+import Confetti from "react-confetti";
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
 import { ProgressBar, ProgressStep, Label } from "../styling/Icons";
@@ -68,7 +68,7 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   // Stepper
   const [activeStep, setActiveStep] = useState(0);
   const numbers = Array.from(Array(numberOfQuestions).keys());
-  const [isCorrect, setIsCorrect] = useState("true");
+  const [isCorrect, setIsCorrect] = useState(false);
 
   // History stuff
   const history = useHistory();
@@ -114,10 +114,10 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
       setScore(score + 1);
       const newState = { ...buttonColor, [index]: green };
       setButtonColor(newState);
+      setIsCorrect(true);
     } else {
       const newState = { ...buttonColor, [correct]: green, [index]: red };
       setButtonColor(newState);
-      setIsCorrect("false");
     }
     setDisable(true);
   };
@@ -146,6 +146,13 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
         <div style={styles.row}>
           {/* Answer section */}
           <div style={styles.column}>
+            <Confetti
+              width={720}
+              height={620}
+              run={isCorrect}
+              recycle={!isCorrect}
+              onConfettiComplete={() => setIsCorrect(false)}
+            />
             <h2>{questions[selectedLanguage][randomNo].question}</h2>
             {questions[selectedLanguage][randomNo].options.map(
               (answerOption, index) => {

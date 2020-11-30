@@ -70,7 +70,6 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   // Stepper
   const [activeStep, setActiveStep] = useState(0);
   const numbers = Array.from(Array(numberOfQuestions).keys());
-  const [isCorrect, setIsCorrect] = useState("true");
 
   // History stuff
   const history = useHistory();
@@ -121,7 +120,6 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
       setAnswer("Wrong...");
       const newState = { ...buttonColor, [correct]: green, [index]: red };
       setButtonColor(newState);
-      setIsCorrect("false");
     }
     setDisable(true);
   };

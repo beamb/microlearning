@@ -19,16 +19,6 @@ export const WebsiteField = ({
   websiteIsDisabled,
   deleteWebsite,
 }) => {
-  const [label, setLabel] = useState("Interruptions enabled");
-
-  const switchLabel = () => {
-    setLabel(
-      label === "Interruptions enabled"
-        ? "Interruptions disabled"
-        : "Interruptions enabled"
-    );
-  };
-
   const handleCheckboxChange = () => {
     updateWebsite(websiteName);
   };
@@ -47,7 +37,6 @@ export const WebsiteField = ({
   };
 
   const handleSwitchChange = () => {
-    switchLabel();
     disableField(websiteName);
   };
 
@@ -60,19 +49,6 @@ export const WebsiteField = ({
           style={{ display: "flex", alignItems: "center" }}
         >
           <FormControlLabel
-            value={websiteName}
-            control={
-              <Checkbox
-                color="primary"
-                checked={websiteState}
-                onChange={handleCheckboxChange}
-                disabled={websiteIsDisabled}
-              />
-            }
-            label={websiteName}
-            labelPlacement="end"
-          />
-          <FormControlLabel
             control={
               <Switch
                 checked={!websiteIsDisabled}
@@ -81,7 +57,8 @@ export const WebsiteField = ({
                 color="primary"
               />
             }
-            label={label}
+            label={websiteName}
+            style={{ width: "15em" }}
           />
 
           <DeleteButton
@@ -92,6 +69,18 @@ export const WebsiteField = ({
           >
             Delete
           </DeleteButton>
+          <FormControlLabel
+            value={websiteName}
+            control={
+              <Checkbox
+                color="primary"
+                checked={websiteState}
+                onChange={handleCheckboxChange}
+                disabled={websiteIsDisabled}
+              />
+            }
+            style={{ marginLeft: "2.25em", marginRight: "1em" }}
+          />
           <TextField
             id="standard-number"
             type="number"

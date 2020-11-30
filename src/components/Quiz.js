@@ -36,6 +36,7 @@ const StyledButton = withStyles({
     margin: "0.3em",
     "&:hover": {
       borderColor: "#21B6A8",
+      borderWidth: "medium",
       background: "none",
     },
   },
@@ -58,6 +59,7 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   const [questionCount, setQuestionCount] = useState(1);
   const [questionsAsked, setQuestionsAsked] = useState([0]);
   const [disable, setDisable] = useState(false);
+  const [answer, setAnswer] = useState("");
 
   const questions = {
     python: pythonQuestions,
@@ -68,7 +70,6 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   // Stepper
   const [activeStep, setActiveStep] = useState(0);
   const numbers = Array.from(Array(numberOfQuestions).keys());
-  const [isCorrect, setIsCorrect] = useState("true");
 
   // History stuff
   const history = useHistory();
@@ -111,13 +112,14 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
 
   const handleAnswerOptionClick = (index, answerOption) => {
     if (answerOption.is_correct) {
+      setAnswer("Correct!");
       setScore(score + 1);
       const newState = { ...buttonColor, [index]: green };
       setButtonColor(newState);
     } else {
+      setAnswer("Wrong...");
       const newState = { ...buttonColor, [correct]: green, [index]: red };
       setButtonColor(newState);
-      setIsCorrect("false");
     }
     setDisable(true);
   };
@@ -170,6 +172,8 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
                   style={{ height: "fit-content" }}
                 >
                   <p>
+                    <strong>{answer}</strong>
+                    <br />
                     <strong>Explanation:</strong>{" "}
                     {questions[selectedLanguage][randomNo].description}
                   </p>{" "}

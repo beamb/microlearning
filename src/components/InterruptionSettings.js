@@ -276,32 +276,38 @@ export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
 
   return (
     <div>
-      <div style={styles.row}>
-        <h4>How often can I interrupt your procrastination?</h4>
-        <FormGroup aria-label="position" row style={{ marginRight: "1em" }}>
-          <FormControlLabel
-            value="select all"
-            control={
-              <Checkbox
-                color="primary"
-                checked={sharedState.websites.every(
-                  (w) => w.state || w.isDisabled
-                )}
-                onChange={handleSelectAllChange}
-                disabled={allDisabled}
-              />
-            }
-            label="select all"
-            labelPlacement="start"
-          />
-        </FormGroup>
-      </div>
+      <h4>
+        How often can I interrupt your procrastination?
+        <br />
+        <small style={{ fontWeight: "normal", color: "#949494" }}>
+          Use the slider to change the minutes for several selected websites at
+          once.
+        </small>
+      </h4>
       <IntervalSlider
         interval={interval}
         handleAllIntervals={handleAllIntervals}
         allDisabled={allDisabled}
       />
       <br />
+      <FormGroup aria-label="position" row style={{ marginLeft: "22.15em" }}>
+        <FormControlLabel
+          value="select all"
+          control={
+            <Checkbox
+              color="primary"
+              checked={
+                sharedState.websites.every((w) => w.state || w.isDisabled) &&
+                !sharedState.websites.every((w) => w.isDisabled)
+              }
+              onChange={handleSelectAllChange}
+              disabled={allDisabled}
+            />
+          }
+          label="select all"
+          labelPlacement="end"
+        />
+      </FormGroup>
       {sharedState.websites.map((website) => (
         <WebsiteField
           websiteName={website.name}

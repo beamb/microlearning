@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
 import Congratulations from "./Congratulations";
 import OhNo from "./OhNo";
+import Confetti from "react-confetti";
 
 // Style
 import { QuizContainer } from "../styling/Containers";
@@ -54,6 +55,7 @@ export const FinalPage = ({ score, numberOfQuestions, setScore }) => {
   if (score / numberOfQuestions >= 0.2) {
     return (
       <QuizContainer>
+        <Confetti width={720} height={500} recycle={false} />
         <Congratulations numberOfQuestions={numberOfQuestions} score={score} />
         <div>
           <ProcrastinateButton />

@@ -1,7 +1,7 @@
 export const javascriptQuestions = [
   {
     qid: 0,
-    question: "Which of the following is correct about features of JavaScript?",
+    question: "JAVASCRIPT: Which of the following is correct about features of JavaScript?",
     description: "Both of the above options are correct.",
     options: [
       {
@@ -25,7 +25,7 @@ export const javascriptQuestions = [
   {
     qid: 1,
     question:
-      "Which of the following is the correct syntax to print a page using JavaScript?",
+      "JAVASCRIPT: Which of the following is the correct syntax to print a page using JavaScript?",
     description: "window.print(); is the correct option.",
     options: [
       {
@@ -49,7 +49,7 @@ export const javascriptQuestions = [
   {
     qid: 2,
     question:
-      "Which of the following type of variable is visible only within a function where it is defined?",
+      "JAVASCRIPT: Which of the following type of variable is visible only within a function where it is defined?",
     description:
       "Local Variables: A local variable will be visible only within a function where it is defined. Function parameters are always local to that function.",
     options: [
@@ -74,7 +74,7 @@ export const javascriptQuestions = [
   {
     qid: 3,
     question:
-      "Which of the following function of Number object formats a number with a specific number of digits to the right of the decimal?",
+      "JAVASCRIPT: Which of the following function of Number object formats a number with a specific number of digits to the right of the decimal?",
     description:
       "toFixed() − Formats a number with a specific number of digits to the right of the decimal.",
     options: [
@@ -99,7 +99,7 @@ export const javascriptQuestions = [
   {
     qid: 4,
     question:
-      "Which of the following function of Number object returns a string value version of the current number in a format that may vary according to a browser's locale settings.?",
+      "JAVASCRIPT: Which of the following function of Number object returns a string value version of the current number in a format that may vary according to a browser's locale settings.?",
     description:
       "toLocaleString() − Returns a string value version of the current number in a format that may vary according to a browser's locale settings.",
     options: [
@@ -124,7 +124,7 @@ export const javascriptQuestions = [
   {
     qid: 5,
     question:
-      "Which of the following function of String object is used to find a match between a regular expression and a string, and to replace the matched substring with a new substring?",
+      "JAVASCRIPT: Which of the following function of String object is used to find a match between a regular expression and a string, and to replace the matched substring with a new substring?",
     description:
       "replace() − Used to find a match between a regular expression and a string, and to replace the matched substring with a new substring.",
     options: [
@@ -149,7 +149,7 @@ export const javascriptQuestions = [
   {
     qid: 6,
     question:
-      "Which of the following function of String object returns the calling string value converted to lower case while respecting the current locale?",
+      "JAVASCRIPT: Which of the following function of String object returns the calling string value converted to lower case while respecting the current locale?",
     description:
       "toLocaleLowerCase() − Returns the calling string value converted to lower case while respecting the current locale.",
     options: [
@@ -174,7 +174,7 @@ export const javascriptQuestions = [
   {
     qid: 7,
     question:
-      "Which of the following function of String object causes a string to be displayed in the specified size as if it were in a <font size = 'size'> tag?",
+      "JAVASCRIPT: Which of the following function of String object causes a string to be displayed in the specified size as if it were in a <font size = 'size'> tag?",
     description:
       "fontsize() − Causes a string to be displayed in the specified size as if it were in a <font size = 'size'> tag.",
     options: [
@@ -199,7 +199,7 @@ export const javascriptQuestions = [
   {
     qid: 8,
     question:
-      "Which of the following function of Array object creates a new array with the results of calling a provided function on every element in this array?",
+      "JAVASCRIPT: Which of the following function of Array object creates a new array with the results of calling a provided function on every element in this array?",
     description:
       "map() − Creates a new array with the results of calling a provided function on every element in this array.",
     options: [
@@ -224,7 +224,7 @@ export const javascriptQuestions = [
   {
     qid: 9,
     question:
-      "Which of the following function of Array object reverses the order of the elements of an array?",
+      "JAVASCRIPT: Which of the following function of Array object reverses the order of the elements of an array?",
     description: "reverse() − Reverses the order of the elements of an array.",
     options: [
       {
@@ -248,7 +248,7 @@ export const javascriptQuestions = [
   {
     qid: 10,
     question:
-      "What is the HTML tag under which one can write the JavaScript code?",
+      "JAVASCRIPT: What is the HTML tag under which one can write the JavaScript code?",
     description:
       "If we want to write a JavaScript code under HTML tag, you will have to use the “script” tag.",
     options: [
@@ -273,7 +273,7 @@ export const javascriptQuestions = [
   {
     qid: 11,
     question:
-      "Which of the following is the correct syntax to display “Practice.now()” in an alert box using JavaScript?",
+      "JAVASCRIPT: Which of the following is the correct syntax to display “Practice.now()” in an alert box using JavaScript?",
     description:
       "To display any text in the alert box, you need to write it as alert(“Practice.now()”);.",
     options: [
@@ -298,7 +298,7 @@ export const javascriptQuestions = [
   {
     qid: 12,
     question:
-      "What is the correct syntax for referring to an external script called “geek.js”?",
+      "JAVASCRIPT: What is the correct syntax for referring to an external script called “geek.js”?",
     description: "The “src” term is used to refer to any JavaScript file.",
     options: [
       {
@@ -322,7 +322,7 @@ export const javascriptQuestions = [
   {
     qid: 13,
     question:
-      "Predict the output of the following JavaScript code. <script type='text/javascript'> a = 8 + '8'; document.write(a); </script>",
+      "JAVASCRIPT: Predict the output of the following JavaScript code. <script type='text/javascript'> a = 8 + '8'; document.write(a); </script>",
     description:
       "In the above given code, 8+”8″ have first integer and second string data types. Rather than adding the two numbers, it concatenated the two.",
     options: [
@@ -346,7 +346,7 @@ export const javascriptQuestions = [
   },
   {
     qid: 14,
-    question: "Which of the following is not a reserved word in JavaScript?",
+    question: "JAVASCRIPT: Which of the following is not a reserved word in JavaScript?",
     description:
       "In JavaScript, interface, throws and short are reserved keywords.",
     options: [
@@ -371,7 +371,7 @@ export const javascriptQuestions = [
   {
     qid: 15,
     question:
-      "How to write an ‘if’ statement for executing some code. If “i” is NOT equal to 5?",
+      "JAVASCRIPT: How to write an ‘if’ statement for executing some code. If “i” is NOT equal to 5?",
     description: "JavaScript do not accept <> operator as not equal to.",
     options: [
       {
@@ -394,7 +394,7 @@ export const javascriptQuestions = [
   },
   {
     qid: 16,
-    question: "What is the correct syntax for adding comments in JavaScript?",
+    question: "JAVASCRIPT: What is the correct syntax for adding comments in JavaScript?",
     description: "Correct Syntax for comments in JavaScript is //comment.",
     options: [
       {
@@ -418,7 +418,7 @@ export const javascriptQuestions = [
   {
     qid: 17,
     question:
-      "What is the method in JavaScript used to remove the whitespace at the beginning and end of any string ?",
+      "JAVASCRIPT: What is the method in JavaScript used to remove the whitespace at the beginning and end of any string ?",
     description:
       "The trim() method in JavaScript is used to remove the whitespaces at the beginning and end of the string.",
     options: [
@@ -443,7 +443,7 @@ export const javascriptQuestions = [
   {
     qid: 18,
     question:
-      "In JavaScript, we do not have datatypes like integer and float. What is the function that can be used to check if the number is an integer or not?",
+      "JAVASCRIPT: In JavaScript, we do not have datatypes like integer and float. What is the function that can be used to check if the number is an integer or not?",
     description:
       "isInteger() function is used to check whether a number is integer or not. The function is used as: document.write(number.isInteger(2018)) will result as true.",
     options: [
@@ -467,7 +467,7 @@ export const javascriptQuestions = [
   },
   {
     qid: 19,
-    question: "JavaScript is a ________ Side Scripting Language.",
+    question: "JAVASCRIPT: JavaScript is a ________ Side Scripting Language.",
     description:
       "JavaScript is a Browser Side Scripting Language. ASP, PHP, Perl are Server Side Scripting Language.",
     options: [

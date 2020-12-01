@@ -1,5 +1,5 @@
 import React from "react";
-import sad from "./images/sad.png";
+import sad from "./images/kingdom-list-is-empty.svg";
 
 export const OhNo = ({ score, numberOfQuestions }) => {
   return (
@@ -8,7 +8,12 @@ export const OhNo = ({ score, numberOfQuestions }) => {
       <h2>
         You finished the quiz with {score}/{numberOfQuestions}{" "}
       </h2>
-      <img alt="Drawing of a sad king or queen" src={sad} />
+      <img
+        alt="Drawing of a crying parchment paper"
+        width="176"
+        height="175"
+        src={sad}
+      />
     </div>
   );
 };

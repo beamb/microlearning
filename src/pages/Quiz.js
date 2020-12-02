@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { javaQuestions } from "./javaquestions";
-import { pythonQuestions } from "./pythonquestions";
-import { javascriptQuestions } from "./javascriptquestions";
+import { javaQuestions } from "../quiz-questions/javaquestions";
+import { pythonQuestions } from "../quiz-questions/pythonquestions";
+import { javascriptQuestions } from "../quiz-questions/javascriptquestions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";

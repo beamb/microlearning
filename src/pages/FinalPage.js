@@ -2,8 +2,8 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
-import Congratulations from "./Congratulations";
-import OhNo from "./OhNo";
+import Congratulations from "../components/Congratulations";
+import OhNo from "../components/OhNo";
 import Confetti from "react-confetti";
 
 // Style

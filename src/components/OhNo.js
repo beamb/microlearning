@@ -1,5 +1,5 @@
 import React from "react";
-import sad from "./images/kingdom-list-is-empty.svg";
+import sad from "../images/kingdom-list-is-empty.svg";
 
 export const OhNo = ({ score, numberOfQuestions }) => {
   return (

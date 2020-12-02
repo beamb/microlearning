@@ -17,7 +17,7 @@ const Language = ({ setLanguage }) => {
           onClick={() => {
             setLanguage(props.language);
           }}
-          src={require("../components/images/" + icon + ".svg")}
+          src={require("../images/" + icon + ".svg")}
         />
         <h2>
           {props.language.charAt(0).toUpperCase() + props.language.slice(1)}

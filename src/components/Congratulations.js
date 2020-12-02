@@ -1,5 +1,5 @@
 import React from "react";
-import bravo from "./images/kingdom-1.svg";
+import bravo from "../images/kingdom-1.svg";
 
 export const Congratulations = ({ score, numberOfQuestions }) => {
   return (

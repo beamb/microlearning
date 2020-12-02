@@ -6,15 +6,6 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import WebsiteForm from "./WebsiteForm";
 
-const styles = {
-  row: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-};
-
 export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
   const [interval, setInterval] = useState(15);
   const [sharedState, setSharedState] = useState(userWebPages);

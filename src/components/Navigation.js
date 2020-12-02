@@ -56,7 +56,12 @@ export const Navigation = () => {
   const ChangeLanguageButton = () => (
     <Link to="/language" style={{ textDecoration: "none" }}>
       <Tooltip title="Your current progress will be lost!" arrow>
-        <Button variant="outlined" style={{ padding: "2px 15px" }}>
+        <Button
+          variant="outlined"
+          color="primary"
+          style={{ marginLeft: "27em" }}
+          size="large"
+        >
           Change language
         </Button>
       </Tooltip>

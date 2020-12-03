@@ -35,12 +35,15 @@ export const LoggedInPrompt = () => {
       variant="contained"
       color="secondary"
       type="button"
-      style={{ margin: "2em" }}
+      style={{ 
+        margin: "2em",
+        borderRadius: 999,
+      }}
       onClick={() => {
         window.close();
       }}
     >
-      No thanks
+      No thanks!
     </Button>
   );
 

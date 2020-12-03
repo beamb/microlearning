@@ -60,7 +60,6 @@ export const Navigation = () => {
           variant="outlined"
           color="primary"
           style={{ marginLeft: "27em" }}
-          size="large"
         >
           Change language
         </Button>

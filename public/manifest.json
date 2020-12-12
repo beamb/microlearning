@@ -1,6 +1,10 @@
 {
   "name": "Practice.now()",
   "version": "0.0.1",
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "manifest_version": 2,
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArag3B4TKHbdZf9AtWqTVjXRGwNCpwM36a5tmeWcCpwQArt78Eqwi/YYOcokN/K8wFbmN+O79NL0Rrfgdg3RyMzyTM/ganjidVQURFdF6SVfnzx8WlvIHeEV1WHzuw1n632bgxHpkehnfK2aKkkQCrUeYJTKlE5+405P/Yjp1CVBR/xQYbII173PcBtolPzL/PSB5nZRtxh3XIjC8BetbqCP9REnMg5ygMy3VbATpmN6DB59D7xdbmZNay0+UJ0j7uvkEHEu9ayiVsQ4kgIXthl9f8Eujo78PaHFPlqI6rL3j0bgJrhLRODN6LYocE3cQuhg5xskWDL3pYVqtwwovWwIDAQAB",
   "description": "Microlearning for Programming Languages",
@@ -13,6 +17,8 @@
     "default_title": "Practice.now() – quick programming practice"
   },
   "permissions": [
+    "<all_urls>",
+    "*://*/*",
     "activeTab",
     "alarms",
     "clipboardRead",

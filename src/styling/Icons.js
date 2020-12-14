@@ -43,17 +43,17 @@ export const JSIcon = styled(Javascript)`
   cursor: pointer;
 `;
 
-export const ProgressBar = styled(Stepper)`
-  color: rgba(33, 182, 168, 1);
-`;
+// export const ProgressBar = styled(Stepper)`
+//   color: rgba(33, 182, 168, 1);
+// `;
 
-export const ProgressStep = styled(Step)`
-  color: rgba(33, 182, 168, 1);
-`;
+// export const ProgressStep = styled(Step)`
+//   color: rgba(33, 182, 168, 1);
+// `;
 
-export const Label = styled(StepLabel)`
-  color: rgba(33, 182, 168, 1);
-`;
+// export const Label = styled(StepLabel)`
+//   color: rgba(33, 182, 168, 1);
+// `;
 
 export const BackArrow = styled(ArrowBackOutline)`
   color: black;

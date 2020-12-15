@@ -183,7 +183,6 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
           </div>
           {/* Progress bar section */}
           <ProgressBar
-            handleAnswerOptionClick={handleAnswerOptionClick}
             numberOfQuestions={numberOfQuestions}
             skipped={skipped}
             activeStep={activeStep}

@@ -5,12 +5,10 @@ import { javascriptQuestions } from "../quiz-questions/javascriptquestions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import ProgressBar from "../components/ProgressBar";
 
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
 
 const styles = {
   column: {
@@ -50,19 +48,20 @@ const StyledButton = withStyles({
     },
   },
 })(Button);
-// only temporary question array
+
 const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * 20);
   };
-  //const [currentQuestion, setCurrentQuestion] = useState(0);
+
   const [nextButtonDisplay, setNextButtonDisplay] = useState(true);
   const [randomNo, setRandomNo] = useState(randomNumber);
   const [questionCount, setQuestionCount] = useState(1);
   const [questionsAsked, setQuestionsAsked] = useState([0]);
   const [disable, setDisable] = useState(false);
   const [answer, setAnswer] = useState("");
-  const [skipped, setSkipped] = useState(new Set());
+  const [skipped] = useState(new Set());
+  const [activeStep, setActiveStep] = useState(0);
 
   const questions = {
     python: pythonQuestions,
@@ -70,11 +69,6 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
     java: javaQuestions,
   };
 
-  // Stepper
-  const [activeStep, setActiveStep] = useState(0);
-  const steps = Array.from(Array(numberOfQuestions).keys());
-
-  // History stuff
   const history = useHistory();
 
   const white = "white";
@@ -145,10 +139,6 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
     }
   };
 
-  const isStepWrong = (step) => {
-    return skipped.has(step);
-  };
-
   return (
     <QuizContainer>
       <QuestionContainer>
@@ -192,20 +182,16 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
             )}
           </div>
           {/* Progress bar section */}
-          <Stepper activeStep={activeStep} orientation="vertical">
-            {steps.map((index) => {
-              const stepProps = {};
-              if (isStepWrong(index)) {
-                stepProps.completed = false;
-              }
-              return (
-                <Step key={index} {...stepProps}>
-                  <StepLabel></StepLabel>
-                </Step>
-              );
-            })}
-          </Stepper>
+          <ProgressBar
+            handleAnswerOptionClick={handleAnswerOptionClick}
+            numberOfQuestions={numberOfQuestions}
+            skipped={skipped}
+            activeStep={activeStep}
+            setActiveStep={setActiveStep}
+          />
         </div>
+
+        {/* Next question button */}
         <div style={{ float: "right" }}>
           <Button
             variant="contained"

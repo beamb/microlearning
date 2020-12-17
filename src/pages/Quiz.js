@@ -14,6 +14,7 @@ const styles = {
   column: {
     display: "flex",
     flexDirection: "column",
+    width: 500,
   },
   row: {
     display: "flex",

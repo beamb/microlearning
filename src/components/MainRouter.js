@@ -52,6 +52,7 @@ export const MainRouter = () => {
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const [selectedLanguage, setLanguage] = useState("");
   const [score, setScore] = useState(0);
+  const [correctQuestions, setCorrectQuestions] = useState([]);
 
   const handleClose = () => {
     setOpenSuccessSnackbar(false);
@@ -140,6 +141,8 @@ export const MainRouter = () => {
               numberOfQuestions={numberOfQuestions}
               score={score}
               setScore={setScore}
+              correctQuestions={correctQuestions}
+              setCorrectQuestions={setCorrectQuestions}
             />
           </MainContainer>
         </Route>
@@ -152,6 +155,8 @@ export const MainRouter = () => {
               numberOfQuestions={numberOfQuestions}
               score={score}
               setScore={setScore}
+              correctQuestions={correctQuestions}
+              setCorrectQuestions={setCorrectQuestions}
             />
           </MainContainer>
         </Route>

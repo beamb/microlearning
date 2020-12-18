@@ -49,7 +49,7 @@ const StyledButton = withStyles({
   },
 })(Button);
 // only temporary question array
-const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
+const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore, correctQuestions, setCorrectQuestions }) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * 20);
   };
@@ -60,6 +60,7 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   const [questionsAsked, setQuestionsAsked] = useState([0]);
   const [disable, setDisable] = useState(false);
   const [answer, setAnswer] = useState("");
+  //const [correctQuestions, setCorrectQuestions] = useState([]);
 
   const questions = {
     python: pythonQuestions,
@@ -116,6 +117,7 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
       setScore(score + 1);
       const newState = { ...buttonColor, [index]: green };
       setButtonColor(newState);
+      setCorrectQuestions([...correctQuestions, questions[selectedLanguage][randomNo].qid]);
     } else {
       setAnswer("Wrong...");
       const newState = { ...buttonColor, [correct]: green, [index]: red };
@@ -138,6 +140,7 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
       history.push("/final_page");
+      console.log(correctQuestions);
     }
   };
 

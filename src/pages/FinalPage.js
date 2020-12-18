@@ -11,56 +11,23 @@ import { firebaseAppAuth, database } from "../firebase";
 // Style
 import { QuizContainer } from "../styling/Containers";
 //correctQuestions is passed form Quiz, it is an array containing the qid for the correct questoins
-export const FinalPage = ({ score, numberOfQuestions, setScore, correctQuestions, setCorrectQuestions}) => {
-  const initialState = {
-    questions: [{
-      qid: "",
-      leanred: 0,
-    },]
-  };
-  
-  const questions = Array.from(Array(correctQuestions).keys());
+export const FinalPage = ({
+  score,
+  numberOfQuestions,
+  setScore,
+  correctQuestions,
+  setCorrectQuestions,
+}) => {
+  const questionsCorrect = Array.from(Array(correctQuestions));
 
   const [user] = useAuthState(firebaseAppAuth);
-  const [userQuestions, setUserQuestions] = useState(initialState);
-  
-  const userCorrectQuestions = {
-    correctQuestions: [ {
-      //testing if the values are passed to the database
-      qid: questions[0],
-      learned: 1,
-    
-    }],
+
+  let questions = {
+    qid: questionsCorrect[0],
+    learned: 1,
   };
 
-  const setUpCorrectQuestions = () => {
-    database.collection("users").doc(user.uid).set({ userCorrectQuestions });
-  };
-
-  useEffect(() => {
-    checkData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const checkData = async () => {
-    await database
-      .collection("users")
-      .doc(user.uid)
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          //seems like userCorrectQuestions is undefined???
-          setUserQuestions(doc.data().userCorrectQuestions.qid);
-        } else {
-          // doc.data() will be undefined in this case
-
-          setUpCorrectQuestions();
-        }
-      })
-      .catch(function (error) {
-        console.error("Error getting document: ", error);
-      });
-  };
+  database.collection("users").doc(user.uid).update({ questions });
 
   const QuizAgainButton = () => (
     <Link to="/language" style={{ textDecoration: "none" }}>

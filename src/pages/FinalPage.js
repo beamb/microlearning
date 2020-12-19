@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
@@ -22,12 +22,25 @@ export const FinalPage = ({
 
   const [user] = useAuthState(firebaseAppAuth);
 
-  let questions = {
-    qid: questionsCorrect[0],
-    learned: 1,
+  
+  const userCorrectAnswers = {
+    userQuestions: questionsCorrect[0],
   };
 
-  database.collection("users").doc(user.uid).update({ questions });
+  database.collection("users").doc(user.uid).update({ userCorrectAnswers });
+
+  const updateCorrectQuestions = () => {
+    database
+      .collection("users")
+      .doc(user.uid)
+      .update({
+        "questions.qid": questionsCorrect,
+      })
+      .catch(function (error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+      });
+  };
 
   const QuizAgainButton = () => (
     <Link to="/language" style={{ textDecoration: "none" }}>
@@ -43,7 +56,7 @@ export const FinalPage = ({
         }}
         startIcon={<PlayCircleOutlineIcon />}
         onClick={() => {
-          console.log(questions);
+          console.log(userCorrectAnswers);
           console.log(score);
           setScore(0);
         }}
@@ -77,7 +90,7 @@ export const FinalPage = ({
     return (
       <QuizContainer>
         <Confetti width={720} height={500} recycle={false} />
-        <Congratulations numberOfQuestions={numberOfQuestions} score={score} />
+        <Congratulations numberOfQuestions={numberOfQuestions} score={score} updateCorrectQuestions={userCorrectAnswers}/>
         <div>
           <ProcrastinateButton />
           <QuizAgainButton />
@@ -87,7 +100,7 @@ export const FinalPage = ({
   } else {
     return (
       <QuizContainer>
-        <OhNo numberOfQuestions={numberOfQuestions} score={score} />
+        <OhNo numberOfQuestions={numberOfQuestions} score={score} updateCorrectQuestions={userCorrectAnswers}/>
         <div>
           <ProcrastinateButton />
           <QuizAgainButton />

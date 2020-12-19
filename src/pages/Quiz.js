@@ -5,6 +5,8 @@ import { javascriptQuestions } from "../quiz-questions/javascriptquestions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { firebaseAppAuth, database } from "../firebase";
 
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
@@ -49,7 +51,7 @@ const StyledButton = withStyles({
   },
 })(Button);
 // only temporary question array
-const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore, correctQuestions, setCorrectQuestions }) => {
+const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore, correctQuestions, setCorrectQuestions}) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * 20);
   };
@@ -60,7 +62,19 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore, correctQue
   const [questionsAsked, setQuestionsAsked] = useState([0]);
   const [disable, setDisable] = useState(false);
   const [answer, setAnswer] = useState("");
-  //const [correctQuestions, setCorrectQuestions] = useState([]);
+  const [user] = useAuthState(firebaseAppAuth);
+  const [questionsAnswered, setQuestionsAnswered] = useState([])
+  
+  database.collection("users").doc(user.uid).get().then(function (doc) {
+    if (doc.exists) {
+      setQuestionsAnswered([doc.data().userCorrectAnswers.userQuestions]);
+    } else {
+      // doc.data() will be undefined in this case
+    }
+  })
+  .catch(function (error) {
+    console.error("Error getting document: ", error);
+  });
 
   const questions = {
     python: pythonQuestions,
@@ -136,11 +150,10 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore, correctQue
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
       changeNumber();
       setQuestionCount(questionCount + 1);
-      console.log(questionCount);
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
       history.push("/final_page");
-      console.log(correctQuestions);
+      console.log("questions that have been answer" + questionsAnswered);
     }
   };
 

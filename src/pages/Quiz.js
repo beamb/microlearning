@@ -15,12 +15,22 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     width: 500,
+    alignItems: "center",
   },
   row: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
+  },
+};
+
+const Stepperstyles = {
+  column: {
+    display: "flex",
+    flexDirection: "column",
+    width: 150,
+    alignItems: "center",
   },
 };
 
@@ -147,7 +157,10 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
         <div style={styles.row}>
           {/* Answer section */}
           <div style={styles.column}>
-            <h2>{questions[selectedLanguage][randomNo].question}</h2>
+            <h2>
+              {questions[selectedLanguage][randomNo].question}
+              {styles.width}
+            </h2>
             {questions[selectedLanguage][randomNo].options.map(
               (answerOption, index) => {
                 return (
@@ -182,27 +195,29 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
               <p></p>
             )}
           </div>
-          {/* Progress bar section */}
-          <ProgressBar
-            numberOfQuestions={numberOfQuestions}
-            skipped={skipped}
-            activeStep={activeStep}
-            setActiveStep={setActiveStep}
-          />
+          <div style={Stepperstyles.column}>
+            {/* Progress bar section */}
+            <ProgressBar
+              numberOfQuestions={numberOfQuestions}
+              skipped={skipped}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              answer={answer}
+            />
+            <Button
+              variant="contained"
+              size="medium"
+              color="primary"
+              disabled={!disable}
+              onClick={handleNextButtonClick}
+            >
+              {questionCount < numberOfQuestions ? "Next" : "Finish"}
+            </Button>
+          </div>
         </div>
 
         {/* Next question button */}
-        <div style={{ float: "right" }}>
-          <Button
-            variant="contained"
-            size="large"
-            color="primary"
-            disabled={!disable}
-            onClick={handleNextButtonClick}
-          >
-            {questionCount < numberOfQuestions ? "Next" : "Finish"}
-          </Button>
-        </div>
+        <div></div>
       </QuestionContainer>
     </QuizContainer>
   );

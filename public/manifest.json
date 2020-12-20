@@ -25,6 +25,7 @@
     "clipboardWrite",
     "declarativeContent",
     "identity",
+    "storage",
     "tabs",
     "unlimitedStorage"
   ],

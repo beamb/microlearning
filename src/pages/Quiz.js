@@ -63,18 +63,7 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore, correctQue
   const [disable, setDisable] = useState(false);
   const [answer, setAnswer] = useState("");
   const [user] = useAuthState(firebaseAppAuth);
-  const [questionsAnswered, setQuestionsAnswered] = useState([])
-  
-  database.collection("users").doc(user.uid).get().then(function (doc) {
-    if (doc.exists) {
-      setQuestionsAnswered([doc.data().userCorrectAnswers.userQuestions]);
-    } else {
-      // doc.data() will be undefined in this case
-    }
-  })
-  .catch(function (error) {
-    console.error("Error getting document: ", error);
-  });
+  const [questionsAnswered, setQuestionsAnswered] = useState([]);
 
   const questions = {
     python: pythonQuestions,
@@ -131,7 +120,12 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore, correctQue
       setScore(score + 1);
       const newState = { ...buttonColor, [index]: green };
       setButtonColor(newState);
-      setCorrectQuestions([...correctQuestions, questions[selectedLanguage][randomNo].qid]);
+      var answer = {questionID: questions[selectedLanguage][randomNo].qid, isLearned: false, count: 1};
+      if(correctQuestions.includes(answer)) {
+        setCorrectQuestions([...correctQuestions, {questionID: questions[selectedLanguage][randomNo].qid, isLearned: false, count: 2}]);
+      } else {
+      setCorrectQuestions([...correctQuestions, {questionID: questions[selectedLanguage][randomNo].qid, isLearned: false, count: 1}]);
+      }
     } else {
       setAnswer("Wrong...");
       const newState = { ...buttonColor, [correct]: green, [index]: red };
@@ -153,7 +147,6 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore, correctQue
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
       history.push("/final_page");
-      console.log("questions that have been answer" + questionsAnswered);
     }
   };
 

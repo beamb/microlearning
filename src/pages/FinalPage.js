@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import PlayCircleOutlineIcon from "@material-ui/icons/PlayCircleOutline";
@@ -10,7 +10,6 @@ import { firebaseAppAuth, database } from "../firebase";
 
 // Style
 import { QuizContainer } from "../styling/Containers";
-//correctQuestions is passed form Quiz, it is an array containing the qid for the correct questoins
 export const FinalPage = ({
   score,
   numberOfQuestions,
@@ -18,23 +17,21 @@ export const FinalPage = ({
   correctQuestions,
   setCorrectQuestions,
 }) => {
-  const questionsCorrect = Array.from(Array(correctQuestions));
 
   const [user] = useAuthState(firebaseAppAuth);
 
-  
-  const userCorrectAnswers = {
-    userQuestions: questionsCorrect[0],
-  };
+  const updateCount = (qid) = {
+    
+  }
 
-  database.collection("users").doc(user.uid).update({ userCorrectAnswers });
+database.collection("users").doc(user.uid).update({ correctQuestions });
 
-  const updateCorrectQuestions = () => {
+  const updateCorrectQuestions = (questions) => {
     database
       .collection("users")
       .doc(user.uid)
       .update({
-        "questions.qid": questionsCorrect,
+        "correctQuestions": questions,
       })
       .catch(function (error) {
         // The document probably doesn't exist.
@@ -56,7 +53,8 @@ export const FinalPage = ({
         }}
         startIcon={<PlayCircleOutlineIcon />}
         onClick={() => {
-          console.log(userCorrectAnswers);
+          updateCorrectQuestions(correctQuestions);
+          console.log(correctQuestions);
           console.log(score);
           setScore(0);
         }}
@@ -90,7 +88,7 @@ export const FinalPage = ({
     return (
       <QuizContainer>
         <Confetti width={720} height={500} recycle={false} />
-        <Congratulations numberOfQuestions={numberOfQuestions} score={score} updateCorrectQuestions={userCorrectAnswers}/>
+        <Congratulations numberOfQuestions={numberOfQuestions} score={score}  />
         <div>
           <ProcrastinateButton />
           <QuizAgainButton />
@@ -100,7 +98,7 @@ export const FinalPage = ({
   } else {
     return (
       <QuizContainer>
-        <OhNo numberOfQuestions={numberOfQuestions} score={score} updateCorrectQuestions={userCorrectAnswers}/>
+        <OhNo numberOfQuestions={numberOfQuestions} score={score}/>
         <div>
           <ProcrastinateButton />
           <QuizAgainButton />

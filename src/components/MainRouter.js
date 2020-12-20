@@ -45,6 +45,12 @@ export const MainRouter = () => {
     ],
   };
 
+  const initialQuestions = {
+        questionID: "",
+        isLearned: false,
+        count: 0,
+  }
+
   const [user] = useAuthState(firebaseAppAuth);
   const [userWebPages, setUserWebPages] = useState(initialState);
   const [numberOfQuestions, setNumberOfQuestions] = useState(5);
@@ -52,7 +58,7 @@ export const MainRouter = () => {
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
   const [selectedLanguage, setLanguage] = useState("");
   const [score, setScore] = useState(0);
-  const [correctQuestions, setCorrectQuestions] = useState([]);
+  const [correctQuestions, setCorrectQuestions] = useState([initialQuestions]);
 
   const handleClose = () => {
     setOpenSuccessSnackbar(false);
@@ -79,6 +85,7 @@ export const MainRouter = () => {
         if (doc.exists) {
           setUserWebPages(doc.data().userSettings.webPages);
           setNumberOfQuestions(doc.data().userSettings.questionNumber);
+          setCorrectQuestions(doc.data().correctQuestions);
         } else {
           // doc.data() will be undefined in this case
 

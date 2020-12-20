@@ -167,9 +167,11 @@ export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
     ) {
       alert("This name/URL has already been stored");
     } else {
+      const pathArray = urlInput.split("/");
+      const newURL = pathArray[0] + "//" + pathArray[2] + "/*";
       let newWebsite = {
         name: nameInput,
-        URL: urlInput,
+        URL: newURL,
         state: true,
         interval: 15,
         isDisabled: false,
@@ -187,35 +189,35 @@ export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
     sites: [
       {
         name: "Disney+",
-        URL: "https://www.disneyplus.com/",
+        URL: "https://www.disneyplus.com/*",
       },
       {
         name: "Facebook",
-        URL: "https://www.facebook.com/",
+        URL: "https://www.facebook.com/*",
       },
       {
         name: "HBO Nordic",
-        URL: "https://dk.hbonordic.com/",
+        URL: "https://dk.hbonordic.com/*",
       },
       {
         name: "Instagram",
-        URL: "https://www.instagram.com/",
+        URL: "https://www.instagram.com/*",
       },
       {
         name: "LinkedIn",
-        URL: "https://www.linkedin.com/",
+        URL: "https://www.linkedin.com/*",
       },
       {
         name: "Netflix",
-        URL: "https://www.netflix.com/",
+        URL: "https://www.netflix.com/*",
       },
       {
         name: "Twitter",
-        URL: "https://twitter.com/",
+        URL: "https://twitter.com/*",
       },
       {
         name: "Youtube",
-        URL: "https://www.youtube.com/",
+        URL: "https://www.youtube.com/*",
       },
     ],
   };

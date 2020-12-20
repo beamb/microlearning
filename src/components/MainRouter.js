@@ -22,21 +22,21 @@ export const MainRouter = () => {
     websites: [
       {
         name: "Netflix",
-        URL: "https://www.netflix.com/",
+        URL: "https://www.netflix.com/*",
         state: true,
         interval: 15,
         isDisabled: false,
       },
       {
         name: "Youtube",
-        URL: "https://www.youtube.com/",
+        URL: "https://www.youtube.com/*",
         state: true,
         interval: 15,
         isDisabled: false,
       },
       {
         name: "Facebook",
-        URL: "https://www.facebook.com/",
+        URL: "https://www.facebook.com/*",
         state: false,
         interval: 15,
         isDisabled: false,

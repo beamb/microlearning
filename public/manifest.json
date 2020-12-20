@@ -2,7 +2,7 @@
   "name": "Practice.now()",
   "version": "0.0.1",
   "background": {
-    "scripts": ["background.js"],
+    "page": "background.html",
     "persistent": false
   },
   "manifest_version": 2,
@@ -29,5 +29,5 @@
     "tabs",
     "unlimitedStorage"
   ],
-  "content_security_policy": "script-src 'self' 'sha256-prAgginqQug3PAKYgGDUmdls9hltyRScXATPJORFZFc=' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://apis.google.com; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'sha256-prAgginqQug3PAKYgGDUmdls9hltyRScXATPJORFZFc=' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://apis.google.com; connect-src 'self' wss://*.firebaseio.com https://*.googleapis.com; object-src 'self'"
 }

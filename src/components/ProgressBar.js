@@ -4,7 +4,6 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import CancelIcon from "@material-ui/icons/Cancel";
 
 const ProgressBar = ({ numberOfQuestions, skipped, activeStep }) => {
   const steps = Array.from(Array(numberOfQuestions).keys());
@@ -12,9 +11,6 @@ const ProgressBar = ({ numberOfQuestions, skipped, activeStep }) => {
   const isStepWrong = (step) => {
     return skipped.has(step);
   };
-
-  // I need to change the error svg
-
   const theme = createMuiTheme({
     overrides: {
       MuiStepIcon: {
@@ -24,14 +20,14 @@ const ProgressBar = ({ numberOfQuestions, skipped, activeStep }) => {
           borderRadius: "50%",
           "&$completed": {
             color: "#a5d6a7",
+            backgroundColor: "#a5d6a7",
           },
           "&$active": {
             color: "#FFFFFF",
           },
           "&$error": {
-            color: "#ef5350",
-            // error: "CancelIcon",
-            backgroundColor: "#ef5350",
+            color: "rgba(239, 83, 80, 0.001)",
+            backgroundColor: "rgba(239, 83, 80, 0.5)",
           },
         },
       },

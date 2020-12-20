@@ -20,9 +20,6 @@ export const FinalPage = ({
 
   const [user] = useAuthState(firebaseAppAuth);
 
-  const updateCount = (qid) = {
-    
-  }
 
 database.collection("users").doc(user.uid).update({ correctQuestions });
 

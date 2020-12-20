@@ -120,12 +120,12 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
 
   const handleAnswerOptionClick = (index, answerOption) => {
     if (answerOption.is_correct) {
-      setAnswer("Correct!");
+      setAnswer("Congratulations! Your answer was correct.");
       setScore(score + 1);
       const newState = { ...buttonColor, [index]: green };
       setButtonColor(newState);
     } else {
-      setAnswer("Wrong...");
+      setAnswer("Oh no! Your answer was wrong.");
       const newState = { ...buttonColor, [correct]: green, [index]: red };
       setButtonColor(newState);
       skipped.add(activeStep);

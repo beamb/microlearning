@@ -183,6 +183,7 @@ export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
     }
     setNameInput("");
     setURLInput("https://");
+    setIsLoading(true);
   };
 
   const options = {
@@ -247,6 +248,7 @@ export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
         }
       }
     });
+    setIsLoading(true);
   };
 
   const handleNameInput = (event) => {

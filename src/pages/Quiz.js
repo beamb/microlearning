@@ -5,21 +5,32 @@ import { javascriptQuestions } from "../quiz-questions/javascriptquestions";
 import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
+import ProgressBar from "../components/ProgressBar";
 
 // Style
 import { QuizContainer, QuestionContainer } from "../styling/Containers";
-import { ProgressBar, ProgressStep, Label } from "../styling/Icons";
 
 const styles = {
   column: {
     display: "flex",
     flexDirection: "column",
+    width: 500,
+    alignItems: "center",
   },
   row: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-evenly",
+  },
+};
+
+const Stepperstyles = {
+  column: {
+    display: "flex",
+    flexDirection: "column",
+    width: 150,
+    alignItems: "center",
   },
 };
 
@@ -48,18 +59,20 @@ const StyledButton = withStyles({
     },
   },
 })(Button);
-// only temporary question array
+
 const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * 20);
   };
-  //const [currentQuestion, setCurrentQuestion] = useState(0);
+
   const [nextButtonDisplay, setNextButtonDisplay] = useState(true);
   const [randomNo, setRandomNo] = useState(randomNumber);
   const [questionCount, setQuestionCount] = useState(1);
   const [questionsAsked, setQuestionsAsked] = useState([0]);
   const [disable, setDisable] = useState(false);
   const [answer, setAnswer] = useState("");
+  const [skipped] = useState(new Set());
+  const [activeStep, setActiveStep] = useState(0);
 
   const questions = {
     python: pythonQuestions,
@@ -67,11 +80,6 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
     java: javaQuestions,
   };
 
-  // Stepper
-  const [activeStep, setActiveStep] = useState(0);
-  const numbers = Array.from(Array(numberOfQuestions).keys());
-
-  // History stuff
   const history = useHistory();
 
   const white = "white";
@@ -112,14 +120,15 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
 
   const handleAnswerOptionClick = (index, answerOption) => {
     if (answerOption.is_correct) {
-      setAnswer("Correct!");
+      setAnswer("Congratulations! Your answer was correct.");
       setScore(score + 1);
       const newState = { ...buttonColor, [index]: green };
       setButtonColor(newState);
     } else {
-      setAnswer("Wrong...");
+      setAnswer("Oh no! Your answer was wrong.");
       const newState = { ...buttonColor, [correct]: green, [index]: red };
       setButtonColor(newState);
+      skipped.add(activeStep);
     }
     setDisable(true);
   };
@@ -148,7 +157,10 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
         <div style={styles.row}>
           {/* Answer section */}
           <div style={styles.column}>
-            <h2>{questions[selectedLanguage][randomNo].question}</h2>
+            <h2>
+              {questions[selectedLanguage][randomNo].question}
+              {styles.width}
+            </h2>
             {questions[selectedLanguage][randomNo].options.map(
               (answerOption, index) => {
                 return (
@@ -183,27 +195,29 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
               <p></p>
             )}
           </div>
+          <div style={Stepperstyles.column}>
+            {/* Progress bar section */}
+            <ProgressBar
+              numberOfQuestions={numberOfQuestions}
+              skipped={skipped}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+              answer={answer}
+            />
+            <Button
+              variant="contained"
+              size="medium"
+              color="primary"
+              disabled={!disable}
+              onClick={handleNextButtonClick}
+            >
+              {questionCount < numberOfQuestions ? "Next" : "Finish"}
+            </Button>
+          </div>
+        </div>
 
-          {/* Progress bar section */}
-          <ProgressBar activeStep={activeStep} orientation="vertical">
-            {numbers.map((number) => (
-              <ProgressStep key={number}>
-                <Label></Label>
-              </ProgressStep>
-            ))}
-          </ProgressBar>
-        </div>
-        <div style={{ float: "right" }}>
-          <Button
-            variant="contained"
-            size="large"
-            color="primary"
-            disabled={!disable}
-            onClick={handleNextButtonClick}
-          >
-            Next
-          </Button>
-        </div>
+        {/* Next question button */}
+        <div></div>
       </QuestionContainer>
     </QuizContainer>
   );

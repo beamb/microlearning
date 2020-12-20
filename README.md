@@ -29,7 +29,7 @@ of the Microlearning App project in the Technical Interaction Design course.
 
 ## Data Modelling
 
-Our primary goal is to deliver an MVP; henceforward, we decided to change the data structure to locally store the quiz's questions and use Firebase to focus on the user's settings storage. Following is the drawing of the current model. We will update it once we include the saving user's progress functionality.
+Our primary goal is to deliver an MVP; henceforward, we decided to change the data structure to locally store the quiz's questions and use Firebase to focus on the user's progress and settings storage. Following is the drawing of the current model.
 
 ![data-model](https://user-images.githubusercontent.com/72602527/102727433-e8971b00-4325-11eb-9442-13354a2b6aca.jpg)
 

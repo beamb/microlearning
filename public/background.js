@@ -13,13 +13,11 @@ firebase.initializeApp(firebaseConfig);
 
 let db = firebase.firestore();
 let uWebsites;
-let userName;
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
-    userName = user.displayName;
     let uid = user.uid;
     db.collection("users")
       .doc(uid)
@@ -70,8 +68,6 @@ chrome.storage.sync.get(["minutes"], (item) => {
 chrome.alarms.onAlarm.addListener((alarm) => {
   chrome.alarms.clear(alarm.name, () => {});
   let msg =
-    "Hi " +
-    userName +
-    "! It's time to practice.\nClick on the 'Practice.now()' icon to start quizzing!";
+    "Hey! It's time to practice.\nClick on the 'Practice.now()' icon to start quizzing!";
   alert(msg);
 });

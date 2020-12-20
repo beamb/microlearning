@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { LoggedInPrompt } from "../pages/LoggedInPrompt";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation";
-import Help from "../pages/Help";
 import Quiz from "../pages/Quiz";
 import FinalPage from "../pages/FinalPage";
 import Settings from "../pages/Settings";
@@ -23,21 +22,21 @@ export const MainRouter = () => {
     websites: [
       {
         name: "Netflix",
-        URL: "https://www.netflix.com/",
+        URL: "https://www.netflix.com/*",
         state: true,
         interval: 15,
         isDisabled: false,
       },
       {
         name: "Youtube",
-        URL: "https://www.youtube.com/",
+        URL: "https://www.youtube.com/*",
         state: true,
         interval: 15,
         isDisabled: false,
       },
       {
         name: "Facebook",
-        URL: "https://www.facebook.com/",
+        URL: "https://www.facebook.com/*",
         state: false,
         interval: 15,
         isDisabled: false,
@@ -142,9 +141,6 @@ export const MainRouter = () => {
               setScore={setScore}
             />
           </MainContainer>
-        </Route>
-        <Route path="/help">
-          <Help />
         </Route>
         <Route path="/final_page">
           <MainContainer>

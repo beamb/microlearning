@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { InterruptionSettings } from "../components/InterruptionSettings";
 import { QuizSettings } from "../components/QuizSettings";
-import Help from "./Help";
+import Help from "../components/Help";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { useHistory } from "react-router-dom";

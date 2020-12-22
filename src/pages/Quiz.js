@@ -102,7 +102,10 @@ const Quiz = ({
 
   const changeNumber = () => {
     let number = randomNumber();
-    if (questionsAsked.includes(number)) {
+    if (
+      questionsAsked < 20 - numberOfQuestions &&
+      questionsAsked.includes(number)
+    ) {
       let newNumber = randomNumber();
       while (newNumber === number) {
         newNumber = randomNumber();

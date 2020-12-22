@@ -112,13 +112,13 @@ const Quiz = ({
       }
       setRandomNo(newNumber);
       setQuestionsAsked([...questionsAsked, newNumber]);
-      if (userQuestions.length < 20 - numberOfQuestions) {
+      if (userQuestions.length - 1 < 20 - numberOfQuestions) {
         checkNumber(newNumber);
       }
     } else {
       setRandomNo(number);
       setQuestionsAsked([...questionsAsked, number]);
-      if (userQuestions.length < 20 - numberOfQuestions) {
+      if (userQuestions.length - 1 < 20 - numberOfQuestions) {
         checkNumber(number);
       }
     }

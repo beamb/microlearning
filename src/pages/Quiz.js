@@ -60,7 +60,15 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
+const Quiz = ({
+  selectedLanguage,
+  numberOfQuestions,
+  score,
+  setScore,
+  userQuestions,
+  setUserQuestions,
+  updateUserProgress,
+}) => {
   const randomNumber = () => {
     return Math.floor(Math.random() * 20);
   };
@@ -93,14 +101,23 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
   const green = "rgba(165, 214, 167, 1)";
 
   const changeNumber = () => {
-    var number = randomNumber();
+    let number = randomNumber();
     if (questionsAsked.includes(number)) {
-      var newNumber = randomNumber();
+      let newNumber = randomNumber();
+      while (newNumber === number) {
+        newNumber = randomNumber();
+      }
       setRandomNo(newNumber);
       setQuestionsAsked([...questionsAsked, newNumber]);
+      if (userQuestions.length < 20 - numberOfQuestions) {
+        checkNumber(newNumber);
+      }
     } else {
       setRandomNo(number);
       setQuestionsAsked([...questionsAsked, number]);
+      if (userQuestions.length < 20 - numberOfQuestions) {
+        checkNumber(number);
+      }
     }
     console.log(questionsAsked);
   };
@@ -110,6 +127,23 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [questionCount]);
 
+  const checkNumber = (number) => {
+    if (
+      userQuestions.questions.some(
+        (uq) => uq.qid === questions[selectedLanguage][number].qid
+      )
+    ) {
+      userQuestions.questions.forEach((uq) => {
+        if (
+          uq.qid === questions[selectedLanguage][number].qid &&
+          uq.isLearned
+        ) {
+          changeNumber();
+        }
+      });
+    }
+  };
+
   const checkAnswers = () => {
     questions[selectedLanguage][randomNo].options.forEach((op, index) => {
       if (op.is_correct) {
@@ -118,10 +152,29 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
     });
   };
 
-  const handleAnswerOptionClick = (index, answerOption) => {
+  const handleAnswerOptionClick = (index, answerOption, id) => {
     if (answerOption.is_correct) {
       setAnswer("Congratulations! Your answer was correct.");
       setScore(score + 1);
+      let newQuestion = {
+        qid: id,
+        count: 1,
+        isLearned: false,
+      };
+      let questionsCopy = { ...userQuestions };
+      if (questionsCopy.questions.some((qc) => qc.qid === id)) {
+        questionsCopy.questions.forEach((qc) => {
+          if (qc.qid === id) {
+            qc.count = qc.count + 1;
+            if (qc.count > 2) {
+              qc.isLearned = true;
+            }
+          }
+        });
+      } else {
+        questionsCopy.questions.push(newQuestion);
+      }
+      setUserQuestions(questionsCopy);
       const newState = { ...buttonColor, [index]: green };
       setButtonColor(newState);
     } else {
@@ -146,6 +199,7 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
       console.log(questionCount);
     } else {
       setNextButtonDisplay(nextButtonDisplay ? false : true);
+      updateUserProgress();
       history.push("/final_page");
     }
   };
@@ -168,7 +222,13 @@ const Quiz = ({ selectedLanguage, numberOfQuestions, score, setScore }) => {
                     key={index}
                     variant="outlined"
                     style={{ backgroundColor: buttonColor[index] }}
-                    onClick={() => handleAnswerOptionClick(index, answerOption)}
+                    onClick={() =>
+                      handleAnswerOptionClick(
+                        index,
+                        answerOption,
+                        questions[selectedLanguage][randomNo].qid
+                      )
+                    }
                     disabled={disable}
                   >
                     {answerOption.text}

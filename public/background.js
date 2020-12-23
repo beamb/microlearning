@@ -13,6 +13,7 @@ firebase.initializeApp(firebaseConfig);
 
 let db = firebase.firestore();
 let uWebsites;
+let allAlarms;
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
@@ -27,24 +28,29 @@ firebase.auth().onAuthStateChanged((user) => {
     chrome.tabs.onActiveChanged.addListener(() => {
       chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
         if (changeInfo.status === "complete") {
-          chrome.alarms.getAll((alarms) => {
-            chrome.tabs.getSelected(null, (tab) => {
-              let url = tab.url;
-              let pathArray = url.split("/");
-              let newUrl = pathArray[0] + "//" + pathArray[2] + "/*";
+          chrome.tabs.getSelected(null, (tab) => {
+            let url = tab.url;
+            let pathArray = url.split("/");
+            let newUrl = pathArray[0] + "//" + pathArray[2] + "/*";
+            chrome.alarms.getAll((alarms) => {
+              allAlarms = alarms;
               if (
                 Array.isArray(alarms) &&
-                alarms.length &&
+                alarms.length > 0 &&
                 !alarms.some((alarm) => alarm.name === newUrl)
               ) {
-                chrome.alarms.clearAll(() => {});
+                chrome.alarms.clearAll();
               }
-              if (alarms.length === 0) {
-                uWebsites.forEach((uw) => {
-                  if (uw.URL === newUrl && !uw.isDisabled) {
+            });
+            uWebsites.forEach((uw) => {
+              if (uw.URL === newUrl && !uw.isDisabled) {
+                if (allAlarms.length > 0) {
+                  if (!allAlarms.some((a) => a.name === newUrl)) {
                     setAlarm(uw.URL, uw.interval);
                   }
-                });
+                } else {
+                  setAlarm(uw.URL, uw.interval);
+                }
               }
             });
           });
@@ -57,16 +63,10 @@ firebase.auth().onAuthStateChanged((user) => {
 function setAlarm(url, interval) {
   let minutes = parseFloat(interval);
   chrome.alarms.create(url, { delayInMinutes: minutes });
-  chrome.storage.sync.set({ minutes: minutes });
-  window.close();
 }
 
-chrome.storage.sync.get(["minutes"], (item) => {
-  chrome.alarms.create(item.name, { delayInMinutes: item.minutes });
-});
-
 chrome.alarms.onAlarm.addListener((alarm) => {
-  chrome.alarms.clear(alarm.name, () => {});
+  chrome.alarms.clear(alarm.name);
   let msg =
     "Hey! It's time to practice.\nClick on the 'Practice.now()' icon to start quizzing!";
   alert(msg);

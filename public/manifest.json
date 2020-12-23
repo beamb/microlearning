@@ -22,7 +22,6 @@
     "activeTab",
     "alarms",
     "identity",
-    "storage",
     "tabs"
   ],
   "content_security_policy": "script-src 'self' 'sha256-prAgginqQug3PAKYgGDUmdls9hltyRScXATPJORFZFc=' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://apis.google.com; connect-src 'self' wss://*.firebaseio.com https://*.googleapis.com; object-src 'self'"

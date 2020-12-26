@@ -42,17 +42,25 @@ firebase.auth().onAuthStateChanged((user) => {
                 chrome.alarms.clearAll();
               }
             });
-            uWebsites.forEach((uw) => {
-              if (uw.URL === newUrl && !uw.isDisabled) {
-                if (allAlarms.length > 0) {
-                  if (!allAlarms.some((a) => a.name === newUrl)) {
-                    setAlarm(uw.URL, uw.interval);
+            if (typeof uWebsites !== "undefined") {
+              if (uWebsites.length > 0) {
+                uWebsites.forEach((uw) => {
+                  if (uw.URL === newUrl && !uw.isDisabled) {
+                    if (allAlarms.length > 0) {
+                      if (!allAlarms.some((a) => a.name === newUrl)) {
+                        setAlarm(uw.URL, uw.interval);
+                      }
+                    } else {
+                      setAlarm(uw.URL, uw.interval);
+                    }
                   }
-                } else {
-                  setAlarm(uw.URL, uw.interval);
-                }
+                });
               }
-            });
+            } else {
+              alert(
+                "Oh no! Something went wrong and no interruptions were scheduled.\nDouble-check your settings and don't forget to hit 'Save & back' when done."
+              );
+            }
           });
         }
       });

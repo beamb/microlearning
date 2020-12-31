@@ -1,6 +1,6 @@
 export const pythonQuestions = [
   {
-    qid: 0,
+    qid: "python0",
     question:
       "Python — What is output for − a = ['he', 'she', 'we'] ' '.join(a)",
     description:
@@ -25,7 +25,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 1,
+    qid: "python1",
     question: "Python — Which is invalid in python for z = 5 ?",
     description:
       "z = z++ is not valid in python, it is not a legal expression. It results in syntax error.",
@@ -49,7 +49,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 2,
+    qid: "python2",
     question: "Python — Which operator is right-associative",
     description:
       "‘=‘ operator is right associative as assignment operators are right associative.",
@@ -73,7 +73,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 3,
+    qid: "python3",
     question: "Python — Suppose we have two sets A & B, then A<B is:",
     description:
       "If A is proper subset of B then all elements of A are in B but B contains at least one element that is not in B.",
@@ -98,7 +98,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 4,
+    qid: "python4",
     question:
       "Python — Which options are correct to create an empty set in Python?",
     description: "we need to define the set by including the keyword ‘set’.",
@@ -122,7 +122,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 5,
+    qid: "python5",
     question: "Python — What does ~~~~~~5 evaluate to?",
     description: "~x is equivalent to -(x+1).",
     options: [
@@ -145,7 +145,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 6,
+    qid: "python6",
     question:
       "Python — What is the output of the following program : print 'Hello World'[::-1]",
     description:
@@ -170,7 +170,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 7,
+    qid: "python7",
     question:
       "Python — Given a function that does not return any value, what value is shown when executed at the shell?",
     description:
@@ -195,7 +195,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 8,
+    qid: "python8",
     question: "Python — Which module in Python supports regular expressions?",
     description:
       "re is a part of the standard library and can be imported using: import re.",
@@ -219,7 +219,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 9,
+    qid: "python9",
     question:
       "Python — What is the output of the following program : print 0.1 + 0.2 == 0.3",
     description:
@@ -244,7 +244,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 10,
+    qid: "python10",
     question:
       "Python — What is output for − b = [11,13,15,17,19,21] ptint(b[::2])",
     description: "b[::2] :- it iterates over the list with ‘2’ increments",
@@ -268,7 +268,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 11,
+    qid: "python11",
     question:
       "Python — Suppose we have a set a = {10,9,8,7}, and we execute a.remove(14) what will happen ?",
     description:
@@ -293,7 +293,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 12,
+    qid: "python12",
     question:
       "Python — Suppose you are given a set(s1={1,2,3}) then what is the output for the code − 2 * s1?",
     description: "* cannot be operated on the sets.",
@@ -317,7 +317,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 13,
+    qid: "python13",
     question:
       "Python — Which method is used to convert raw byte data to a string?",
     description:
@@ -342,7 +342,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 14,
+    qid: "python14",
     question:
       "Python — Which is the special symbol used in python to add comments?",
     description: "'#' is the special symbol used in python to add comments.",
@@ -366,7 +366,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 15,
+    qid: "python15",
     question:
       "Python — What will be the output of the following code : print type(type(int))",
     description:
@@ -391,7 +391,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 16,
+    qid: "python16",
     question: "Python — What is the output of the following code : print 9//2",
     description:
       "The ‘//’ operator in Python returns the integer part of the floating number.",
@@ -415,7 +415,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 17,
+    qid: "python17",
     question: "Python — Which operator is overloaded by the or() function?",
     description: "or() function overloads the bitwise OR operator",
     options: [
@@ -438,7 +438,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 18,
+    qid: "python18",
     question: "Python — Which of these is not a core data type?",
     description: "Class is a user defined data type",
     options: [
@@ -461,7 +461,7 @@ export const pythonQuestions = [
     ],
   },
   {
-    qid: 19,
+    qid: "python19",
     question:
       "Python — Given a string s = “Welcome”, which of the following code is incorrect?",
     description: "strings are immutable in Python",

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { InterruptionSettings } from "../components/InterruptionSettings";
 import { QuizSettings } from "../components/QuizSettings";
-import Help from "./Help";
+import Help from "../components/Help";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import { useHistory } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useStyles, a11yProps, TabPanel } from "../components/TabPanel";
 import { SettingsContainer } from "../styling/Containers";
 import { BackArrow } from "../styling/Icons";
 import { SBButton } from "../styling/Buttons";
+import Button from "@material-ui/core/Button";
 
 const styles = {
   tab: {
@@ -83,13 +84,17 @@ export const Settings = ({
             setUserWebPages={setUserWebPages}
           />
           <br />
-          <small>
-            <em>
-              Remember to hit{" "}
-              <span style={{ color: "#21B6A8" }}>"Save &amp; back"</span> to
-              store your changes.
-            </em>
-          </small>
+          <Button
+            variant="outlined"
+            color="primary"
+            style={{ marginLeft: "27em" }}
+            onClick={() => {
+              updateUserSettings();
+              history.goBack();
+            }}
+          >
+            Save &amp; Back
+          </Button>
         </TabPanel>
         <TabPanel value={value} index={1}>
           <Help />

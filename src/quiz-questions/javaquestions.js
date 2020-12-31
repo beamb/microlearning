@@ -1,7 +1,7 @@
 export const javaQuestions = [
   {
-    qid: "j0",
-    question: "What is a class in java?",
+    qid: "java0",
+    question: "Java — What is a class in java?",
     description:
       "A class is a blue print from which individual objects are created. A class can contain fields and methods to describe the behavior of an object.",
     options: [
@@ -25,8 +25,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j1",
-    question: "What is Encapsulation?",
+    qid: "java1",
+    question: "Java — What is Encapsulation?",
     description:
       "It is the technique of making the fields in a class private and providing access to the fields via public methods. If a field is declared private, it cannot be accessed by anyone outside the class, thereby hiding the fields within the class. Therefore encapsulation is also referred to as data hiding.",
     options: [
@@ -52,8 +52,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j2",
-    question: "What is the size of boolean variable?",
+    qid: "java2",
+    question: "Java — What is the size of boolean variable?",
     description:
       'The boolean data type can take either true or false, but its "size" isn\'t precisely defined.',
     options: [
@@ -76,8 +76,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j3",
-    question: "What is polymorphism?",
+    qid: "java3",
+    question: "Java — What is polymorphism?",
     description:
       "Polymorphism is the ability of an object to take on many forms. The most common use of polymorphism in OOP occurs when a parent class reference is used to refer to a child class object.",
     options: [
@@ -102,8 +102,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j4",
-    question: "What is the default value of float variable?",
+    qid: "java4",
+    question: "Java — What is the default value of float variable?",
     description:
       "float variable has default value of 0.0f if defined as an instance/static variable.",
     options: [
@@ -126,8 +126,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j5",
-    question: "What is an applet?",
+    qid: "java5",
+    question: "Java — What is an applet?",
     description: "An applet is a Java program that runs in a Web browser.",
     options: [
       {
@@ -149,8 +149,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j6",
-    question: "Method Overriding is an example of",
+    qid: "java6",
+    question: "Java — Method Overriding is an example of",
     description: "Method Overriding is an example of dynamic binding.",
     options: [
       {
@@ -172,8 +172,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j7",
-    question: "What invokes a thread's run() method?",
+    qid: "java7",
+    question: "Java — What invokes a thread's run() method?",
     description:
       "After a thread is started, via its start() method of the Thread class, the JVM invokes the thread's run() method when the thread is initially executed.",
     options: [
@@ -197,9 +197,9 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j8",
+    qid: "java8",
     question:
-      "What will happen if static modifier is removed from the signature of the main method?",
+      "Java — What will happen if static modifier is removed from the signature of the main method?",
     description: 'Program throws "NoSuchMethodError" error at runtime.',
     options: [
       {
@@ -221,9 +221,9 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j9",
+    qid: "java9",
     question:
-      "Which of the following is Faster, StringBuilder or StringBuffer?",
+      "Java — Which of the following is Faster, StringBuilder or StringBuffer?",
     description: "StringBuilder is faster than StringBuffer.",
     options: [
       {
@@ -245,8 +245,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j10",
-    question: "What is local variable?",
+    qid: "java10",
+    question: "Java — What is local variable?",
     description:
       "Variables defined inside methods, constructors or blocks are called local variables. The variable will be declared and initialized within the method and it will be destroyed when the method has completed.",
     options: [
@@ -272,8 +272,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j11",
-    question: "Which of the following is not a keyword in java?",
+    qid: "java11",
+    question: "Java — Which of the following is not a keyword in java?",
     description: "Boolean is a class and is not a keyword.",
     options: [
       {
@@ -295,8 +295,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j12",
-    question: "What is the size of short variable?",
+    qid: "java12",
+    question: "Java — What is the size of short variable?",
     description:
       "The short data type is represented by 16-bit signed two's complement integer. Minimum value: -32,768. Maximum value: 32,767.",
     options: [
@@ -319,8 +319,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j13",
-    question: "What is the default value of Boolean variable?",
+    qid: "java13",
+    question: "Java — What is the default value of Boolean variable?",
     description:
       "boolean variable has default value of false if defined as an instance/static variable.",
     options: [
@@ -343,8 +343,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j14",
-    question: "What is an Interface?",
+    qid: "java14",
+    question: "Java — What is an Interface?",
     description:
       "An interface is a collection of abstract methods. A class implements an interface, thereby inheriting the abstract methods of the interface.",
     options: [
@@ -367,8 +367,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j15",
-    question: "When finally block gets executed?",
+    qid: "java15",
+    question: "Java — When finally block gets executed?",
     description:
       "Always when a try block gets executed, no matter if an exception occured or not.",
     options: [
@@ -394,8 +394,9 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j16",
-    question: "Which will legally declare, construct, and initialize an array?",
+    qid: "java16",
+    question:
+      "Java — Which will legally declare, construct, and initialize an array?",
     description:
       "The only legal array declaration and assignment statement is Option D. Option A is wrong because it initializes an int array with String literals. Option B is wrong because it use something other than curly braces for the initialization. Option C is wrong because it provides initial values for only one dimension, although the declared array is a two-dimensional array.",
     options: [
@@ -418,8 +419,9 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j17",
-    question: "Which is a reserved word in the Java programming language?",
+    qid: "java17",
+    question:
+      "Java — Which is a reserved word in the Java programming language?",
     description:
       "The word 'native' is a valid keyword, used to modify a method declaration. 'method' and 'array' are not keywords. 'subclasses' is wrong because the keyword for subclassing in Java is 'extends', not 'subclasses'.",
     options: [
@@ -442,8 +444,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j18",
-    question: "Which one is a valid declaration of a boolean?",
+    qid: "java18",
+    question: "Java — Which one is a valid declaration of a boolean?",
     description: "A boolean can only be assigned the literal true or false.",
     options: [
       {
@@ -465,8 +467,8 @@ export const javaQuestions = [
     ],
   },
   {
-    qid: "j19",
-    question: "Which is a valid declarations of a String?",
+    qid: "java19",
+    question: "Java — Which is a valid declarations of a String?",
     description:
       "Option A sets the String reference to null. Option B is wrong because null cannot be in single quotes. Option C is wrong because there are multiple characters between the single quotes ('abc'). Option D is wrong because you can't cast a char (primitive) to a String (object).",
     options: [
@@ -489,7 +491,3 @@ export const javaQuestions = [
     ],
   },
 ];
-
-export default {
-  javaQuestions,
-};

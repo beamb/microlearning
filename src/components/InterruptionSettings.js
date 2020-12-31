@@ -6,15 +6,6 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import WebsiteForm from "./WebsiteForm";
 
-const styles = {
-  row: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-};
-
 export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
   const [interval, setInterval] = useState(15);
   const [sharedState, setSharedState] = useState(userWebPages);
@@ -176,9 +167,11 @@ export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
     ) {
       alert("This name/URL has already been stored");
     } else {
+      const pathArray = urlInput.split("/");
+      const newURL = pathArray[0] + "//" + pathArray[2] + "/*";
       let newWebsite = {
         name: nameInput,
-        URL: urlInput,
+        URL: newURL,
         state: true,
         interval: 15,
         isDisabled: false,
@@ -190,41 +183,42 @@ export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
     }
     setNameInput("");
     setURLInput("https://");
+    setIsLoading(true);
   };
 
   const options = {
     sites: [
       {
         name: "Disney+",
-        URL: "https://www.disneyplus.com/",
+        URL: "https://www.disneyplus.com/*",
       },
       {
         name: "Facebook",
-        URL: "https://www.facebook.com/",
+        URL: "https://www.facebook.com/*",
       },
       {
         name: "HBO Nordic",
-        URL: "https://dk.hbonordic.com/",
+        URL: "https://dk.hbonordic.com/*",
       },
       {
         name: "Instagram",
-        URL: "https://www.instagram.com/",
+        URL: "https://www.instagram.com/*",
       },
       {
         name: "LinkedIn",
-        URL: "https://www.linkedin.com/",
+        URL: "https://www.linkedin.com/*",
       },
       {
         name: "Netflix",
-        URL: "https://www.netflix.com/",
+        URL: "https://www.netflix.com/*",
       },
       {
         name: "Twitter",
-        URL: "https://twitter.com/",
+        URL: "https://twitter.com/*",
       },
       {
         name: "Youtube",
-        URL: "https://www.youtube.com/",
+        URL: "https://www.youtube.com/*",
       },
     ],
   };
@@ -254,6 +248,7 @@ export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
         }
       }
     });
+    setIsLoading(true);
   };
 
   const handleNameInput = (event) => {
@@ -276,32 +271,38 @@ export const InterruptionSettings = ({ userWebPages, setUserWebPages }) => {
 
   return (
     <div>
-      <div style={styles.row}>
-        <h4>How often can I interrupt your procrastination?</h4>
-        <FormGroup aria-label="position" row style={{ marginRight: "1em" }}>
-          <FormControlLabel
-            value="select all"
-            control={
-              <Checkbox
-                color="primary"
-                checked={sharedState.websites.every(
-                  (w) => w.state || w.isDisabled
-                )}
-                onChange={handleSelectAllChange}
-                disabled={allDisabled}
-              />
-            }
-            label="select all"
-            labelPlacement="start"
-          />
-        </FormGroup>
-      </div>
+      <h4>
+        How often can I interrupt your procrastination?
+        <br />
+        <small style={{ fontWeight: "normal", color: "#949494" }}>
+          Use the slider to change the minutes for several selected websites at
+          once.
+        </small>
+      </h4>
       <IntervalSlider
         interval={interval}
         handleAllIntervals={handleAllIntervals}
         allDisabled={allDisabled}
       />
       <br />
+      <FormGroup aria-label="position" row style={{ marginLeft: "22.15em" }}>
+        <FormControlLabel
+          value="select all"
+          control={
+            <Checkbox
+              color="primary"
+              checked={
+                sharedState.websites.every((w) => w.state || w.isDisabled) &&
+                !sharedState.websites.every((w) => w.isDisabled)
+              }
+              onChange={handleSelectAllChange}
+              disabled={allDisabled}
+            />
+          }
+          label="select all"
+          labelPlacement="end"
+        />
+      </FormGroup>
       {sharedState.websites.map((website) => (
         <WebsiteField
           websiteName={website.name}

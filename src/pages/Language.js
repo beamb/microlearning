@@ -8,7 +8,7 @@ const Language = ({ setLanguage }) => {
   const LanguageButton = (props) => {
     var icon = props.language;
     return (
-      <Link to="/quiz">
+      <Link to="/quiz" style={{ textDecoration: "none", color: "black" }}>
         <img
           alt={icon + " icon"}
           width="85"
@@ -17,8 +17,11 @@ const Language = ({ setLanguage }) => {
           onClick={() => {
             setLanguage(props.language);
           }}
-          src={require("../components/images/" + icon + ".svg")}
+          src={require("../images/" + icon + ".svg")}
         />
+        <h2>
+          {props.language.charAt(0).toUpperCase() + props.language.slice(1)}
+        </h2>
       </Link>
     );
   };

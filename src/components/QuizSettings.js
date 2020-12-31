@@ -55,6 +55,11 @@ export const QuizSettings = ({ numberOfQuestions, setNumberOfQuestions }) => {
           15
         </StyledToggleButton>
       </ToggleButtonGroup>
+      <div>
+        <small style={{ color: "#949494", marginLeft: "29em" }}>
+          questions
+        </small>
+      </div>
     </div>
   );
 };

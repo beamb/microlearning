@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 import { LoggedInPrompt } from "../pages/LoggedInPrompt";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navigation from "./Navigation";
-import Help from "../pages/Help";
-import Quiz from "./Quiz";
-import FinalPage from "./FinalPage";
+import Quiz from "../pages/Quiz";
+import FinalPage from "../pages/FinalPage";
 import Settings from "../pages/Settings";
-import Language from "./Language";
+import Language from "../pages/Language";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { firebaseAppAuth, database } from "../firebase";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 //styling
 import { MainContainer } from "../styling/Containers";
-import { SettingsInputComponentRounded } from "@material-ui/icons";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -24,21 +22,21 @@ export const MainRouter = () => {
     websites: [
       {
         name: "Netflix",
-        URL: "https://www.netflix.com/",
+        URL: "https://www.netflix.com/*",
         state: true,
         interval: 15,
         isDisabled: false,
       },
       {
         name: "Youtube",
-        URL: "https://www.youtube.com/",
+        URL: "https://www.youtube.com/*",
         state: true,
         interval: 15,
         isDisabled: false,
       },
       {
         name: "Facebook",
-        URL: "https://www.facebook.com/",
+        URL: "https://www.facebook.com/*",
         state: false,
         interval: 15,
         isDisabled: false,
@@ -46,8 +44,19 @@ export const MainRouter = () => {
     ],
   };
 
+  const initialQuestionState = {
+    questions: [
+      {
+        qid: "",
+        count: 0,
+        isLearned: false,
+      },
+    ],
+  };
+
   const [user] = useAuthState(firebaseAppAuth);
   const [userWebPages, setUserWebPages] = useState(initialState);
+  const [userQuestions, setUserQuestions] = useState(initialQuestionState);
   const [numberOfQuestions, setNumberOfQuestions] = useState(5);
   const [openSuccessSnackbar, setOpenSuccessSnackbar] = useState(false);
   const [openErrorSnackbar, setOpenErrorSnackbar] = useState(false);
@@ -65,6 +74,10 @@ export const MainRouter = () => {
     webPages: userWebPages,
   };
 
+  const userProgress = {
+    questions: userQuestions.questions,
+  };
+
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -79,10 +92,14 @@ export const MainRouter = () => {
         if (doc.exists) {
           setUserWebPages(doc.data().userSettings.webPages);
           setNumberOfQuestions(doc.data().userSettings.questionNumber);
+          if (doc.get("userProgress") != null) {
+            setUserQuestions(doc.data().userProgress);
+          } else {
+            setUpProgress();
+          }
         } else {
-          // doc.data() will be undefined in this case
-
           setUpSettings();
+          setUpProgress();
         }
       })
       .catch(function (error) {
@@ -92,6 +109,10 @@ export const MainRouter = () => {
 
   const setUpSettings = () => {
     database.collection("users").doc(user.uid).set({ userSettings });
+  };
+
+  const setUpProgress = () => {
+    database.collection("users").doc(user.uid).update({ userProgress });
   };
 
   const updateUserSettings = () => {
@@ -109,6 +130,19 @@ export const MainRouter = () => {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
         setOpenErrorSnackbar(true);
+      });
+  };
+
+  const updateUserProgress = () => {
+    database
+      .collection("users")
+      .doc(user.uid)
+      .update({
+        "userProgress.questions": userQuestions.questions,
+      })
+      .catch(function (error) {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
       });
   };
 
@@ -141,11 +175,11 @@ export const MainRouter = () => {
               numberOfQuestions={numberOfQuestions}
               score={score}
               setScore={setScore}
+              userQuestions={userQuestions}
+              setUserQuestions={setUserQuestions}
+              updateUserProgress={updateUserProgress}
             />
           </MainContainer>
-        </Route>
-        <Route path="/help">
-          <Help />
         </Route>
         <Route path="/final_page">
           <MainContainer>

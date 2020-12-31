@@ -1,6 +1,6 @@
 export const javascriptQuestions = [
   {
-    qid: 0,
+    qid: "js0",
     question:
       "Javascript — Which of the following is correct about features of JavaScript?",
     description: "Both of the above options are correct.",
@@ -24,7 +24,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 1,
+    qid: "js1",
     question:
       "Javascript — Which of the following is the correct syntax to print a page using JavaScript?",
     description: "window.print(); is the correct option.",
@@ -48,7 +48,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 2,
+    qid: "js2",
     question:
       "Javascript — Which of the following type of variable is visible only within a function where it is defined?",
     description:
@@ -73,7 +73,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 3,
+    qid: "js3",
     question:
       "Javascript — Which of the following function of Number object formats a number with a specific number of digits to the right of the decimal?",
     description:
@@ -98,7 +98,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 4,
+    qid: "js4",
     question:
       "Javascript — Which of the following function of Number object returns a string value version of the current number in a format that may vary according to a browser's locale settings.?",
     description:
@@ -123,7 +123,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 5,
+    qid: "js5",
     question:
       "Javascript — Which of the following function of String object is used to find a match between a regular expression and a string, and to replace the matched substring with a new substring?",
     description:
@@ -148,7 +148,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 6,
+    qid: "js6",
     question:
       "Javascript — Which of the following function of String object returns the calling string value converted to lower case while respecting the current locale?",
     description:
@@ -173,7 +173,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 7,
+    qid: "js7",
     question:
       "Javascript — Which of the following function of String object causes a string to be displayed in the specified size as if it were in a <font size = 'size'> tag?",
     description:
@@ -198,7 +198,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 8,
+    qid: "js8",
     question:
       "Javascript — Which of the following function of Array object creates a new array with the results of calling a provided function on every element in this array?",
     description:
@@ -223,7 +223,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 9,
+    qid: "js9",
     question:
       "Javascript — Which of the following function of Array object reverses the order of the elements of an array?",
     description: "reverse() − Reverses the order of the elements of an array.",
@@ -247,7 +247,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 10,
+    qid: "js10",
     question:
       "Javascript — What is the HTML tag under which one can write the JavaScript code?",
     description:
@@ -272,7 +272,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 11,
+    qid: "js11",
     question:
       "Javascript — Which of the following is the correct syntax to display “Practice.now()” in an alert box using JavaScript?",
     description:
@@ -297,7 +297,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 12,
+    qid: "js12",
     question:
       "Javascript — What is the correct syntax for referring to an external script called “geek.js”?",
     description: "The “src” term is used to refer to any JavaScript file.",
@@ -321,7 +321,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 13,
+    qid: "js13",
     question:
       "Javascript — Predict the output of the following JavaScript code. <script type='text/javascript'> a = 8 + '8'; document.write(a); </script>",
     description:
@@ -346,7 +346,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 14,
+    qid: "js14",
     question:
       "Javascript — Which of the following is not a reserved word in JavaScript?",
     description:
@@ -371,7 +371,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 15,
+    qid: "js15",
     question:
       "Javascript — How to write an ‘if’ statement for executing some code. If “i” is NOT equal to 5?",
     description: "JavaScript do not accept <> operator as not equal to.",
@@ -395,7 +395,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 16,
+    qid: "js16",
     question:
       "Javascript — What is the correct syntax for adding comments in JavaScript?",
     description: "Correct Syntax for comments in JavaScript is //comment.",
@@ -419,7 +419,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 17,
+    qid: "js17",
     question:
       "Javascript — What is the method in JavaScript used to remove the whitespace at the beginning and end of any string ?",
     description:
@@ -444,7 +444,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 18,
+    qid: "js18",
     question:
       "Javascript — In JavaScript, we do not have datatypes like integer and float. What is the function that can be used to check if the number is an integer or not?",
     description:
@@ -469,7 +469,7 @@ export const javascriptQuestions = [
     ],
   },
   {
-    qid: 19,
+    qid: "js19",
     question: "Javascript — JavaScript is a ________ Side Scripting Language.",
     description:
       "JavaScript is a Browser Side Scripting Language. ASP, PHP, Perl are Server Side Scripting Language.",
